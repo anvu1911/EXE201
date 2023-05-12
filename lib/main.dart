@@ -1,5 +1,9 @@
+import 'package:exe201/pages/auth/login_page.dart';
+import 'package:exe201/pages/auth/registry_page.dart';
+import 'package:exe201/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:exe201/helper/helper_function.dart';
 
 import 'firebase_options.dart';
 
@@ -11,10 +15,23 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _isSignedIn = false;
+
   // This widget is the root of your application.
+  @override
+  void initState() {
+    super.initState();
+    getUserLoggedInStatus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,8 +48,16 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Shleep Home Page'),
+      home: _isSignedIn ? const HomePage() : const LoginPage(),
     );
+  }
+
+  void getUserLoggedInStatus() async {
+    await HelperFunctions.getUserLoggedInStatus().then((value) {
+      if (value != null) {
+        _isSignedIn = value;
+      }
+    });
   }
 }
 
@@ -107,10 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headlineMedium,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
