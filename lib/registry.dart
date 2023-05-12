@@ -34,7 +34,7 @@ class _MyAppState extends State<Myapp>{
                   Container(
                     alignment: Alignment.center,
                     child: Text(
-                      "LOGIN",
+                      "REGISTRY",
                       style:
                       TextStyle(
                           fontWeight: FontWeight.bold,
@@ -43,21 +43,43 @@ class _MyAppState extends State<Myapp>{
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                     child: TextField(
                       style: TextStyle(fontSize: 18, color: Colors.black),
-                      decoration: InputDecoration(labelText: "Username or email",
+                      decoration: InputDecoration(labelText: "Username",
                           labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: TextField(
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      decoration: InputDecoration(labelText: "Email",
+                          labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                     child: Stack(
                       alignment: AlignmentDirectional.centerEnd,
                       children: [
                         TextField(
                           style: TextStyle(fontSize: 18, color: Colors.black),
-                          obscureText: true,
+                          obscureText: _isSecurePassword,
                           decoration: InputDecoration(labelText: "Paword",
+                              labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),
+                        ),
+                        togglePassword(),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: Stack(
+                      alignment: AlignmentDirectional.centerEnd,
+                      children: [
+                        TextField(
+                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          obscureText: _isSecurePassword,
+                          decoration: InputDecoration(labelText: "Confirm Password",
                               labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),
                         ),
                         togglePassword(),
@@ -73,7 +95,7 @@ class _MyAppState extends State<Myapp>{
                           primary: Color.fromRGBO(117, 166, 193, 1),
                           minimumSize: Size(250, 40),
                         ),
-                        child: Text("LOG IN", style: TextStyle(
+                        child: Text("CREATE & LOG IN", style: TextStyle(
                             color: Colors.white,
                             fontSize: 30,
                             fontWeight: FontWeight.bold
@@ -81,27 +103,11 @@ class _MyAppState extends State<Myapp>{
                       )
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: Container(alignment: Alignment.center,
-                        child: Text("FORGOT PASSWORD",style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold
-                        ),)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: Container(alignment: Alignment.center,
-                        child: Text("If, you do not have account, create one",style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold
-                        ),)),
-                  ),
+
+
 
                   Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0,80, 0, 0),
                       child: ElevatedButton(
                           onPressed: (){},
                           style: ElevatedButton.styleFrom(
@@ -182,8 +188,9 @@ class _MyAppState extends State<Myapp>{
       });
 
     }, icon: _isSecurePassword ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
-      color: Colors.grey,);
+    color: Colors.grey,);
   }
 }
+
 
 
