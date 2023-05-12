@@ -103,10 +103,6 @@ class _MyAppState extends State<Myapp>{
                           ),),
                         )
                     ),
-
-
-
-
                     Padding(
                         padding: const EdgeInsets.fromLTRB(0,80, 0, 0),
                         child: ElevatedButton(

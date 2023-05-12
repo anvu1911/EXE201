@@ -52,7 +52,7 @@ class _MyAppState extends State<Myapp>{
                           decoration: InputDecoration(labelText: "Username or email",
                               labelStyle: TextStyle(color: Colors.blue, fontSize: 15,
                                   fontFamily: 'Itim-Regular'
-    )),),
+                        )),),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
@@ -120,9 +120,6 @@ class _MyAppState extends State<Myapp>{
                               )
                           )
                       ),
-
-
-
                       Container(
                         height: 60,
                         width: double.infinity,
