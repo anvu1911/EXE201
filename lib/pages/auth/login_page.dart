@@ -15,7 +15,6 @@ class _MyAppState extends State<Myapp>{
         decoration: BoxDecoration(
           image: DecorationImage(image: img_bg,fit: BoxFit.cover),
         ),
-        child: SingleChildScrollView(
           child: SafeArea(
             child: Scaffold(
               backgroundColor: Colors.transparent,
@@ -39,9 +38,11 @@ class _MyAppState extends State<Myapp>{
                           "LOGIN",
                           style:
                           TextStyle(
-                              fontWeight: FontWeight.bold,
+
                               color: Colors.white,
-                              fontSize: 30),
+                              fontSize: 30,
+                              fontFamily: 'Itim-Regular'
+                          ),
                         ),
                       ),
                       Padding(
@@ -49,7 +50,9 @@ class _MyAppState extends State<Myapp>{
                         child: TextField(
                           style: TextStyle(fontSize: 18, color: Colors.black),
                           decoration: InputDecoration(labelText: "Username or email",
-                              labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),),
+                              labelStyle: TextStyle(color: Colors.blue, fontSize: 15,
+                                  fontFamily: 'Itim-Regular'
+    )),),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
@@ -60,7 +63,9 @@ class _MyAppState extends State<Myapp>{
                               style: TextStyle(fontSize: 18, color: Colors.black),
                               obscureText: true,
                               decoration: InputDecoration(labelText: "Paword",
-                                  labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),
+                                  labelStyle: TextStyle(color: Colors.blue, fontSize: 15,
+                                      fontFamily: 'Itim-Regular'
+                                  )),
                             ),
                             togglePassword(),
                           ],
@@ -78,32 +83,23 @@ class _MyAppState extends State<Myapp>{
                             child: Text("LOG IN", style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,
-                                fontWeight: FontWeight.bold
+
+                                fontFamily: 'Itim-Regular'
                             ),),
                           )
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: Container(alignment: Alignment.center,
-                            child: Text("FORGOT PASSWORD",style: TextStyle(
+                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: Container(alignment: Alignment.centerRight,
+                            child: Text("Forgot Password?",style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 13,
-                                fontWeight: FontWeight.bold
+                                fontFamily: 'Itim-Regular'
                             ),)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: Container(alignment: Alignment.center,
-                            child: Text("If, you do not have account, create one",style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold
-                            ),)),
-                      ),
-
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 200, 0, 0),
                           child: ElevatedButton(
                               onPressed: (){},
                               style: ElevatedButton.styleFrom(
@@ -116,7 +112,8 @@ class _MyAppState extends State<Myapp>{
                                   Text("LOGIN WITH NUMBER", style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 25,
-                                      fontWeight: FontWeight.bold
+
+                                      fontFamily: 'Itim-Regular'
                                   ),
                                   ),
                                 ],
@@ -139,6 +136,7 @@ class _MyAppState extends State<Myapp>{
                                   Text("GOOGLE", style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18.5,
+                                    fontFamily: 'Itim-Regular'
                                   ),)
                                 ],
                               )
@@ -152,6 +150,7 @@ class _MyAppState extends State<Myapp>{
                                   Text("FACEBOOK", style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18.5,
+                                    fontFamily: 'Itim-Regular'
                                   ),)
                                 ],
                               )
@@ -159,22 +158,14 @@ class _MyAppState extends State<Myapp>{
                             ),
                           ],
                         ),
-
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                        child: Container(
-                            child: Text("Khi đăng ký trên Shleep, bạn đã đồng ý với \n các điều khoản và chính sách bảo mật của chúng tôi", style: TextStyle(
-                              color: Colors.white,
-                            ),)),
-                      )
                     ],
                   ),
                 ),
               ),
             ),
           ),
-        ),
+
       ),
       debugShowCheckedModeBanner: false,
     );

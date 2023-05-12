@@ -38,7 +38,7 @@ class _MyAppState extends State<Myapp>{
                         "REGISTRY",
                         style:
                         TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Itim-Regular',
                             color: Colors.white,
                             fontSize: 30),
                       ),
@@ -48,14 +48,14 @@ class _MyAppState extends State<Myapp>{
                       child: TextField(
                         style: TextStyle(fontSize: 18, color: Colors.black),
                         decoration: InputDecoration(labelText: "Username",
-                            labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),),
+                            labelStyle: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Itim-Regular')),),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                       child: TextField(
                         style: TextStyle(fontSize: 18, color: Colors.black),
                         decoration: InputDecoration(labelText: "Email",
-                            labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),),
+                            labelStyle: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Itim-Regular')),),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
@@ -66,7 +66,7 @@ class _MyAppState extends State<Myapp>{
                             style: TextStyle(fontSize: 18, color: Colors.black),
                             obscureText: _isSecurePassword,
                             decoration: InputDecoration(labelText: "Paword",
-                                labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),
+                                labelStyle: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Itim-Regular')),
                           ),
                           togglePassword(),
                         ],
@@ -80,8 +80,8 @@ class _MyAppState extends State<Myapp>{
                           TextField(
                             style: TextStyle(fontSize: 18, color: Colors.black),
                             obscureText: _isSecurePassword,
-                            decoration: InputDecoration(labelText: "Confirm Password",
-                                labelStyle: TextStyle(color: Colors.blue, fontSize: 15)),
+                            decoration: InputDecoration(labelText: "Re-enter Password",
+                                labelStyle: TextStyle(color: Colors.blue, fontSize: 15, fontFamily: 'Itim-Regular')),
                           ),
                           togglePassword(),
                         ],
@@ -96,10 +96,10 @@ class _MyAppState extends State<Myapp>{
                             primary: Color.fromRGBO(117, 166, 193, 1),
                             minimumSize: Size(250, 40),
                           ),
-                          child: Text("CREATE & LOG IN", style: TextStyle(
+                          child: Text("SIGN UP", style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,
-                              fontWeight: FontWeight.bold
+                              fontFamily: 'Itim-Regular'
                           ),),
                         )
                     ),
@@ -121,7 +121,7 @@ class _MyAppState extends State<Myapp>{
                                 Text("LOGIN WITH NUMBER", style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 25,
-                                    fontWeight: FontWeight.bold
+                                    fontFamily: 'Itim-Regular'
                                 ),
                                 ),
                               ],
@@ -141,6 +141,7 @@ class _MyAppState extends State<Myapp>{
                                 Text("GOOGLE", style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18.5,
+                                    fontFamily: 'Itim-Regular'
                                 ),)
                               ],
                             )
@@ -154,6 +155,7 @@ class _MyAppState extends State<Myapp>{
                                 Text("FACEBOOK", style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18.5,
+                                    fontFamily: 'Itim-Regular'
                                 ),)
                               ],
                             )
@@ -166,8 +168,10 @@ class _MyAppState extends State<Myapp>{
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: Container(
-                          child: Text("Khi đăng ký trên Shleep, bạn đã đồng ý với \n các điều khoản và chính sách bảo mật của chúng tôi", style: TextStyle(
+                          alignment: Alignment.center,
+                          child: Text("Khi đăng ký trên Shleep, bạn đã đồng ý với các \nđiều khoản và chính sách bảo mật của chúng tôi.", style: TextStyle(
                             color: Colors.white,
+                              fontFamily: 'Itim-Regular'
                           ),)),
                     )
                   ],
