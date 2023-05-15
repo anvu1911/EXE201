@@ -1,6 +1,7 @@
 import 'package:exe201/pages/auth/login_page.dart';
 import 'package:exe201/pages/auth/registry_page.dart';
 import 'package:exe201/pages/home_page.dart';
+import 'package:exe201/pages/started_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:exe201/helper/helper_function.dart';
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: _isSignedIn ? const HomePage() : const LoginPage(),
+      home: _isSignedIn ? const HomePage() : StartedPage(),
     );
   }
 

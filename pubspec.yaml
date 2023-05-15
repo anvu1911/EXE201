@@ -39,6 +39,10 @@ dependencies:
   shared_preferences: ^2.1.1
   firebase_auth: ^4.5.0
   cloud_firestore: ^4.6.0
+  
+  intl: ^0.18.1
+  
+  swipeable_button_view:
 
 dev_dependencies:
   flutter_test:
