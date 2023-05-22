@@ -8,6 +8,7 @@ import '../widgets/clock_view.dart';
 import '../widgets/swipte_button.dart';
 import '../widgets/current_datetime.dart';
 import 'start_sleeping_page.dart';
+import 'set_alarm_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -176,7 +177,13 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(bottom: 24.0),
                     child: DarkButton(
                         text: 'SET ALARM',
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddAlarm()),
+                          );
+                        },
                         width: 400,
                         height: 40))
               ],
