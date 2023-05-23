@@ -1,10 +1,13 @@
+import 'package:exe201/pages/auth/login_page.dart';
+import 'package:exe201/pages/auth/registry_page.dart';
 import 'package:exe201/pages/home_page.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/light_button.dart';
 import '../widgets/dark_button.dart';
 
 class StartedPage extends StatelessWidget {
-  const StartedPage({super.key});
+  StartedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +58,30 @@ class StartedPage extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child: DarkButton(
                             text: 'ALREADY HAVE AN ACCOUNT',
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()),
+                              );
+                            },
                             width: 260,
                             height: 40)),
                     Padding(
-                        padding: const EdgeInsets.only(bottom: 44.0),
+                      padding: const EdgeInsets.only(bottom: 44.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterPage()),
+                          );
+                        },
                         child: RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                             children: [
                               TextSpan(
-                                text: 'NOT HAVE ACCOUNT YET? ',
+                                text: 'NOT HAVE AN ACCOUNT YET? ',
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 117, 166, 193),
                                   fontSize: 9,
@@ -80,7 +97,9 @@ class StartedPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )

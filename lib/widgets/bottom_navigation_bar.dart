@@ -44,7 +44,7 @@ class MyBottomNavigationBar extends StatelessWidget {
               height: 28,
             ),
           ),
-          label: 'Static',
+          label: 'Statistics',
         ),
         BottomNavigationBarItem(
           icon: ColorFiltered(
