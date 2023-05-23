@@ -39,6 +39,12 @@ dependencies:
   shared_preferences: ^2.1.1
   firebase_auth: ^4.5.0
   cloud_firestore: ^4.6.0
+  flutter_local_notifications: ^14.1.0
+  vibration: ^1.7.5
+  flutter_native_timezone: ^2.0.0
+  intl: ^0.18.1
+  
+  swipeable_button_view:
 
 dev_dependencies:
   flutter_test:
