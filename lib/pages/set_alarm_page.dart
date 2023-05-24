@@ -5,16 +5,31 @@ import '../widgets/top_bar.dart';
 class AddAlarm extends StatefulWidget {
   const AddAlarm({Key? key}) : super(key: key);
 
+  @override
   _AddAlarmState createState() => _AddAlarmState();
 }
 
 class _AddAlarmState extends State<AddAlarm> {
   late TimeOfDay _selectedTime;
   late ValueChanged<TimeOfDay> selectTime;
+  late bool isMonSelected;
+  late bool isTueSelected;
+  late bool isWedSelected;
+  late bool isThuSelected;
+  late bool isFriSelected;
+  late bool isSatSelected;
+  late bool isSunSelected;
 
   @override
   void initState() {
     _selectedTime = TimeOfDay(hour: 12, minute: 00);
+    isMonSelected = false;
+    isTueSelected = false;
+    isWedSelected = false;
+    isThuSelected = false;
+    isFriSelected = false;
+    isSatSelected = false;
+    isSunSelected = false;
     super.initState();
   }
 
@@ -40,7 +55,7 @@ class _AddAlarmState extends State<AddAlarm> {
             Column(
               children: [
                 TopBar(
-                  title: 'Alarm',
+                  title: 'Set wake up time',
                   onBackButtonPressed: () {
                     Navigator.pop(context);
                   },
@@ -69,13 +84,69 @@ class _AddAlarmState extends State<AddAlarm> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              circleDay('Mon', context, false),
-                              circleDay('Tue', context, true),
-                              circleDay('Wed', context, true),
-                              circleDay('Thu', context, true),
-                              circleDay('Fri', context, false),
-                              circleDay('Sat', context, true),
-                              circleDay('Sun', context, false),
+                              CircleDay(
+                                day: 'Mon',
+                                initialSelected: isMonSelected,
+                                onSelectedChanged: (value) {
+                                  setState(() {
+                                    isMonSelected = value;
+                                  });
+                                },
+                              ),
+                              CircleDay(
+                                day: 'Tue',
+                                initialSelected: isTueSelected,
+                                onSelectedChanged: (value) {
+                                  setState(() {
+                                    isTueSelected = value;
+                                  });
+                                },
+                              ),
+                              CircleDay(
+                                day: 'Wed',
+                                initialSelected: isWedSelected,
+                                onSelectedChanged: (value) {
+                                  setState(() {
+                                    isWedSelected = value;
+                                  });
+                                },
+                              ),
+                              CircleDay(
+                                day: 'Thu',
+                                initialSelected: isThuSelected,
+                                onSelectedChanged: (value) {
+                                  setState(() {
+                                    isThuSelected = value;
+                                  });
+                                },
+                              ),
+                              CircleDay(
+                                day: 'Fri',
+                                initialSelected: isFriSelected,
+                                onSelectedChanged: (value) {
+                                  setState(() {
+                                    isFriSelected = value;
+                                  });
+                                },
+                              ),
+                              CircleDay(
+                                day: 'Sat',
+                                initialSelected: isSatSelected,
+                                onSelectedChanged: (value) {
+                                  setState(() {
+                                    isSatSelected = value;
+                                  });
+                                },
+                              ),
+                              CircleDay(
+                                day: 'Sun',
+                                initialSelected: isSunSelected,
+                                onSelectedChanged: (value) {
+                                  setState(() {
+                                    isSunSelected = value;
+                                  });
+                                },
+                              ),
                             ],
                           ),
                           SizedBox(height: 60.0),
@@ -155,7 +226,238 @@ class _AddAlarmState extends State<AddAlarm> {
                               'Save',
                               style: TextStyle(color: Colors.white),
                             ),
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    backgroundColor:
+                                        Color.fromARGB(150, 53, 70, 131),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Container(
+                                      width: 600,
+                                      height: 500,
+                                      child: Column(
+                                        children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: InkWell(
+                                              onTap: () {
+                                                // do something when the row is clicked
+                                              },
+                                              child: Ink(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: Color.fromARGB(
+                                                      150, 53, 70, 131),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 16),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(width: 16),
+                                                    Text(
+                                                      '01',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 20,
+                                                        color: Color.fromARGB(
+                                                            255, 198, 167, 132),
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 16),
+                                                    Expanded(
+                                                      child: Text(
+                                                        '9:00 PM for Six Cycles - Nine Hours of Sleep.',
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 20,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Divider(
+                                            color:
+                                                Color.fromARGB(192, 37, 34, 70),
+                                            height: 1,
+                                            thickness: 2,
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: InkWell(
+                                              onTap: () {
+                                                // do something when the row is clicked
+                                              },
+                                              child: Ink(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: Color.fromARGB(
+                                                      150, 53, 70, 131),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 16),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(width: 16),
+                                                    Text(
+                                                      '02',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 20,
+                                                        color: Color.fromARGB(
+                                                            255, 198, 167, 132),
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 16),
+                                                    Expanded(
+                                                      child: Text(
+                                                        '9:00 PM for Six Cycles - Nine Hours of Sleep.',
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 20,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Divider(
+                                            color:
+                                                Color.fromARGB(192, 37, 34, 70),
+                                            height: 1,
+                                            thickness: 2,
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: InkWell(
+                                              onTap: () {
+                                                // do something when the row is clicked
+                                              },
+                                              child: Ink(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: Color.fromARGB(
+                                                      150, 53, 70, 131),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 16),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(width: 16),
+                                                    Text(
+                                                      '03',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 20,
+                                                        color: Color.fromARGB(
+                                                            255, 198, 167, 132),
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 16),
+                                                    Expanded(
+                                                      child: Text(
+                                                        '9:00 PM for Six Cycles - Nine Hours of Sleep.',
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 20,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Divider(
+                                            color:
+                                                Color.fromARGB(192, 37, 34, 70),
+                                            height: 1,
+                                            thickness: 2,
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: InkWell(
+                                              onTap: () {
+                                                // do something when the row is clicked
+                                              },
+                                              child: Ink(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: Color.fromARGB(
+                                                      150, 53, 70, 131),
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 16),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(width: 16),
+                                                    Text(
+                                                      '04',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 20,
+                                                        color: Color.fromARGB(
+                                                            255, 198, 167, 132),
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 16),
+                                                    Expanded(
+                                                      child: Text(
+                                                        '9:00 PM for Six Cycles - Nine Hours of Sleep.',
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 20,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
                           ),
                         ],
                       ),
