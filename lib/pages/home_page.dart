@@ -24,6 +24,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  late TimeOfDay? bedTime = null;
+  late TimeOfDay? wakeTime = null;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -105,7 +107,9 @@ class _HomePageState extends State<HomePage> {
                               Clip.none, // add this line to remove clipping
                           children: [
                             LightButton(
-                              text: 'Bedtime\n 10:20 PM',
+                              // text: 'Bedtime\n 10:20 PM',
+                              text:
+                                  'Bedtime\n ${bedTime.formatOrEmpty(context)}',
                               onPressed: () {},
                               width: 195,
                               height: 60,
@@ -135,7 +139,9 @@ class _HomePageState extends State<HomePage> {
                               Clip.none, // add this line to remove clipping
                           children: [
                             LightButton(
-                              text: 'Wakeup \n 10:20 PM',
+                              // text: 'Wakeup \n 10:20 PM',
+                              text:
+                                  'Wakeup \n ${wakeTime.formatOrEmpty(context)}',
                               onPressed: () {},
                               width: 195,
                               height: 60,
@@ -178,13 +184,22 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                     padding: const EdgeInsets.only(bottom: 24.0),
                     child: DarkButton(
-                        text: 'SHLEEPZ',
-                        onPressed: () {
-                          Navigator.push(
+                        text: 'SET ALARM',
+                        onPressed: () async {
+                          final selectedTimes =
+                              await Navigator.push<Map<String, TimeOfDay?>>(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const AddAlarm()),
                           );
+
+                          if (selectedTimes != null) {
+                            print(selectedTimes);
+                            setState(() {
+                              wakeTime = selectedTimes['wake_time'];
+                              bedTime = selectedTimes['bed_time'];
+                            });
+                          }
                         },
                         width: 400,
                         height: 40))
@@ -198,5 +213,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+extension TimeOfDayExtension on TimeOfDay? {
+  String formatOrEmpty(BuildContext context) {
+    if (this != null) {
+      return "${this?.hour.toString().padLeft(2, '0')}:${this?.minute.toString().padLeft(2, '0')}";
+    }
+    return '';
   }
 }
