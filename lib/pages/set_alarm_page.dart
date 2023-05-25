@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../widgets/circle_day.dart';
 import '../widgets/top_bar.dart';
+import 'package:intl/intl.dart';
+import 'home_page.dart';
 
 class AddAlarm extends StatefulWidget {
   const AddAlarm({Key? key}) : super(key: key);
@@ -12,10 +14,10 @@ class AddAlarm extends StatefulWidget {
 
 class _AddAlarmState extends State<AddAlarm> {
   late TimeOfDay _selectedTime;
-  late TimeOfDay wakeTime1;
-  late TimeOfDay wakeTime2;
-  late TimeOfDay wakeTime3;
-  late TimeOfDay wakeTime4;
+  late TimeOfDay wakeTime1 = TimeOfDay(hour: 3, minute: 00);
+  late TimeOfDay wakeTime2 = TimeOfDay(hour: 4, minute: 30);
+  late TimeOfDay wakeTime3 = TimeOfDay(hour: 6, minute: 00);
+  late TimeOfDay wakeTime4 = TimeOfDay(hour: 7, minute: 30);
   late ValueChanged<TimeOfDay> selectTime;
   late bool isMonSelected;
   late bool isTueSelected;
@@ -43,27 +45,28 @@ class _AddAlarmState extends State<AddAlarm> {
   void _saveTimes(BuildContext context, int choice) {
     TimeOfDay? wakeTime;
     switch (choice) {
-      case 1: {
-        wakeTime = wakeTime1;
-      }
-      break;
-      case 2: {
-        wakeTime = wakeTime2;
-      }
-      break;
-      case 3: {
-        wakeTime = wakeTime3;
-      }
-      break;
-      case 4: {
-        wakeTime = wakeTime4;
-      }
-      break;
+      case 1:
+        {
+          wakeTime = wakeTime1;
+        }
+        break;
+      case 2:
+        {
+          wakeTime = wakeTime2;
+        }
+        break;
+      case 3:
+        {
+          wakeTime = wakeTime3;
+        }
+        break;
+      case 4:
+        {
+          wakeTime = wakeTime4;
+        }
+        break;
     }
-    selectedTimes = {
-      'bed_time': wakeTime,
-      'wake_time': _selectedTime
-    };
+    selectedTimes = {'bed_time': wakeTime, 'wake_time': _selectedTime};
 
     print(selectedTimes);
   }
@@ -71,6 +74,10 @@ class _AddAlarmState extends State<AddAlarm> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        '/home': (context) => HomePage(),
+        // Define other routes
+      },
       home: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
@@ -268,7 +275,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                 builder: (BuildContext context) {
                                   return Dialog(
                                     backgroundColor:
-                                    Color.fromARGB(150, 53, 70, 131),
+                                        Color.fromARGB(150, 53, 70, 131),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -282,12 +289,16 @@ class _AddAlarmState extends State<AddAlarm> {
                                             child: InkWell(
                                               onTap: () {
                                                 _saveTimes(context, 1);
-                                                Navigator.of(context).pop();
+                                                //code here
+
+                                                Navigator.pop(context);
+                                                Navigator.pop(
+                                                    context, selectedTimes);
                                               },
                                               child: Ink(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(8),
+                                                      BorderRadius.circular(8),
                                                   color: Color.fromARGB(
                                                       150, 53, 70, 131),
                                                 ),
@@ -301,7 +312,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       '01',
                                                       style: TextStyle(
                                                         fontWeight:
-                                                        FontWeight.w700,
+                                                            FontWeight.w700,
                                                         fontSize: 20,
                                                         color: Color.fromARGB(
                                                             255, 198, 167, 132),
@@ -312,11 +323,11 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       child: Text(
                                                         '${wakeTime1.formatOrEmpty(context)} for Six Cycles - Nine Hours of Sleep.',
                                                         textAlign:
-                                                        TextAlign.left,
+                                                            TextAlign.left,
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
-                                                          FontWeight.w700,
+                                                              FontWeight.w700,
                                                           fontSize: 20,
                                                         ),
                                                       ),
@@ -328,7 +339,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                           ),
                                           Divider(
                                             color:
-                                            Color.fromARGB(192, 37, 34, 70),
+                                                Color.fromARGB(192, 37, 34, 70),
                                             height: 1,
                                             thickness: 2,
                                           ),
@@ -337,12 +348,14 @@ class _AddAlarmState extends State<AddAlarm> {
                                             child: InkWell(
                                               onTap: () {
                                                 _saveTimes(context, 2);
-                                                Navigator.of(context).pop();
+                                                Navigator.pop(context);
+                                                Navigator.pop(
+                                                    context, selectedTimes);
                                               },
                                               child: Ink(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(8),
+                                                      BorderRadius.circular(8),
                                                   color: Color.fromARGB(
                                                       150, 53, 70, 131),
                                                 ),
@@ -356,7 +369,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       '02',
                                                       style: TextStyle(
                                                         fontWeight:
-                                                        FontWeight.w700,
+                                                            FontWeight.w700,
                                                         fontSize: 20,
                                                         color: Color.fromARGB(
                                                             255, 198, 167, 132),
@@ -367,11 +380,11 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       child: Text(
                                                         '${wakeTime2.formatOrEmpty(context)} for Five Cycles - Seven and a Half Hours of Sleep.',
                                                         textAlign:
-                                                        TextAlign.left,
+                                                            TextAlign.left,
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
-                                                          FontWeight.w700,
+                                                              FontWeight.w700,
                                                           fontSize: 20,
                                                         ),
                                                       ),
@@ -383,7 +396,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                           ),
                                           Divider(
                                             color:
-                                            Color.fromARGB(192, 37, 34, 70),
+                                                Color.fromARGB(192, 37, 34, 70),
                                             height: 1,
                                             thickness: 2,
                                           ),
@@ -392,12 +405,14 @@ class _AddAlarmState extends State<AddAlarm> {
                                             child: InkWell(
                                               onTap: () {
                                                 _saveTimes(context, 3);
-                                                Navigator.of(context).pop();
+                                                Navigator.pop(context);
+                                                Navigator.pop(
+                                                    context, selectedTimes);
                                               },
                                               child: Ink(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(8),
+                                                      BorderRadius.circular(8),
                                                   color: Color.fromARGB(
                                                       150, 53, 70, 131),
                                                 ),
@@ -411,7 +426,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       '03',
                                                       style: TextStyle(
                                                         fontWeight:
-                                                        FontWeight.w700,
+                                                            FontWeight.w700,
                                                         fontSize: 20,
                                                         color: Color.fromARGB(
                                                             255, 198, 167, 132),
@@ -422,11 +437,11 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       child: Text(
                                                         '${wakeTime3.formatOrEmpty(context)} for Four Cycles - Six Hours of Sleep.',
                                                         textAlign:
-                                                        TextAlign.left,
+                                                            TextAlign.left,
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
-                                                          FontWeight.w700,
+                                                              FontWeight.w700,
                                                           fontSize: 20,
                                                         ),
                                                       ),
@@ -438,7 +453,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                           ),
                                           Divider(
                                             color:
-                                            Color.fromARGB(192, 37, 34, 70),
+                                                Color.fromARGB(192, 37, 34, 70),
                                             height: 1,
                                             thickness: 2,
                                           ),
@@ -447,12 +462,14 @@ class _AddAlarmState extends State<AddAlarm> {
                                             child: InkWell(
                                               onTap: () {
                                                 _saveTimes(context, 4);
-                                                Navigator.of(context).pop();
+                                                Navigator.pop(context);
+                                                Navigator.pop(
+                                                    context, selectedTimes);
                                               },
                                               child: Ink(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(8),
+                                                      BorderRadius.circular(8),
                                                   color: Color.fromARGB(
                                                       150, 53, 70, 131),
                                                 ),
@@ -466,7 +483,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       '04',
                                                       style: TextStyle(
                                                         fontWeight:
-                                                        FontWeight.w700,
+                                                            FontWeight.w700,
                                                         fontSize: 20,
                                                         color: Color.fromARGB(
                                                             255, 198, 167, 132),
@@ -477,11 +494,11 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       child: Text(
                                                         '${wakeTime4.formatOrEmpty(context)} for Three Cycles - Four and a Half Hours of Sleep',
                                                         textAlign:
-                                                        TextAlign.left,
+                                                            TextAlign.left,
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
-                                                          FontWeight.w700,
+                                                              FontWeight.w700,
                                                           fontSize: 20,
                                                         ),
                                                       ),
@@ -527,8 +544,7 @@ class _AddAlarmState extends State<AddAlarm> {
       wakeTime2 = _selectedTime.minusMinute(cycle_length * 5);
       wakeTime3 = _selectedTime.minusMinute(cycle_length * 4);
       wakeTime4 = _selectedTime.minusMinute(cycle_length * 3);
-      print(
-          "$wakeTime1\t$wakeTime2\t$wakeTime3\t$wakeTime4");
+      print("$wakeTime1\t$wakeTime2\t$wakeTime3\t$wakeTime4");
     }
   }
 }
@@ -556,7 +572,6 @@ extension TimeOfDayExtension on TimeOfDay {
   }
 
   String formatOrEmpty(BuildContext context) {
-    return "${hour.toString().padLeft(2, '0')}:${minute.toString()
-        .padLeft(2, '0')}";
+    return "${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}";
   }
 }
