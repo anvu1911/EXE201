@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/light_button.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/top_bar.dart';
@@ -11,6 +12,7 @@ import 'start_sleeping_page.dart';
 import 'set_alarm_page.dart';
 import './auth/login_page.dart';
 import './auth/registry_page.dart';
+import 'dart:developer';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,8 +26,39 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  late TimeOfDay? bedTime = null;
-  late TimeOfDay? wakeTime = null;
+  TimeOfDay? bedTime = TimeOfDay(hour: 10, minute: 0);
+  TimeOfDay? wakeTime = TimeOfDay(hour: 5, minute: 30);
+
+  Future<void> getTimesSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Retrieve the TimeOfDay strings from SharedPreferences
+    final wakeTimeString = prefs.getString('wake_time');
+    final bedTimeString = prefs.getString('bed_time');
+    log("Getting times from SF");
+    log('wakeTime: $wakeTimeString');
+    log('bedTime: $bedTimeString');
+    // Convert the strings back to TimeOfDay objects
+    if (wakeTimeString != null) {
+      wakeTime = TimeOfDay(
+          hour: int.parse(wakeTimeString.split(":")[0]),
+          minute: int.parse(wakeTimeString.split(":")[1]));
+    }
+    if (bedTimeString != null) {
+      bedTime = TimeOfDay(
+          hour: int.parse(bedTimeString.split(":")[0]),
+          minute: int.parse(bedTimeString.split(":")[1]));
+    }
+
+    // Trigger a rebuild of the widget tree
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getTimesSharedPreferences();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -184,7 +217,6 @@ class _HomePageState extends State<HomePage> {
                         );
 
                         if (selectedTimes != null) {
-                          print(selectedTimes);
                           setState(() {
                             wakeTime = selectedTimes['wake_time'];
                             bedTime = selectedTimes['bed_time'];

@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/circle_day.dart';
 import '../widgets/top_bar.dart';
 import 'package:intl/intl.dart';
@@ -16,11 +19,12 @@ class AddAlarm extends StatefulWidget {
 }
 
 class _AddAlarmState extends State<AddAlarm> {
-  late TimeOfDay _selectedTime;
-  late TimeOfDay wakeTime1 = TimeOfDay(hour: 3, minute: 00);
-  late TimeOfDay wakeTime2 = TimeOfDay(hour: 4, minute: 30);
-  late TimeOfDay wakeTime3 = TimeOfDay(hour: 6, minute: 00);
-  late TimeOfDay wakeTime4 = TimeOfDay(hour: 7, minute: 30);
+  late TimeOfDay wakeTime = TimeOfDay(hour: 5, minute: 30);
+  late TimeOfDay bedTime;
+  late TimeOfDay bedTime1;
+  late TimeOfDay bedTime2;
+  late TimeOfDay bedTime3;
+  late TimeOfDay bedTime4;
   late ValueChanged<TimeOfDay> selectTime;
   late bool isMonSelected;
   late bool isTueSelected;
@@ -34,7 +38,6 @@ class _AddAlarmState extends State<AddAlarm> {
 
   @override
   void initState() {
-    _selectedTime = TimeOfDay(hour: 12, minute: 00);
     isMonSelected = false;
     isTueSelected = false;
     isWedSelected = false;
@@ -43,35 +46,34 @@ class _AddAlarmState extends State<AddAlarm> {
     isSatSelected = false;
     isSunSelected = false;
     super.initState();
+    getTimesSharedPreferences();
   }
 
   void _saveTimes(BuildContext context, int choice) {
-    TimeOfDay? wakeTime;
+    TimeOfDay? bedtime;
     switch (choice) {
       case 1:
         {
-          wakeTime = wakeTime1;
+          bedtime = bedTime1;
         }
         break;
       case 2:
         {
-          wakeTime = wakeTime2;
+          bedtime = bedTime2;
         }
         break;
       case 3:
         {
-          wakeTime = wakeTime3;
+          bedtime = bedTime3;
         }
         break;
       case 4:
         {
-          wakeTime = wakeTime4;
+          bedtime = bedTime4;
         }
         break;
     }
-    selectedTimes = {'bed_time': wakeTime, 'wake_time': _selectedTime};
-
-    print(selectedTimes);
+    selectedTimes = {'bed_time': bedtime, 'wake_time': wakeTime};
   }
 
   @override
@@ -102,7 +104,7 @@ class _AddAlarmState extends State<AddAlarm> {
                 TopBar(
                   title: 'Set wake up time',
                   onBackButtonPressed: () {
-                    Navigator.of(context).pop(selectedTimes);
+                    Navigator.of(context).pop();
                     // Navigator.pop(context);
                   },
                 ),
@@ -119,7 +121,7 @@ class _AddAlarmState extends State<AddAlarm> {
                           ),
                           GestureDetector(
                             child: Text(
-                              _selectedTime.format(context),
+                              wakeTime.format(context),
                               style: TextStyle(
                                 fontSize: 60.0,
                                 fontWeight: FontWeight.bold,
@@ -277,10 +279,11 @@ class _AddAlarmState extends State<AddAlarm> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               LightButton(
-                                text: 'Caculate',
+                                text: 'CALCULATE',
                                 width: 180,
                                 height: 50,
                                 onPressed: () {
+                                  calculateTimes();
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -301,6 +304,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                 child: InkWell(
                                                   onTap: () {
                                                     _saveTimes(context, 1);
+                                                    saveTimesSharedPreferences();
                                                     //code here
 
                                                     Navigator.pop(context);
@@ -339,7 +343,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                         SizedBox(width: 16),
                                                         Expanded(
                                                           child: Text(
-                                                            '${wakeTime1.formatOrEmpty(context)} for Six Cycles - Nine Hours of Sleep.',
+                                                            '${bedTime1.formatOrEmpty(context)} for Six Cycles - Nine Hours of Sleep.',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: TextStyle(
@@ -368,6 +372,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                 child: InkWell(
                                                   onTap: () {
                                                     _saveTimes(context, 2);
+                                                    saveTimesSharedPreferences();
                                                     Navigator.pop(context);
                                                     Navigator.pop(
                                                         context, selectedTimes);
@@ -404,7 +409,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                         SizedBox(width: 16),
                                                         Expanded(
                                                           child: Text(
-                                                            '${wakeTime2.formatOrEmpty(context)} for Five Cycles - Seven and a Half Hours of Sleep.',
+                                                            '${bedTime2.formatOrEmpty(context)} for Five Cycles - Seven and a Half Hours of Sleep.',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: TextStyle(
@@ -433,6 +438,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                 child: InkWell(
                                                   onTap: () {
                                                     _saveTimes(context, 3);
+                                                    saveTimesSharedPreferences();
                                                     Navigator.pop(context);
                                                     Navigator.pop(
                                                         context, selectedTimes);
@@ -469,7 +475,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                         SizedBox(width: 16),
                                                         Expanded(
                                                           child: Text(
-                                                            '${wakeTime3.formatOrEmpty(context)} for Four Cycles - Six Hours of Sleep.',
+                                                            '${bedTime3.formatOrEmpty(context)} for Four Cycles - Six Hours of Sleep.',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: TextStyle(
@@ -498,6 +504,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                 child: InkWell(
                                                   onTap: () {
                                                     _saveTimes(context, 4);
+                                                    saveTimesSharedPreferences();
                                                     Navigator.pop(context);
                                                     Navigator.pop(
                                                         context, selectedTimes);
@@ -534,7 +541,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                         SizedBox(width: 16),
                                                         Expanded(
                                                           child: Text(
-                                                            '${wakeTime4.formatOrEmpty(context)} for Three Cycles - Four and a Half Hours of Sleep',
+                                                            '${bedTime4.formatOrEmpty(context)} for Three Cycles - Four and a Half Hours of Sleep',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: TextStyle(
@@ -563,7 +570,7 @@ class _AddAlarmState extends State<AddAlarm> {
                               SizedBox(width: 8),
 
                               DarkButton(
-                                text: 'Save',
+                                text: 'SAVE',
                                 width: 180,
                                 height: 50,
                                 onPressed: () {},
@@ -584,22 +591,70 @@ class _AddAlarmState extends State<AddAlarm> {
     );
   }
 
+  Future<void> saveTimesSharedPreferences() async {
+    if (selectedTimes['wake_time'] != null &&
+        selectedTimes['bed_time'] != null) {
+      final prefs = await SharedPreferences.getInstance();
+
+      // Convert TimeOfDay objects to String representation
+      final wakeTimeString =
+          "${selectedTimes['wake_time']?.hour.toString()}:${selectedTimes['wake_time']?.minute.toString()}";
+      final bedTimeString =
+          "${selectedTimes['bed_time']?.hour.toString()}:${selectedTimes['bed_time']?.minute.toString()}";
+
+      log("Saving to SF");
+      log('wakeTime $wakeTimeString');
+      log('bedTimeString $bedTimeString');
+
+      // Save the TimeOfDay strings to SharedPreferences
+      await prefs.setString('wake_time', wakeTimeString!);
+      await prefs.setString('bed_time', bedTimeString!);
+    }
+  }
+
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
-      initialTime: _selectedTime,
+      initialTime: wakeTime,
     );
     if (picked != null) {
       setState(() {
-        _selectedTime = picked;
+        wakeTime = picked;
       });
+    }
+  }
 
-      int cycle_length = 90;
-      wakeTime1 = _selectedTime.minusMinute(cycle_length * 6);
-      wakeTime2 = _selectedTime.minusMinute(cycle_length * 5);
-      wakeTime3 = _selectedTime.minusMinute(cycle_length * 4);
-      wakeTime4 = _selectedTime.minusMinute(cycle_length * 3);
-      print("$wakeTime1\t$wakeTime2\t$wakeTime3\t$wakeTime4");
+  void calculateTimes() {
+    int cycle_length = 90;
+    bedTime1 = wakeTime.minusMinute(cycle_length * 6);
+    bedTime2 = wakeTime.minusMinute(cycle_length * 5);
+    bedTime3 = wakeTime.minusMinute(cycle_length * 4);
+    bedTime4 = wakeTime.minusMinute(cycle_length * 3);
+  }
+
+  Future<void> getTimesSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Retrieve the TimeOfDay strings from SharedPreferences
+    final wakeTimeString = prefs.getString('wake_time');
+    final bedTimeString = prefs.getString('bed_time');
+
+    // Convert the strings back to TimeOfDay objects
+    try {
+      if (wakeTimeString != null) {
+        wakeTime = TimeOfDay(
+            hour: int.parse(wakeTimeString.split(":")[0]),
+            minute: int.parse(wakeTimeString.split(":")[1]));
+      }
+      if (bedTimeString != null) {
+        bedTime = TimeOfDay(
+            hour: int.parse(bedTimeString.split(":")[0]),
+            minute: int.parse(bedTimeString.split(":")[1]));
+      }
+      setState(() {});
+    } on Exception catch (e) {
+      wakeTime = TimeOfDay(hour: 6, minute: 0);
+      setState(() {});
     }
   }
 }
@@ -622,7 +677,6 @@ extension TimeOfDayExtension on TimeOfDay {
     if (hourNew >= 24) {
       hourNew = 0;
     }
-    print("$hourNew, $minuteNew");
     return replacing(hour: hourNew, minute: minuteNew);
   }
 
