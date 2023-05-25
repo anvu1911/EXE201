@@ -4,6 +4,9 @@ import '../widgets/circle_day.dart';
 import '../widgets/top_bar.dart';
 import 'package:intl/intl.dart';
 import 'home_page.dart';
+import 'package:exe201/widgets/tooltip.dart';
+import 'package:exe201/widgets/light_button.dart';
+import 'package:exe201/widgets/dark_button.dart';
 
 class AddAlarm extends StatefulWidget {
   const AddAlarm({Key? key}) : super(key: key);
@@ -109,7 +112,11 @@ class _AddAlarmState extends State<AddAlarm> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          SizedBox(height: 60.0),
+                          SizedBox(height: 30.0),
+                          Text(
+                            'Choose Time',
+                            style: TextStyle(color: Colors.white),
+                          ),
                           GestureDetector(
                             child: Text(
                               _selectedTime.format(context),
@@ -123,9 +130,11 @@ class _AddAlarmState extends State<AddAlarm> {
                               _selectTime(context);
                             },
                           ),
+                          //tool tip here
+
                           SizedBox(height: 30.0),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               CircleDay(
                                 day: 'Mon',
@@ -264,257 +273,303 @@ class _AddAlarmState extends State<AddAlarm> {
                             ),
                           ),
                           SizedBox(height: 60.0),
-                          FloatingActionButton(
-                            child: Text(
-                              'Save',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Dialog(
-                                    backgroundColor:
-                                        Color.fromARGB(150, 53, 70, 131),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Container(
-                                      width: 600,
-                                      height: 500,
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: InkWell(
-                                              onTap: () {
-                                                _saveTimes(context, 1);
-                                                //code here
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LightButton(
+                                text: 'Caculate',
+                                width: 180,
+                                height: 50,
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor:
+                                            Color.fromARGB(150, 53, 70, 131),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Container(
+                                          width: 600,
+                                          height: 500,
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    _saveTimes(context, 1);
+                                                    //code here
 
-                                                Navigator.pop(context);
-                                                Navigator.pop(
-                                                    context, selectedTimes);
-                                              },
-                                              child: Ink(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  color: Color.fromARGB(
-                                                      150, 53, 70, 131),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8,
-                                                    vertical: 16),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(width: 16),
-                                                    Text(
-                                                      '01',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 20,
-                                                        color: Color.fromARGB(
-                                                            255, 198, 167, 132),
-                                                      ),
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(
+                                                        context, selectedTimes);
+                                                  },
+                                                  child: Ink(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      color: Color.fromARGB(
+                                                          150, 53, 70, 131),
                                                     ),
-                                                    SizedBox(width: 16),
-                                                    Expanded(
-                                                      child: Text(
-                                                        '${wakeTime1.formatOrEmpty(context)} for Six Cycles - Nine Hours of Sleep.',
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 20,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 16),
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(width: 16),
+                                                        Text(
+                                                          '01',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize: 20,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    198,
+                                                                    167,
+                                                                    132),
+                                                          ),
                                                         ),
-                                                      ),
+                                                        SizedBox(width: 16),
+                                                        Expanded(
+                                                          child: Text(
+                                                            '${wakeTime1.formatOrEmpty(context)} for Six Cycles - Nine Hours of Sleep.',
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 20,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          Divider(
-                                            color:
-                                                Color.fromARGB(192, 37, 34, 70),
-                                            height: 1,
-                                            thickness: 2,
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: InkWell(
-                                              onTap: () {
-                                                _saveTimes(context, 2);
-                                                Navigator.pop(context);
-                                                Navigator.pop(
-                                                    context, selectedTimes);
-                                              },
-                                              child: Ink(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  color: Color.fromARGB(
-                                                      150, 53, 70, 131),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8,
-                                                    vertical: 16),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(width: 16),
-                                                    Text(
-                                                      '02',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 20,
-                                                        color: Color.fromARGB(
-                                                            255, 198, 167, 132),
-                                                      ),
+                                              Divider(
+                                                color: Color.fromARGB(
+                                                    192, 37, 34, 70),
+                                                height: 1,
+                                                thickness: 2,
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    _saveTimes(context, 2);
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(
+                                                        context, selectedTimes);
+                                                  },
+                                                  child: Ink(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      color: Color.fromARGB(
+                                                          150, 53, 70, 131),
                                                     ),
-                                                    SizedBox(width: 16),
-                                                    Expanded(
-                                                      child: Text(
-                                                        '${wakeTime2.formatOrEmpty(context)} for Five Cycles - Seven and a Half Hours of Sleep.',
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 20,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 16),
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(width: 16),
+                                                        Text(
+                                                          '02',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize: 20,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    198,
+                                                                    167,
+                                                                    132),
+                                                          ),
                                                         ),
-                                                      ),
+                                                        SizedBox(width: 16),
+                                                        Expanded(
+                                                          child: Text(
+                                                            '${wakeTime2.formatOrEmpty(context)} for Five Cycles - Seven and a Half Hours of Sleep.',
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 20,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          Divider(
-                                            color:
-                                                Color.fromARGB(192, 37, 34, 70),
-                                            height: 1,
-                                            thickness: 2,
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: InkWell(
-                                              onTap: () {
-                                                _saveTimes(context, 3);
-                                                Navigator.pop(context);
-                                                Navigator.pop(
-                                                    context, selectedTimes);
-                                              },
-                                              child: Ink(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  color: Color.fromARGB(
-                                                      150, 53, 70, 131),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8,
-                                                    vertical: 16),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(width: 16),
-                                                    Text(
-                                                      '03',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 20,
-                                                        color: Color.fromARGB(
-                                                            255, 198, 167, 132),
-                                                      ),
+                                              Divider(
+                                                color: Color.fromARGB(
+                                                    192, 37, 34, 70),
+                                                height: 1,
+                                                thickness: 2,
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    _saveTimes(context, 3);
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(
+                                                        context, selectedTimes);
+                                                  },
+                                                  child: Ink(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      color: Color.fromARGB(
+                                                          150, 53, 70, 131),
                                                     ),
-                                                    SizedBox(width: 16),
-                                                    Expanded(
-                                                      child: Text(
-                                                        '${wakeTime3.formatOrEmpty(context)} for Four Cycles - Six Hours of Sleep.',
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 20,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 16),
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(width: 16),
+                                                        Text(
+                                                          '03',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize: 20,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    198,
+                                                                    167,
+                                                                    132),
+                                                          ),
                                                         ),
-                                                      ),
+                                                        SizedBox(width: 16),
+                                                        Expanded(
+                                                          child: Text(
+                                                            '${wakeTime3.formatOrEmpty(context)} for Four Cycles - Six Hours of Sleep.',
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 20,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          Divider(
-                                            color:
-                                                Color.fromARGB(192, 37, 34, 70),
-                                            height: 1,
-                                            thickness: 2,
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: InkWell(
-                                              onTap: () {
-                                                _saveTimes(context, 4);
-                                                Navigator.pop(context);
-                                                Navigator.pop(
-                                                    context, selectedTimes);
-                                              },
-                                              child: Ink(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  color: Color.fromARGB(
-                                                      150, 53, 70, 131),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8,
-                                                    vertical: 16),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(width: 16),
-                                                    Text(
-                                                      '04',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 20,
-                                                        color: Color.fromARGB(
-                                                            255, 198, 167, 132),
-                                                      ),
+                                              Divider(
+                                                color: Color.fromARGB(
+                                                    192, 37, 34, 70),
+                                                height: 1,
+                                                thickness: 2,
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    _saveTimes(context, 4);
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(
+                                                        context, selectedTimes);
+                                                  },
+                                                  child: Ink(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      color: Color.fromARGB(
+                                                          150, 53, 70, 131),
                                                     ),
-                                                    SizedBox(width: 16),
-                                                    Expanded(
-                                                      child: Text(
-                                                        '${wakeTime4.formatOrEmpty(context)} for Three Cycles - Four and a Half Hours of Sleep',
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          fontSize: 20,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 8,
+                                                            vertical: 16),
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(width: 16),
+                                                        Text(
+                                                          '04',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize: 20,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    198,
+                                                                    167,
+                                                                    132),
+                                                          ),
                                                         ),
-                                                      ),
+                                                        SizedBox(width: 16),
+                                                        Expanded(
+                                                          child: Text(
+                                                            '${wakeTime4.formatOrEmpty(context)} for Three Cycles - Four and a Half Hours of Sleep',
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 20,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                    ),
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
+                              ),
+                              SizedBox(width: 8),
+
+                              DarkButton(
+                                text: 'Save',
+                                width: 180,
+                                height: 50,
+                                onPressed: () {},
+                              ),
+                              //
+                            ],
                           ),
                         ],
                       ),
