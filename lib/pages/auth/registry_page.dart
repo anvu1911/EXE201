@@ -55,13 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Container(
-                            //     decoration: BoxDecoration(shape: BoxShape.circle),
-                            //     child: Image.asset(
-                            //       'assets/images/logo1.1.png',
-                            //       height: 70,
-                            //       width: 70,
-                            //     )),
+
                             SizedBox(
                               height: 60,
                               width: double.infinity,
@@ -94,15 +88,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             const SizedBox(height: 20),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                              // child: TextField(
-                              //   style: TextStyle(fontSize: 18, color: Colors.black),
-                              //   decoration: InputDecoration(
-                              //       labelText: "Username",
-                              //       labelStyle: TextStyle(
-                              //           color: Colors.blue,
-                              //           fontSize: 15,
-                              //           fontFamily: 'Itim-Regular')),
-                              // ),
                               child: TextFormField(
                                 decoration: textInputDecoration.copyWith(
                                     labelText: "Full Name",

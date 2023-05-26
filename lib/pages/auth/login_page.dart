@@ -53,13 +53,6 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Container(
-                            //     decoration: BoxDecoration(shape: BoxShape.circle),
-                            //     child: Image.asset(
-                            //       'assets/images/logo1.1.png',
-                            //       height: 70,
-                            //       width: 70,
-                            //     )),
                             SizedBox(
                               height: 60,
                               width: double.infinity,
