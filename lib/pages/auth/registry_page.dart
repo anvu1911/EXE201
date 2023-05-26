@@ -62,14 +62,33 @@ class _RegisterPageState extends State<RegisterPage> {
                             //       height: 70,
                             //       width: 70,
                             //     )),
-                            Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "REGISTRY",
-                                style: TextStyle(
-                                    fontFamily: 'Itim-Regular',
-                                    color: Colors.white,
-                                    fontSize: 30),
+                            SizedBox(
+                              height: 60,
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.arrow_back, color: Colors.white,),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      child:
+                                      Text(
+                                        "REGISTER",
+                                        style: TextStyle(
+                                            fontFamily: 'Itim-Regular',
+                                            color: Colors.white,
+                                            fontSize: 30),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             const SizedBox(height: 20),

@@ -60,14 +60,33 @@ class _LoginPageState extends State<LoginPage> {
                             //       height: 70,
                             //       width: 70,
                             //     )),
-                            Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "LOGIN",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30,
-                                    fontFamily: 'Itim-Regular'),
+                            SizedBox(
+                              height: 60,
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.arrow_back, color: Colors.white,),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      child:
+                                      Text(
+                                        "Login",
+                                        style: TextStyle(
+                                            fontFamily: 'Itim-Regular',
+                                            color: Colors.white,
+                                            fontSize: 30),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             const SizedBox(height: 20),
