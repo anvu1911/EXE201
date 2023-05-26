@@ -55,6 +55,7 @@ class _StartSleepingPageState extends State<StartSleepingPage> {
       home: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: TopBar(
+          showArrow: true,
           title: 'My Screen',
           onBackButtonPressed: () {
             Navigator.pop(context);
