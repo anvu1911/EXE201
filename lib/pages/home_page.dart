@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: TopBar(
+        showArrow: false,
         title: 'Alarm',
         onBackButtonPressed: () {
           //no pop in homepage
@@ -137,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                             // text: 'Bedtime\n 10:20 PM',
                             text: 'Bedtime\n ${bedTime.formatOrEmpty(context)}',
                             onPressed: () {},
-                            width: 195,
+                            width: 190,
                             height: 60,
                           ),
                           Positioned(
@@ -168,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                             text:
                                 'Wakeup \n ${wakeTime.formatOrEmpty(context)}',
                             onPressed: () {},
-                            width: 195,
+                            width: 190,
                             height: 60,
                           ),
                           Positioned(

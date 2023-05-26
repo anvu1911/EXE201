@@ -102,6 +102,7 @@ class _AddAlarmState extends State<AddAlarm> {
             Column(
               children: [
                 TopBar(
+                  showArrow: true,
                   title: 'Set wake up time',
                   onBackButtonPressed: () {
                     Navigator.of(context).pop();
@@ -280,7 +281,7 @@ class _AddAlarmState extends State<AddAlarm> {
                             children: [
                               LightButton(
                                 text: 'CALCULATE',
-                                width: 180,
+                                width: 170,
                                 height: 50,
                                 onPressed: () {
                                   calculateTimes();
@@ -571,7 +572,7 @@ class _AddAlarmState extends State<AddAlarm> {
 
                               DarkButton(
                                 text: 'SAVE',
-                                width: 180,
+                                width: 170,
                                 height: 50,
                                 onPressed: () {},
                               ),

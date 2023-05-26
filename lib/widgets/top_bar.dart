@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool showArrow;
   final Function() onBackButtonPressed;
 
   const TopBar({
     super.key,
+    required this.showArrow,
     required this.title,
     required this.onBackButtonPressed,
   });
@@ -19,7 +21,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
+        icon: showArrow ? const Icon(Icons.arrow_back) : SizedBox(),
         onPressed: onBackButtonPressed,
       ),
       title: Text(title),
