@@ -68,6 +68,9 @@ class _LoginPageState extends State<LoginPage> {
                                         const EdgeInsets.fromLTRB(0, 0, 0, 20),
                                     child: TextFormField(
                                       decoration: textInputDecoration.copyWith(
+                                          errorStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              color: Colors.yellow.shade300),
                                           labelText: "Email",
                                           labelStyle: TextStyle(
                                               color: Colors.blue,
@@ -216,8 +219,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              20.0))
-                                                  ),
+                                                              20.0))),
                                               child: Row(
                                                 children: [
                                                   Image.asset(

@@ -84,14 +84,14 @@ class StartedPage extends StatelessWidget {
                                 text: 'NOT HAVE AN ACCOUNT YET? ',
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 117, 166, 193),
-                                  fontSize: 9,
+                                  fontSize: 12,
                                 ),
                               ),
                               TextSpan(
                                 text: 'SIGN UP NOW',
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 117, 166, 193),
-                                  fontSize: 9,
+                                  fontSize: 12,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
