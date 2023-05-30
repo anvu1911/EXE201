@@ -1,8 +1,19 @@
 import 'dart:developer';
+import 'dart:isolate';
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:exe201/pages/wakeup_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../context/alarm_context.dart';
+import '../domain/enums/repeat_enum.dart';
+import '../domain/models/models.dart';
+import '../service/alarm_service.dart';
 import '../widgets/circle_day.dart';
 import '../widgets/top_bar.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +30,13 @@ class AddAlarm extends StatefulWidget {
 }
 
 class _AddAlarmState extends State<AddAlarm> {
+  late AlarmContext _alarmContext;
+
+  bool _isVibrate = false;
+  bool _isDelete = true;
+  RepeatEnum _repeat = RepeatEnum.daily;
+  late TextEditingController _labelController;
+
   late TimeOfDay wakeTime = TimeOfDay(hour: 5, minute: 30);
   late TimeOfDay bedTime;
   late TimeOfDay bedTime1;
@@ -36,6 +54,8 @@ class _AddAlarmState extends State<AddAlarm> {
 
   Map<String, TimeOfDay?> selectedTimes = {};
 
+  DateTime at = DateTime.now().add(const Duration(minutes: 1));
+
   @override
   void initState() {
     isMonSelected = false;
@@ -46,7 +66,8 @@ class _AddAlarmState extends State<AddAlarm> {
     isSatSelected = false;
     isSunSelected = false;
     super.initState();
-    getTimesSharedPreferences();
+    _getTimesSharedPreferences();
+    _labelController = TextEditingController();
   }
 
   void _saveTimes(BuildContext context, int choice) {
@@ -74,6 +95,12 @@ class _AddAlarmState extends State<AddAlarm> {
         break;
     }
     selectedTimes = {'bed_time': bedtime, 'wake_time': wakeTime};
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _alarmContext = Provider.of<AlarmContext>(context);
   }
 
   @override
@@ -284,7 +311,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                 width: 170,
                                 height: 50,
                                 onPressed: () {
-                                  calculateTimes();
+                                  _calculateTimes();
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -371,9 +398,12 @@ class _AddAlarmState extends State<AddAlarm> {
                                               Expanded(
                                                 flex: 1,
                                                 child: InkWell(
-                                                  onTap: () {
+                                                  onTap: () async {
                                                     _saveTimes(context, 2);
                                                     saveTimesSharedPreferences();
+                                                    // _scheduleAlarm();
+                                                    _addAlarm();
+                                                    // Provider.of<AlarmContext>(context, listen: false).addAlarms(AlarmsModel(at: at));
                                                     Navigator.pop(context);
                                                     Navigator.pop(
                                                         context, selectedTimes);
@@ -625,7 +655,7 @@ class _AddAlarmState extends State<AddAlarm> {
     }
   }
 
-  void calculateTimes() {
+  void _calculateTimes() {
     int cycle_length = 90;
     bedTime1 = wakeTime.minusMinute(cycle_length * 6);
     bedTime2 = wakeTime.minusMinute(cycle_length * 5);
@@ -633,7 +663,7 @@ class _AddAlarmState extends State<AddAlarm> {
     bedTime4 = wakeTime.minusMinute(cycle_length * 3);
   }
 
-  Future<void> getTimesSharedPreferences() async {
+  Future<void> _getTimesSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
 
     // Retrieve the TimeOfDay strings from SharedPreferences
@@ -657,6 +687,88 @@ class _AddAlarmState extends State<AddAlarm> {
       wakeTime = TimeOfDay(hour: 6, minute: 0);
       setState(() {});
     }
+  }
+
+  void _scheduleAlarm() async {
+    // DateTime now = DateTime.now();
+    // DateTime alarmTime = DateTime(now.year, now.month, now.day, 7);
+
+    // await AndroidAlarmManager.periodic(
+    //     const Duration(minutes: 1), 0, printHello);
+    await AndroidAlarmManager.periodic(
+      const Duration(minutes: 1),
+      0,
+      printHello,
+      exact: true,
+      wakeup: true,
+    );
+
+    log('alarm set ' + DateTime.now().toString());
+  }
+
+  Future<void> _playRingtone() async {
+    await FlutterRingtonePlayer.play(
+      fromAsset: "assets/sound/wakeup-alarm.mp3",
+      looping: true, // Android only - API >= 28
+      volume: 0.1, // Android only - API >= 28
+      asAlarm: true, // Android only - all APIs
+    );
+  }
+
+  static printHello() {
+// Handle alarm triggered here
+    AudioPlayer audioPlayer = AudioPlayer();
+// AudioCache audioCache = AudioCache();
+
+    audioPlayer.play(UrlSource(
+        'https://d6cp9b00-a.akamaihd.net/downloads/ringtones/files/mp3/wakeup-alarm-tone-21497.mp3'));
+    log("printHello called");
+
+    final DateTime now = DateTime.now();
+    final int isolateId = Isolate.current.hashCode;
+    print("[$now] Hello, world! isolate=${isolateId} function='$printHello'");
+  }
+
+  void _addAlarm() {
+    TimeOfDay? wakeTime = selectedTimes['wake_time'];
+    log('waketime $wakeTime');
+    final now = DateTime.now();
+    at = DateTime(now.year, now.month, now.day, wakeTime!.hour, wakeTime!.minute);
+    if (DateTime.now().hour > at.hour) {
+      at = at.add(const Duration(days: 1));
+    } else if (DateTime.now().hour == at.hour &&
+        DateTime.now().minute >= at.minute) {
+      at = at.add(const Duration(days: 1));
+    }
+    final AlarmsModel alarm = AlarmsModel(
+      at: at,
+      repeat: _repeat,
+      vibrate: _isVibrate,
+      label: _labelController.text.isNotEmpty ? _labelController.text : null,
+      deleteAfterDone: _isDelete,
+    );
+    final bool itExists = _alarmContext.isAlarmAlreadyExists(alarm);
+
+    if (!itExists) {
+      _alarmContext.addAlarms(alarm);
+      // return Navigator.of(context).pop();
+    }
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) => AlertDialog(
+    //     title: const Text('Failed to create an alarm'),
+    //     content: const Text(
+    //         'There is a alarm already assigned to this  particular time'),
+    //     actions: <Widget>[
+    //       ElevatedButton(
+    //         onPressed: () => Navigator.of(context)
+    //           ..pop()
+    //           ..pop(),
+    //         child: const Text('OK I got it !'),
+    //       )
+    //     ],
+    //   ),
+    // );
   }
 }
 
@@ -684,4 +796,26 @@ extension TimeOfDayExtension on TimeOfDay {
   String formatOrEmpty(BuildContext context) {
     return "${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}";
   }
+}
+
+// @pragma('vm:entry-point')
+// printHello() {
+// // Handle alarm triggered here
+//   AudioPlayer audioPlayer = AudioPlayer();
+// // AudioCache audioCache = AudioCache();
+//
+//   audioPlayer.play(UrlSource(
+//       'https://d6cp9b00-a.akamaihd.net/downloads/ringtones/files/mp3/wakeup-alarm-tone-21497.mp3'));
+//
+// // Navigator.pushNamedAndRemoveUntil(context, '/wakeup', (_) => false);
+//
+//   final DateTime now = DateTime.now();
+//   final int isolateId = Isolate.current.hashCode;
+//   print("[$now] Hello, world! isolate=${isolateId} function='$printHello'");
+// }
+
+void _navigateToScreen(BuildContext context, String route) {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    Navigator.of(context).pushReplacementNamed(route);
+  });
 }
