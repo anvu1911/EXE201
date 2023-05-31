@@ -608,8 +608,8 @@ class _AddAlarmState extends State<AddAlarm> {
       log('bedTimeString $bedTimeString');
 
       // Save the TimeOfDay strings to SharedPreferences
-      await prefs.setString('wake_time', wakeTimeString!);
-      await prefs.setString('bed_time', bedTimeString!);
+      await prefs.setString('wake_time', wakeTimeString); //remove !
+      await prefs.setString('bed_time', bedTimeString); //remove !
     }
   }
 
