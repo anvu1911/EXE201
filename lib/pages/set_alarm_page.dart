@@ -46,7 +46,7 @@ class _AddAlarmState extends State<AddAlarm> {
     isSatSelected = false;
     isSunSelected = false;
     super.initState();
-    getTimesSharedPreferences();
+    _getTimesSharedPreferences();
   }
 
   void _saveTimes(BuildContext context, int choice) {
@@ -284,7 +284,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                 width: 170,
                                 height: 50,
                                 onPressed: () {
-                                  calculateTimes();
+                                  _calculateTimes();
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -306,14 +306,14 @@ class _AddAlarmState extends State<AddAlarm> {
                                                   onTap: () {
                                                     _saveTimes(
                                                         context, index + 1);
-                                                    saveTimesSharedPreferences();
+                                                    _saveTimesSharedPreferences();
                                                     Navigator.pop(context);
                                                     Navigator.pop(
                                                         context, selectedTimes);
                                                   },
                                                   child: Container(
-                                                    height:
-                                                        125, // Specify the desired height here
+                                                    height: 125,
+                                                    // Specify the desired height here
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -345,7 +345,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                         SizedBox(width: 16),
                                                         Expanded(
                                                           child: Text(
-                                                            '${getBedTime(index + 1)} for ${getCycleCount(index + 1)} Cycles \n${getSleepDuration(index + 1)} of Sleep.',
+                                                            '${_getBedTime(index + 1)} for ${_getCycleCount(index + 1)} Cycles \n${_getSleepDuration(index + 1)} of Sleep.',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: TextStyle(
@@ -397,7 +397,7 @@ class _AddAlarmState extends State<AddAlarm> {
     );
   }
 
-  Future<void> saveTimesSharedPreferences() async {
+  Future<void> _saveTimesSharedPreferences() async {
     if (selectedTimes['wake_time'] != null &&
         selectedTimes['bed_time'] != null) {
       final prefs = await SharedPreferences.getInstance();
@@ -430,7 +430,7 @@ class _AddAlarmState extends State<AddAlarm> {
     }
   }
 
-  void calculateTimes() {
+  void _calculateTimes() {
     int cycle_length = 90;
     bedTime1 = wakeTime.minusMinute(cycle_length * 6);
     bedTime2 = wakeTime.minusMinute(cycle_length * 5);
@@ -438,7 +438,7 @@ class _AddAlarmState extends State<AddAlarm> {
     bedTime4 = wakeTime.minusMinute(cycle_length * 3);
   }
 
-  Future<void> getTimesSharedPreferences() async {
+  Future<void> _getTimesSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
 
     // Retrieve the TimeOfDay strings from SharedPreferences
@@ -464,7 +464,7 @@ class _AddAlarmState extends State<AddAlarm> {
     }
   }
 
-  String getBedTime(int index) {
+  String _getBedTime(int index) {
     switch (index) {
       case 1:
         return bedTime1.formatOrEmpty(context);
@@ -478,35 +478,35 @@ class _AddAlarmState extends State<AddAlarm> {
         return '';
     }
   }
-}
 
-int getCycleCount(int index) {
-  switch (index) {
-    case 1:
-      return 6;
-    case 2:
-      return 5;
-    case 3:
-      return 4;
-    case 4:
-      return 3;
-    default:
-      return 0;
+  int _getCycleCount(int index) {
+    switch (index) {
+      case 1:
+        return 6;
+      case 2:
+        return 5;
+      case 3:
+        return 4;
+      case 4:
+        return 3;
+      default:
+        return 0;
+    }
   }
-}
 
-String getSleepDuration(int index) {
-  switch (index) {
-    case 1:
-      return 'Nine Hours';
-    case 2:
-      return 'Seven and a Half Hours';
-    case 3:
-      return 'Six Hours';
-    case 4:
-      return 'Four and a Half Hours';
-    default:
-      return '';
+  String _getSleepDuration(int index) {
+    switch (index) {
+      case 1:
+        return 'Nine Hours';
+      case 2:
+        return 'Seven and a Half Hours';
+      case 3:
+        return 'Six Hours';
+      case 4:
+        return 'Four and a Half Hours';
+      default:
+        return '';
+    }
   }
 }
 
