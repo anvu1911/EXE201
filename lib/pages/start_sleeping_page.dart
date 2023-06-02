@@ -1,3 +1,4 @@
+import 'package:exe201/pages/wake_up_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/light_button.dart';
 import '../widgets/bottom_navigation_bar.dart';
@@ -113,7 +114,7 @@ class _StartSleepingPageState extends State<StartSleepingPage> {
                     )),
                 _showButton
                     ? _buildFirstComponent(_toggleButton)
-                    : _buildSecondComponent(),
+                    : _buildSecondComponent(context),
                 _showButton
                     ? Container(height: 0)
                     : Padding(
@@ -150,13 +151,24 @@ Widget _buildFirstComponent(VoidCallback onPressedCallback) {
   );
 }
 
-Widget _buildSecondComponent() {
+Widget _buildSecondComponent(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(top: 11.0),
-    child: SwipeUpButton(
+    child: GestureDetector(
+      onVerticalDragEnd: (details) {
+        if (details.primaryVelocity! < 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => WakeUpPage()),
+          );
+        }
+      },
+      child: SwipeUpButton(
         onFinish: () {},
         onWaitingProcess: () {},
         activeColor: Color.fromARGB(255, 172, 165, 223),
-        iconColor: Colors.white),
+        iconColor: Colors.white,
+      ),
+    ),
   );
 }
