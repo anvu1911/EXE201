@@ -39,10 +39,10 @@ class _AddAlarmState extends State<AddAlarm> {
 
   late TimeOfDay wakeTime = TimeOfDay(hour: 5, minute: 30);
   late TimeOfDay bedTime;
-  late TimeOfDay bedTime1;
-  late TimeOfDay bedTime2;
-  late TimeOfDay bedTime3;
-  late TimeOfDay bedTime4;
+  late TimeOfDay bedTime1 = TimeOfDay(hour: 0, minute: 0);
+  late TimeOfDay bedTime2 = TimeOfDay(hour: 0, minute: 0);
+  late TimeOfDay bedTime3 = TimeOfDay(hour: 0, minute: 0);
+  late TimeOfDay bedTime4 = TimeOfDay(hour: 0, minute: 0);
   late ValueChanged<TimeOfDay> selectTime;
   late bool isMonSelected;
   late bool isTueSelected;
@@ -325,21 +325,22 @@ class _AddAlarmState extends State<AddAlarm> {
                                         child: Container(
                                           width: 600,
                                           height: 500,
-                                          child: Column(
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: InkWell(
+                                          child: ListView(
+                                            children: ListTile.divideTiles(
+                                              context: context,
+                                              tiles: List.generate(4, (index) {
+                                                return InkWell(
                                                   onTap: () {
-                                                    _saveTimes(context, 1);
-                                                    saveTimesSharedPreferences();
-                                                    //code here
-
+                                                    _saveTimes(
+                                                        context, index + 1);
+                                                    _saveTimesSharedPreferences();
                                                     Navigator.pop(context);
                                                     Navigator.pop(
                                                         context, selectedTimes);
                                                   },
-                                                  child: Ink(
+                                                  child: Container(
+                                                    height: 125,
+                                                    // Specify the desired height here
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -355,7 +356,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       children: [
                                                         SizedBox(width: 16),
                                                         Text(
-                                                          '01',
+                                                          '${(index + 1).toString().padLeft(2, '0')}',
                                                           style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w700,
@@ -371,7 +372,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                         SizedBox(width: 16),
                                                         Expanded(
                                                           child: Text(
-                                                            '${bedTime1.formatOrEmpty(context)} for Six Cycles - Nine Hours of Sleep.',
+                                                            '${_getBedTime(index + 1)} for ${_getCycleCount(index + 1)} Cycles \n${_getSleepDuration(index + 1)} of Sleep.',
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: TextStyle(
@@ -387,210 +388,11 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       ],
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              Divider(
-                                                color: Color.fromARGB(
-                                                    192, 37, 34, 70),
-                                                height: 1,
-                                                thickness: 2,
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    _saveTimes(context, 2);
-                                                    saveTimesSharedPreferences();
-                                                    // _scheduleAlarm();
-                                                    _addAlarm();
-                                                    // Provider.of<AlarmContext>(context, listen: false).addAlarms(AlarmsModel(at: at));
-                                                    Navigator.pop(context);
-                                                    Navigator.pop(
-                                                        context, selectedTimes);
-                                                  },
-                                                  child: Ink(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      color: Color.fromARGB(
-                                                          150, 53, 70, 131),
-                                                    ),
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8,
-                                                            vertical: 16),
-                                                    child: Row(
-                                                      children: [
-                                                        SizedBox(width: 16),
-                                                        Text(
-                                                          '02',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            fontSize: 20,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    198,
-                                                                    167,
-                                                                    132),
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: 16),
-                                                        Expanded(
-                                                          child: Text(
-                                                            '${bedTime2.formatOrEmpty(context)} for Five Cycles - Seven and a Half Hours of Sleep.',
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontSize: 20,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Divider(
-                                                color: Color.fromARGB(
-                                                    192, 37, 34, 70),
-                                                height: 1,
-                                                thickness: 2,
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    _saveTimes(context, 3);
-                                                    saveTimesSharedPreferences();
-                                                    Navigator.pop(context);
-                                                    Navigator.pop(
-                                                        context, selectedTimes);
-                                                  },
-                                                  child: Ink(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      color: Color.fromARGB(
-                                                          150, 53, 70, 131),
-                                                    ),
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8,
-                                                            vertical: 16),
-                                                    child: Row(
-                                                      children: [
-                                                        SizedBox(width: 16),
-                                                        Text(
-                                                          '03',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            fontSize: 20,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    198,
-                                                                    167,
-                                                                    132),
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: 16),
-                                                        Expanded(
-                                                          child: Text(
-                                                            '${bedTime3.formatOrEmpty(context)} for Four Cycles - Six Hours of Sleep.',
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontSize: 20,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Divider(
-                                                color: Color.fromARGB(
-                                                    192, 37, 34, 70),
-                                                height: 1,
-                                                thickness: 2,
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    _saveTimes(context, 4);
-                                                    saveTimesSharedPreferences();
-                                                    Navigator.pop(context);
-                                                    Navigator.pop(
-                                                        context, selectedTimes);
-                                                  },
-                                                  child: Ink(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      color: Color.fromARGB(
-                                                          150, 53, 70, 131),
-                                                    ),
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8,
-                                                            vertical: 16),
-                                                    child: Row(
-                                                      children: [
-                                                        SizedBox(width: 16),
-                                                        Text(
-                                                          '04',
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            fontSize: 20,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    198,
-                                                                    167,
-                                                                    132),
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: 16),
-                                                        Expanded(
-                                                          child: Text(
-                                                            '${bedTime4.formatOrEmpty(context)} for Three Cycles - Four and a Half Hours of Sleep',
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontSize: 20,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                                );
+                                              }),
+                                              color: Color.fromARGB(
+                                                  192, 37, 34, 70),
+                                            ).toList(),
                                           ),
                                         ),
                                       );
@@ -622,7 +424,7 @@ class _AddAlarmState extends State<AddAlarm> {
     );
   }
 
-  Future<void> saveTimesSharedPreferences() async {
+  Future<void> _saveTimesSharedPreferences() async {
     if (selectedTimes['wake_time'] != null &&
         selectedTimes['bed_time'] != null) {
       final prefs = await SharedPreferences.getInstance();
@@ -638,8 +440,8 @@ class _AddAlarmState extends State<AddAlarm> {
       log('bedTimeString $bedTimeString');
 
       // Save the TimeOfDay strings to SharedPreferences
-      await prefs.setString('wake_time', wakeTimeString!);
-      await prefs.setString('bed_time', bedTimeString!);
+      await prefs.setString('wake_time', wakeTimeString); //remove !
+      await prefs.setString('bed_time', bedTimeString); //remove !
     }
   }
 
@@ -686,6 +488,51 @@ class _AddAlarmState extends State<AddAlarm> {
     } on Exception catch (e) {
       wakeTime = TimeOfDay(hour: 6, minute: 0);
       setState(() {});
+    }
+  }
+
+  String _getBedTime(int index) {
+    switch (index) {
+      case 1:
+        return bedTime1.formatOrEmpty(context);
+      case 2:
+        return bedTime2.formatOrEmpty(context);
+      case 3:
+        return bedTime3.formatOrEmpty(context);
+      case 4:
+        return bedTime4.formatOrEmpty(context);
+      default:
+        return '';
+    }
+  }
+
+  int _getCycleCount(int index) {
+    switch (index) {
+      case 1:
+        return 6;
+      case 2:
+        return 5;
+      case 3:
+        return 4;
+      case 4:
+        return 3;
+      default:
+        return 0;
+    }
+  }
+
+  String _getSleepDuration(int index) {
+    switch (index) {
+      case 1:
+        return 'Nine Hours';
+      case 2:
+        return 'Seven and a Half Hours';
+      case 3:
+        return 'Six Hours';
+      case 4:
+        return 'Four and a Half Hours';
+      default:
+        return '';
     }
   }
 
