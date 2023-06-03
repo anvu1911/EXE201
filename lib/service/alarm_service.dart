@@ -22,24 +22,34 @@ class AlarmService {
   static Future<void> _nonRepeatingAlarm(int id) async {
     debugPrint('entering a new thread, nonRepeatingAlarm $id');
     await Hive.initFlutter();
-    if (!Hive.isAdapterRegistered(0) && !Hive.isAdapterRegistered(3)) {
+    if (!Hive.isAdapterRegistered(0) &&
+        !Hive.isAdapterRegistered(3) &&
+        !Hive.isAdapterRegistered(4)) {
       Hive
         ..registerAdapter(RepeatEnumAdapter())
-        ..registerAdapter(AlarmsModelAdapter());
+        ..registerAdapter(AlarmsModelAdapter())
+        ..registerAdapter(TypeEnumAdapter());
     }
 
     alarmsBox = await Hive.openLazyBox<AlarmsModel>('alarm');
 
-    final AlarmsModel? model = await alarmsBox!.get(id);
-
-    debugPrint(model != null ? 'true' : 'false');
+    AlarmsModel? model = await alarmsBox!.get(id);
 
     if (model != null) {
       debugPrint('running the notification and alarm');
-      NotificationService.showStaticNotification(
-          id: id,
-          title: alarmFormat(model.at),
-          body: 'Tap to turn off the alarm');
+      if (model.type == TypeEnum.bedTime) {
+        NotificationService.showStaticNotification(
+            id: id,
+            title: 'Shleep ${alarmFormat(model.at)}',
+            body: 'Go to bed!');
+      } else {
+        NotificationService.showStaticNotification(
+            id: id, title: 'Shleep ${alarmFormat(model.at)}', body: 'Wake up!');
+      }
+      // NotificationService.showStaticNotification(
+      //     id: id,
+      //     title: alarmFormat(model.at),
+      //     body: 'Tap to turn off the alarm');
 
       if (model.vibrate) {
         Vibrate.feedback(FeedbackType.heavy);
@@ -56,7 +66,17 @@ class AlarmService {
       }
 
       await alarmsBox!.close();
-      FlutterRingtonePlayer.playAlarm(volume: _volume);
+      // FlutterRingtonePlayer.playAlarm(volume: _volume);
+      if (model.type == TypeEnum.wakeTime) {
+        FlutterRingtonePlayer.play(
+          fromAsset: "assets/sound/wakeup-alarm.mp3",
+          looping: true, // Android only - API >= 28
+          volume: _volume, // Android only - API >= 28
+          asAlarm: true, // Android only - all APIs
+        );
+      } else {
+        FlutterRingtonePlayer.playAlarm(volume: _volume);
+      }
 
       // Conversation between the isolates
       final ReceivePort receiver = ReceivePort();
@@ -71,7 +91,7 @@ class AlarmService {
       receiver.listen(
         (dynamic message) async {
           if (message == 'stop') {
-            debugPrint('stoping the rigntone player');
+            debugPrint('stopping the ringtone player');
             await FlutterRingtonePlayer.stop();
             receiver.close();
           }
@@ -83,12 +103,15 @@ class AlarmService {
   }
 
   static Future<void> _repeatingAlarm(int id) async {
-    debugPrint('enerting a new thread');
+    debugPrint('entering a new thread repeating alarm');
     await Hive.initFlutter();
-    if (!Hive.isAdapterRegistered(0) && !Hive.isAdapterRegistered(3)) {
+    if (!Hive.isAdapterRegistered(0) &&
+        !Hive.isAdapterRegistered(3) &&
+        !Hive.isAdapterRegistered(4)) {
       Hive
         ..registerAdapter(RepeatEnumAdapter())
-        ..registerAdapter(AlarmsModelAdapter());
+        ..registerAdapter(AlarmsModelAdapter())
+        ..registerAdapter(TypeEnumAdapter());
     }
 
     alarmsBox = await Hive.openLazyBox<AlarmsModel>('alarm');
@@ -125,7 +148,7 @@ class AlarmService {
       receiver.listen(
         (dynamic message) async {
           if (message == 'stop') {
-            debugPrint('stoping the rigntone player');
+            debugPrint('stopping the ringtone player');
             await FlutterRingtonePlayer.stop();
             receiver.close();
           }
@@ -142,22 +165,29 @@ class AlarmService {
   }
 
   Future<void> createAlarm(AlarmsModel model) async {
-    debugPrint(model.at.toString() + '!!!!!!!!');
-
     if (model.repeat == RepeatEnum.once) {
+      debugPrint('creating once alarm');
       final bool isCreated = await AndroidAlarmManager.oneShotAt(
           model.at, model.id, _nonRepeatingAlarm,
           alarmClock: true, wakeup: true, exact: true);
 
       if (isCreated) {
-        await _notificationService.showBaseNotification(
-          id: model.id,
-          title: 'Upcoming alarm at ${alarmFormat(model.at)}',
-          body: model.label,
-        );
+        if (model.type == TypeEnum.bedTime) {
+          await _notificationService.showBaseNotification(
+            id: model.id,
+            title: 'Bedtime alarm at ${alarmFormat(model.at)}',
+            body: model.label,
+          );
+        } else {
+          await _notificationService.showBaseNotification(
+            id: model.id,
+            title: 'Wakeup alarm at ${alarmFormat(model.at)}',
+            body: model.label,
+          );
+        }
       }
     } else if (model.repeat == RepeatEnum.daily) {
-      debugPrint('a daily alarm has benn registerd');
+      debugPrint('a daily alarm has been registered');
 
       final bool isCreated = await AndroidAlarmManager.periodic(
         const Duration(days: 1),

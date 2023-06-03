@@ -1,6 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../domain/enums/repeat_enum.dart';
+import '../../domain/enums/type_enum.dart';
 import '../../domain/models/models.dart';
 import '../data.dart';
 
@@ -10,7 +11,8 @@ class LocalStorage {
     await Hive.initFlutter();
     Hive
       ..registerAdapter(AlarmsModelAdapter())
-      ..registerAdapter(RepeatEnumAdapter());
+      ..registerAdapter(RepeatEnumAdapter())
+      ..registerAdapter(TypeEnumAdapter());
     await AlarmData.init();
   }
 }

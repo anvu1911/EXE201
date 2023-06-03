@@ -24,13 +24,14 @@ class AlarmsModelAdapter extends TypeAdapter<AlarmsModel> {
       label: fields[4] as String?,
       deleteAfterDone: fields[5] as bool,
       isActive: fields[6] as bool,
+      type: fields[7] as TypeEnum,
     );
   }
 
   @override
   void write(BinaryWriter writer, AlarmsModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,9 +45,10 @@ class AlarmsModelAdapter extends TypeAdapter<AlarmsModel> {
       ..writeByte(5)
       ..write(obj.deleteAfterDone)
       ..writeByte(6)
-      ..write(obj.isActive);
+      ..write(obj.isActive)
+      ..writeByte(7)
+      ..write(obj.type);
   }
-  
 
   @override
   int get hashCode => typeId.hashCode;

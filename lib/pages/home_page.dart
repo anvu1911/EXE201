@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../context/alarm_context.dart';
 import '../widgets/light_button.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/top_bar.dart';
 import '../widgets/dark_button.dart';
-import 'package:intl/intl.dart';
 import '../widgets/clock_view.dart';
-import '../widgets/swipte_button.dart';
 import '../widgets/current_datetime.dart';
 import 'start_sleeping_page.dart';
 import 'add_alarm_page.dart';
-import './auth/login_page.dart';
-import './auth/registry_page.dart';
 import 'dart:developer';
 
 class HomePage extends StatefulWidget {
@@ -28,8 +22,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  TimeOfDay? bedTime = TimeOfDay(hour: 10, minute: 0);
-  TimeOfDay? wakeTime = TimeOfDay(hour: 5, minute: 30);
+  TimeOfDay? bedTime = const TimeOfDay(hour: 10, minute: 0);
+  TimeOfDay? wakeTime = const TimeOfDay(hour: 5, minute: 30);
 
   Future<void> getTimesSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();

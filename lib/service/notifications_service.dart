@@ -17,7 +17,7 @@ class NotificationService {
         android: AndroidNotificationDetails(
           '02',
           'static_notification',
-          channelDescription: 'non removable notificaions',
+          channelDescription: 'non removable notification',
           importance: Importance.high,
           priority: Priority.high,
           ongoing: true,

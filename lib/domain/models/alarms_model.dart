@@ -12,6 +12,7 @@ class AlarmsModel extends HiveObject {
     this.label,
     this.deleteAfterDone = false,
     this.isActive = true,
+    this.type = TypeEnum.wakeTime,
   });
   @HiveField(0)
   int id;
@@ -33,6 +34,9 @@ class AlarmsModel extends HiveObject {
 
   @HiveField(6)
   bool isActive;
+
+  @HiveField(7)
+  TypeEnum type;
 
   // ignore: avoid_setters_without_getters
   set setId(int id) => this.id = id;

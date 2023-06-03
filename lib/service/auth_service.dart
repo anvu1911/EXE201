@@ -1,6 +1,7 @@
 import 'package:exe201/helper/helper_function.dart';
 import 'package:exe201/service/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class AuthService {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -15,7 +16,7 @@ class AuthService {
         return true;
       }
     } on FirebaseAuthException catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return e.message;
     }
   }
@@ -33,7 +34,7 @@ class AuthService {
         return true;
       }
     } on FirebaseAuthException catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return e.message;
     }
   }

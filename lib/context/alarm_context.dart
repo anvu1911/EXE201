@@ -18,8 +18,11 @@ class AlarmContext extends ChangeNotifier {
     notifyListeners();
     _alarmService.createAlarm(alarm);
     final int index = _alarmData.getIndex(alarm);
+    debugPrint("checking id: $index ${alarm.at} ${alarm.type}");
     // ignore: always_put_control_body_on_new_line
-    if (_key.currentState == null) return;
+    if (_key.currentState == null) {
+      return;
+    }
     _key.currentState!.insertItem(index);
   }
 
@@ -58,7 +61,6 @@ class AlarmContext extends ChangeNotifier {
 
     alarm.setIsActive = active;
     await alarm.save();
-    debugPrint(alarm.toString());
     if (alarm.isActive) {
       _alarmService.createAlarm(alarm);
       debugPrint('alarm created');

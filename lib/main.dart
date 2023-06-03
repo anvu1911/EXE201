@@ -1,19 +1,16 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:exe201/pages/home_page.dart';
-import 'package:exe201/pages/add_alarm_page.dart';
 import 'package:exe201/pages/started_page.dart';
 import 'package:exe201/service/alarm_service.dart';
 import 'package:exe201/service/notifications_service.dart';
-import 'package:exe201/widgets/bottom_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:exe201/helper/helper_function.dart';
-import 'package:exe201/pages/wakeup_page.dart';
 import 'package:provider/provider.dart';
 
 import 'context/alarm_context.dart';
-import 'data/local/local_storage.dart';
+import 'data/data.dart';
 import 'firebase_options.dart';
+import 'helper/helper_function.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,10 +29,6 @@ void main() async {
     create: (_) => AlarmContext(),
     child: MyApp(),
   ));
-
-  // final int helloAlarmID = 0;
-  // await AndroidAlarmManager.periodic(
-  //     const Duration(minutes: 1), helloAlarmID, printHello);
 }
 
 // class ProviderWrapper extends StatelessWidget {
@@ -55,61 +48,64 @@ void main() async {
 //   }
 // }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'ClockWork',
-        debugShowCheckedModeBanner: false,
-        home: HomePage());
-  }
-}
-
-// class MyApp extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() => _MyAppState();
-// }
-//
-// class _MyAppState extends State<MyApp> {
-//   bool _isSignedIn = false;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     getUserLoggedInStatus();
-//   }
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
 //
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
-//       title: 'Shleep',
-//       theme: ThemeData(
-//         // This is the theme of your application.
-//         //
-//         // Try running your application with "flutter run". You'll see the
-//         // application has a blue toolbar. Then, without quitting the app, try
-//         // changing the primarySwatch below to Colors.green and then invoke
-//         // "hot reload" (press "r" in the console where you ran "flutter run",
-//         // or simply save your changes to "hot reload" in a Flutter IDE).
-//         // Notice that the counter didn't reset back to zero; the application
-//         // is not restarted.
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: _isSignedIn ? const HomePage() : StartedPage(),
-//     );
-//   }
-//
-//   void getUserLoggedInStatus() async {
-//     await HelperFunctions.getUserLoggedInStatus().then((value) {
-//       if (value != null) {
-//         _isSignedIn = value;
-//       }
-//     });
+//         title: 'ClockWork',
+//         debugShowCheckedModeBanner: false,
+//         home: HomePage());
 //   }
 // }
-//
+
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _isSignedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserLoggedInStatus();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Shleep',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: _isSignedIn ? const HomePage() : StartedPage(),
+    );
+  }
+
+  void _getUserLoggedInStatus() async {
+    await HelperFunctions.getUserLoggedInStatus().then((value) {
+      if (value != null) {
+        _isSignedIn = value;
+      }
+    });
+    setState(() {
+
+    });
+  }
+}
+
 // class _MyAppState extends State<MyApp> {
 //   bool _isSignedIn = false;
 //

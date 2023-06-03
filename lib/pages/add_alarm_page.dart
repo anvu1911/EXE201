@@ -1,24 +1,14 @@
 import 'dart:developer';
-import 'dart:isolate';
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:exe201/pages/wakeup_page.dart';
+import 'package:exe201/domain/enums/enums.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
-import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../context/alarm_context.dart';
-import '../domain/enums/repeat_enum.dart';
 import '../domain/models/models.dart';
-import '../service/alarm_service.dart';
 import '../widgets/circle_day.dart';
 import '../widgets/top_bar.dart';
-import 'package:intl/intl.dart';
 import 'home_page.dart';
-import 'package:exe201/widgets/tooltip.dart';
 import 'package:exe201/widgets/light_button.dart';
 import 'package:exe201/widgets/dark_button.dart';
 
@@ -34,15 +24,15 @@ class _AddAlarmState extends State<AddAlarm> {
 
   bool _isVibrate = false;
   bool _isDelete = true;
-  RepeatEnum _repeat = RepeatEnum.daily;
+  RepeatEnum _repeat = RepeatEnum.once;
   late TextEditingController _labelController;
 
-  late TimeOfDay wakeTime = TimeOfDay(hour: 5, minute: 30);
+  late TimeOfDay wakeTime = const TimeOfDay(hour: 5, minute: 30);
   late TimeOfDay bedTime;
-  late TimeOfDay bedTime1 = TimeOfDay(hour: 0, minute: 0);
-  late TimeOfDay bedTime2 = TimeOfDay(hour: 0, minute: 0);
-  late TimeOfDay bedTime3 = TimeOfDay(hour: 0, minute: 0);
-  late TimeOfDay bedTime4 = TimeOfDay(hour: 0, minute: 0);
+  late TimeOfDay bedTime1 = const TimeOfDay(hour: 0, minute: 0);
+  late TimeOfDay bedTime2 = const TimeOfDay(hour: 0, minute: 0);
+  late TimeOfDay bedTime3 = const TimeOfDay(hour: 0, minute: 0);
+  late TimeOfDay bedTime4 = const TimeOfDay(hour: 0, minute: 0);
   late ValueChanged<TimeOfDay> selectTime;
   late bool isMonSelected;
   late bool isTueSelected;
@@ -54,7 +44,8 @@ class _AddAlarmState extends State<AddAlarm> {
 
   Map<String, TimeOfDay?> selectedTimes = {};
 
-  DateTime at = DateTime.now().add(const Duration(minutes: 1));
+  late DateTime wakeAt;
+  late DateTime bedAt;
 
   @override
   void initState() {
@@ -115,7 +106,7 @@ class _AddAlarmState extends State<AddAlarm> {
         body: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/background-2.png'),
                   fit: BoxFit.cover,
@@ -138,19 +129,19 @@ class _AddAlarmState extends State<AddAlarm> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          SizedBox(height: 30.0),
-                          Text(
+                          const SizedBox(height: 30.0),
+                          const Text(
                             'Choose Time',
                             style: TextStyle(color: Colors.white),
                           ),
                           GestureDetector(
                             child: Text(
                               wakeTime.format(context),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 60.0,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -162,7 +153,7 @@ class _AddAlarmState extends State<AddAlarm> {
                           ),
                           //tool tip here
 
-                          SizedBox(height: 30.0),
+                          const SizedBox(height: 30.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -231,14 +222,14 @@ class _AddAlarmState extends State<AddAlarm> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 60.0),
+                          const SizedBox(height: 60.0),
                           SizedBox(
                             height: 2.0,
                             child: Container(
                               color: Colors.white30,
                             ),
                           ),
-                          ListTile(
+                          const ListTile(
                             leading: Icon(
                               Icons.notifications_none,
                               color: Colors.white,
@@ -254,7 +245,7 @@ class _AddAlarmState extends State<AddAlarm> {
                               color: Colors.white30,
                             ),
                           ),
-                          ListTile(
+                          const ListTile(
                             leading: Icon(
                               Icons.notifications_none,
                               color: Colors.white,
@@ -270,7 +261,7 @@ class _AddAlarmState extends State<AddAlarm> {
                               color: Colors.white30,
                             ),
                           ),
-                          ListTile(
+                          const ListTile(
                             leading: Icon(
                               Icons.notifications_none,
                               color: Colors.white,
@@ -286,7 +277,7 @@ class _AddAlarmState extends State<AddAlarm> {
                               color: Colors.white30,
                             ),
                           ),
-                          ListTile(
+                          const ListTile(
                             leading: Icon(
                               Icons.check_box,
                               color: Colors.white,
@@ -302,7 +293,7 @@ class _AddAlarmState extends State<AddAlarm> {
                               color: Colors.white30,
                             ),
                           ),
-                          SizedBox(height: 60.0),
+                          const SizedBox(height: 60.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -317,12 +308,12 @@ class _AddAlarmState extends State<AddAlarm> {
                                     builder: (BuildContext context) {
                                       return Dialog(
                                         backgroundColor:
-                                            Color.fromARGB(150, 53, 70, 131),
+                                            const Color.fromARGB(150, 53, 70, 131),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
-                                        child: Container(
+                                        child: SizedBox(
                                           width: 600,
                                           height: 500,
                                           child: ListView(
@@ -334,6 +325,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                     _saveTimes(
                                                         context, index + 1);
                                                     _saveTimesSharedPreferences();
+                                                    _addAlarm();
                                                     Navigator.pop(context);
                                                     Navigator.pop(
                                                         context, selectedTimes);
@@ -345,19 +337,19 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               8),
-                                                      color: Color.fromARGB(
+                                                      color: const Color.fromARGB(
                                                           150, 53, 70, 131),
                                                     ),
                                                     padding:
-                                                        EdgeInsets.symmetric(
+                                                        const EdgeInsets.symmetric(
                                                             horizontal: 8,
                                                             vertical: 16),
                                                     child: Row(
                                                       children: [
-                                                        SizedBox(width: 16),
+                                                        const SizedBox(width: 16),
                                                         Text(
-                                                          '${(index + 1).toString().padLeft(2, '0')}',
-                                                          style: TextStyle(
+                                                          (index + 1).toString().padLeft(2, '0'),
+                                                          style: const TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w700,
                                                             fontSize: 20,
@@ -369,13 +361,13 @@ class _AddAlarmState extends State<AddAlarm> {
                                                                     132),
                                                           ),
                                                         ),
-                                                        SizedBox(width: 16),
+                                                        const SizedBox(width: 16),
                                                         Expanded(
                                                           child: Text(
                                                             '${_getBedTime(index + 1)} for ${_getCycleCount(index + 1)} Cycles \n${_getSleepDuration(index + 1)} of Sleep.',
                                                             textAlign:
                                                                 TextAlign.left,
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                               color:
                                                                   Colors.white,
                                                               fontWeight:
@@ -390,7 +382,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                                   ),
                                                 );
                                               }),
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   192, 37, 34, 70),
                                             ).toList(),
                                           ),
@@ -400,7 +392,7 @@ class _AddAlarmState extends State<AddAlarm> {
                                   );
                                 },
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
 
                               DarkButton(
                                 text: 'SAVE',
@@ -458,11 +450,12 @@ class _AddAlarmState extends State<AddAlarm> {
   }
 
   void _calculateTimes() {
-    int cycle_length = 90;
-    bedTime1 = wakeTime.minusMinute(cycle_length * 6);
-    bedTime2 = wakeTime.minusMinute(cycle_length * 5);
-    bedTime3 = wakeTime.minusMinute(cycle_length * 4);
-    bedTime4 = wakeTime.minusMinute(cycle_length * 3);
+    int cycleLength = 90;
+    bedTime1 = wakeTime.minusMinute(cycleLength * 6);
+    // bedTime1 = wakeTime.replacing(minute: wakeTime.minute - 1);
+    bedTime2 = wakeTime.minusMinute(cycleLength * 5);
+    bedTime3 = wakeTime.minusMinute(cycleLength * 4);
+    bedTime4 = wakeTime.minusMinute(cycleLength * 3);
   }
 
   Future<void> _getTimesSharedPreferences() async {
@@ -485,8 +478,8 @@ class _AddAlarmState extends State<AddAlarm> {
             minute: int.parse(bedTimeString.split(":")[1]));
       }
       setState(() {});
-    } on Exception catch (e) {
-      wakeTime = TimeOfDay(hour: 6, minute: 0);
+    } on Exception {
+      wakeTime = const TimeOfDay(hour: 6, minute: 0);
       setState(() {});
     }
   }
@@ -536,68 +529,49 @@ class _AddAlarmState extends State<AddAlarm> {
     }
   }
 
-  void _scheduleAlarm() async {
-    // DateTime now = DateTime.now();
-    // DateTime alarmTime = DateTime(now.year, now.month, now.day, 7);
-
-    // await AndroidAlarmManager.periodic(
-    //     const Duration(minutes: 1), 0, printHello);
-    await AndroidAlarmManager.periodic(
-      const Duration(minutes: 1),
-      0,
-      printHello,
-      exact: true,
-      wakeup: true,
-    );
-
-    log('alarm set ' + DateTime.now().toString());
-  }
-
-  Future<void> _playRingtone() async {
-    await FlutterRingtonePlayer.play(
-      fromAsset: "assets/sound/wakeup-alarm.mp3",
-      looping: true, // Android only - API >= 28
-      volume: 0.1, // Android only - API >= 28
-      asAlarm: true, // Android only - all APIs
-    );
-  }
-
-  static printHello() {
-// Handle alarm triggered here
-    AudioPlayer audioPlayer = AudioPlayer();
-// AudioCache audioCache = AudioCache();
-
-    audioPlayer.play(UrlSource(
-        'https://d6cp9b00-a.akamaihd.net/downloads/ringtones/files/mp3/wakeup-alarm-tone-21497.mp3'));
-    log("printHello called");
-
-    final DateTime now = DateTime.now();
-    final int isolateId = Isolate.current.hashCode;
-    print("[$now] Hello, world! isolate=${isolateId} function='$printHello'");
-  }
-
   void _addAlarm() {
     TimeOfDay? wakeTime = selectedTimes['wake_time'];
+    TimeOfDay? bedTime = selectedTimes['bed_time'];
     log('waketime $wakeTime');
     final now = DateTime.now();
-    at = DateTime(now.year, now.month, now.day, wakeTime!.hour, wakeTime!.minute);
-    if (DateTime.now().hour > at.hour) {
-      at = at.add(const Duration(days: 1));
-    } else if (DateTime.now().hour == at.hour &&
-        DateTime.now().minute >= at.minute) {
-      at = at.add(const Duration(days: 1));
-    }
-    final AlarmsModel alarm = AlarmsModel(
-      at: at,
-      repeat: _repeat,
-      vibrate: _isVibrate,
-      label: _labelController.text.isNotEmpty ? _labelController.text : null,
-      deleteAfterDone: _isDelete,
-    );
-    final bool itExists = _alarmContext.isAlarmAlreadyExists(alarm);
 
+    wakeAt =
+        DateTime(now.year, now.month, now.day, wakeTime!.hour, wakeTime.minute);
+    if (DateTime.now().hour > wakeAt.hour) {
+      wakeAt = wakeAt.add(const Duration(days: 1));
+    } else if (DateTime.now().hour == wakeAt.hour &&
+        DateTime.now().minute >= wakeAt.minute) {
+      wakeAt = wakeAt.add(const Duration(days: 1));
+    }
+    final AlarmsModel wakeAlarm = AlarmsModel(
+        at: wakeAt,
+        repeat: _repeat,
+        vibrate: _isVibrate,
+        label: _labelController.text.isNotEmpty ? _labelController.text : null,
+        deleteAfterDone: _isDelete,
+        type: TypeEnum.wakeTime);
+
+    bedAt =
+        DateTime(now.year, now.month, now.day, bedTime!.hour, bedTime.minute);
+    if (DateTime.now().hour > bedAt.hour) {
+      bedAt = bedAt.add(const Duration(days: 1));
+    } else if (DateTime.now().hour == bedAt.hour &&
+        DateTime.now().minute >= bedAt.minute) {
+      bedAt = bedAt.add(const Duration(days: 1));
+    }
+    final AlarmsModel bedAlarm = AlarmsModel(
+        at: bedAt,
+        repeat: _repeat,
+        vibrate: _isVibrate,
+        label: _labelController.text.isNotEmpty ? _labelController.text : null,
+        deleteAfterDone: _isDelete,
+        type: TypeEnum.bedTime);
+
+    final bool itExists = _alarmContext.isAlarmAlreadyExists(wakeAlarm);
+    log("alarm already exists - $itExists");
     if (!itExists) {
-      _alarmContext.addAlarms(alarm);
+      _alarmContext.addAlarms(bedAlarm);
+      _alarmContext.addAlarms(wakeAlarm);
       // return Navigator.of(context).pop();
     }
     // showDialog(
@@ -660,9 +634,3 @@ extension TimeOfDayExtension on TimeOfDay {
 //   final int isolateId = Isolate.current.hashCode;
 //   print("[$now] Hello, world! isolate=${isolateId} function='$printHello'");
 // }
-
-void _navigateToScreen(BuildContext context, String route) {
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    Navigator.of(context).pushReplacementNamed(route);
-  });
-}
