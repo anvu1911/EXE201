@@ -49,30 +49,35 @@ class _AddAlarmState extends State<AddAlarm> {
     _getTimesSharedPreferences();
   }
 
-  void _saveTimes(BuildContext context, int choice) {
+  void _saveTimes(
+    BuildContext context,
+    int choice,
+  ) {
     TimeOfDay? bedtime;
-    switch (choice) {
-      case 1:
-        {
-          bedtime = bedTime1;
-        }
-        break;
-      case 2:
-        {
-          bedtime = bedTime2;
-        }
-        break;
-      case 3:
-        {
-          bedtime = bedTime3;
-        }
-        break;
-      case 4:
-        {
-          bedtime = bedTime4;
-        }
-        break;
-    }
+
+    // switch (true) {
+    //   case 0:
+    //     Navigator.pushReplacement(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => const AddAlarm()),
+    //     );
+    //     break;
+    //   case 1:
+    //     // Navigate to the chart page
+    //     Navigator.pushReplacement(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => const ChartPage()),
+    //     );
+    //     break;
+
+    //   case 2:
+    //     // Navigate to the notifications page
+    //     Navigator.pushReplacementNamed(context, '#');
+    //     break;
+    //   default:
+    //     // Do nothing
+    //     break;
+    // }
     selectedTimes = {'bed_time': bedtime, 'wake_time': wakeTime};
   }
 
