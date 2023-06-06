@@ -1,13 +1,8 @@
 import 'package:exe201/pages/home_page.dart';
-import 'package:exe201/pages/start_sleeping_page.dart';
 import 'package:exe201/widgets/dark_button.dart';
 import 'package:flutter/material.dart';
-import '../widgets/light_button.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/top_bar.dart';
-import '../widgets/swipe_up_button.dart';
-import '../widgets/current_datetime_v2.dart';
-import 'package:swipeable_button_view/swipeable_button_view.dart';
 
 class WakeUpPage extends StatefulWidget {
   const WakeUpPage({super.key});
@@ -77,8 +72,8 @@ class _WakeUpPageState extends State<WakeUpPage> {
             ),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 111.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 111.0),
                   child: Center(
                     child: Text(
                       'Good Morning\n and have a nice day',
@@ -104,8 +99,8 @@ class _WakeUpPageState extends State<WakeUpPage> {
 
                   //icon
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 40.0),
                   child: Text(
                     'You have slept',
                     textAlign: TextAlign.center,
@@ -116,10 +111,10 @@ class _WakeUpPageState extends State<WakeUpPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
                   child: Text(
-                    'XX:XX:XX',
+                    '00:01:00',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 36,

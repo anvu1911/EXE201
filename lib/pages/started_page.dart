@@ -1,7 +1,6 @@
 import 'package:exe201/pages/auth/login_page.dart';
 import 'package:exe201/pages/auth/registry_page.dart';
 import 'package:exe201/pages/home_page.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/light_button.dart';
 import '../widgets/dark_button.dart';
@@ -78,7 +77,7 @@ class StartedPage extends StatelessWidget {
                           );
                         },
                         child: RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                             children: [
                               TextSpan(
                                 text: 'NOT HAVE AN ACCOUNT YET? ',
