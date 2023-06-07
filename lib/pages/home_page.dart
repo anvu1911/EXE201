@@ -9,6 +9,7 @@ import '../widgets/current_datetime.dart';
 import 'start_sleeping_page.dart';
 import 'add_alarm_page.dart';
 import 'dart:developer';
+import 'chart_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -62,11 +63,19 @@ class _HomePageState extends State<HomePage> {
     });
     switch (index) {
       case 0:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
         break;
       case 1:
-        // Navigate to the settings page
-        Navigator.pushReplacementNamed(context, 'login');
+        // Navigate to the chart page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ChartPage()),
+        );
         break;
+
       case 2:
         // Navigate to the notifications page
         Navigator.pushReplacementNamed(context, '#');
