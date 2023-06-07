@@ -20,7 +20,7 @@ class LineChartWidget extends StatelessWidget {
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 13,
       color: Colors.white, // Set text color to white
     );
     Widget text;
@@ -58,6 +58,47 @@ class LineChartWidget extends StatelessWidget {
     );
   }
 
+  Widget leftTitleWidgets(double value, TitleMeta meta) {
+    const style = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 10,
+      color: Colors.white, // Set text color to white
+    );
+    Widget text;
+    debugPrint('$value');
+    switch (value.toInt()) {
+      case 0:
+        text = const Text('0', style: style);
+        break;
+      case 20:
+        text = const Text('20', style: style);
+        break;
+      case 40:
+        text = const Text('40', style: style);
+        break;
+      case 60:
+        text = const Text('60', style: style);
+        break;
+      case 80:
+        text = const Text('80', style: style);
+        break;
+      case 100:
+        text = const Text('100',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 8, color: Colors.white));
+        break;
+      default:
+        text = const Text('');
+        break;
+    }
+
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 8,
+      child: text,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -76,15 +117,18 @@ class LineChartWidget extends StatelessWidget {
               show: true,
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
-                  showTitles: true,
-                  getTitlesWidget: bottomTitleWidgets,
-                ),
+                    showTitles: true,
+                    getTitlesWidget: bottomTitleWidgets,
+                    interval: 1.0),
               ),
               // Remove leftTitles
-              leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              leftTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                      showTitles: true, getTitlesWidget: leftTitleWidgets)),
               topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
               rightTitles:
-                  AxisTitles(sideTitles: SideTitles(showTitles: false))),
+                  AxisTitles(sideTitles: SideTitles(showTitles: false))
+          ),
           // Set up y-axis range and labels
           gridData: FlGridData(
             show: true,
@@ -93,11 +137,11 @@ class LineChartWidget extends StatelessWidget {
               color: Color.fromARGB(234, 96, 98, 169),
               strokeWidth: 1,
             ),
-            drawVerticalLine: false,
-            // getDrawingVerticalLine: (value) => FlLine(
-            //   color: Colors.grey,
-            //   strokeWidth: 1,
-            // ),
+            drawVerticalLine: true,
+            getDrawingVerticalLine: (value) => FlLine(
+              color: Colors.grey,
+              strokeWidth: 1,
+            ),
           ),
           minY: 0,
           maxY: 100,

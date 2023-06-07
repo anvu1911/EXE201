@@ -1,18 +1,11 @@
 import 'package:exe201/pages/home_page.dart';
-import 'package:exe201/pages/set_alarm_page.dart';
-import 'package:exe201/pages/start_sleeping_page.dart';
 import 'package:exe201/widgets/chart.dart';
-import 'package:exe201/widgets/dark_button.dart';
 import 'package:exe201/widgets/percentage_rectangle.dart';
 import 'package:exe201/widgets/show_box.dart';
 import 'package:exe201/widgets/sleep_quality_linechart.dart';
 import 'package:flutter/material.dart';
-import '../widgets/light_button.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/top_bar.dart';
-import '../widgets/swipe_up_button.dart';
-import '../widgets/current_datetime_v2.dart';
-import 'package:swipeable_button_view/swipeable_button_view.dart';
 
 class ChartPage extends StatefulWidget {
   const ChartPage({super.key});
@@ -26,13 +19,13 @@ class ChartPage extends StatefulWidget {
 class _ChartPageState extends State<ChartPage> {
   int _selectedIndex = 0;
 
-  bool _showButton = true;
+  // bool _showButton = true;
 
-  void _toggleButton() {
-    setState(() {
-      _showButton = !_showButton;
-    });
-  }
+  // void _toggleButton() {
+  //   setState(() {
+  //     _showButton = !_showButton;
+  //   });
+  // }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -65,7 +58,7 @@ class _ChartPageState extends State<ChartPage> {
 
   @override
   Widget build(BuildContext context) {
-    final data = [10.0, 23.0, 43.0, 54.0, 34.0, 76.0, 97.0];
+    // final data = [10.0, 23.0, 43.0, 54.0, 34.0, 76.0, 97.0];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sleeping app',
@@ -117,7 +110,7 @@ class _ChartPageState extends State<ChartPage> {
                 ColoredRectangle(
                     width: 360,
                     height: 40,
-                    text: 'Sleep Quality',
+                    text: 'Sleep Quality (%)',
                     padding: EdgeInsets.only(top: 10)),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
