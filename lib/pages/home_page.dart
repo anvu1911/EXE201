@@ -157,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                                 shape: BoxShape.circle,
                                 color: Color.fromRGBO(49, 27, 107, 1),
                                 image: DecorationImage(
-                                  image: AssetImage('assets/images/phone.png'),
+                                  image: AssetImage('assets/images/bedtime.png'),
                                 ),
                               ),
                             ),
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                                 shape: BoxShape.circle,
                                 color: Color.fromRGBO(49, 27, 107, 1),
                                 image: DecorationImage(
-                                  image: AssetImage('assets/images/phone.png'),
+                                  image: AssetImage('assets/images/waketime.png'),
                                 ),
                               ),
                             ),

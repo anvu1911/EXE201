@@ -21,6 +21,8 @@ class AddAlarm extends StatefulWidget {
 
 class _AddAlarmState extends State<AddAlarm> {
   late AlarmContext _alarmContext;
+  bool _isSwitchedFade = false;
+  bool _isSwitchedVibrate = true;
 
   bool _isVibrate = false;
   bool _isDelete = true;
@@ -67,29 +69,28 @@ class _AddAlarmState extends State<AddAlarm> {
   ) {
     TimeOfDay? bedtime;
 
-    // switch (true) {
-    //   case 0:
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => const AddAlarm()),
-    //     );
-    //     break;
-    //   case 1:
-    //     // Navigate to the chart page
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => const ChartPage()),
-    //     );
-    //     break;
-
-    //   case 2:
-    //     // Navigate to the notifications page
-    //     Navigator.pushReplacementNamed(context, '#');
-    //     break;
-    //   default:
-    //     // Do nothing
-    //     break;
-    // }
+    switch (choice) {
+      case 1:
+        {
+          bedtime = bedTime1;
+        }
+        break;
+      case 2:
+        {
+          bedtime = bedTime2;
+        }
+        break;
+      case 3:
+        {
+          bedtime = bedTime3;
+        }
+        break;
+      case 4:
+        {
+          bedtime = bedTime4;
+        }
+        break;
+    }
     selectedTimes = {'bed_time': bedtime, 'wake_time': wakeTime};
   }
 
@@ -234,14 +235,89 @@ class _AddAlarmState extends State<AddAlarm> {
                               color: Colors.white30,
                             ),
                           ),
-                          const ListTile(
+                          ListTile(
                             leading: Icon(
-                              Icons.notifications_none,
+                              Icons.volume_down,
                               color: Colors.white,
+                              size: 40.0,
                             ),
-                            title: Text(
-                              'Alarm Notification',
-                              style: TextStyle(color: Colors.white),
+                            title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Sound & Music',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    '70%',
+                                    style: TextStyle(
+                                        color: Colors.grey[350], fontSize: 12),
+                                  ),
+                                ]),
+                          ),
+                          SizedBox(
+                            height: 2.0,
+                            child: Container(
+                              color: Colors.white30,
+                            ),
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.music_note_sharp,
+                              color: Colors.white,
+                              size: 40.0,
+                            ),
+                            title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Sound & Music',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'Chúc bé ngủ ngon',
+                                    style: TextStyle(
+                                        color: Colors.grey[350], fontSize: 12),
+                                  ),
+                                ]),
+                          ),
+                          SizedBox(
+                            height: 2.0,
+                            child: Container(
+                              color: Colors.white30,
+                            ),
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.vibration,
+                              color: Colors.white,
+                              size: 40.0,
+                            ),
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [const Text(
+                                'Vibrate',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ), Switch(
+                                value: _isSwitchedVibrate,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isSwitchedVibrate = value;
+                                    print(_isSwitchedVibrate);
+                                  });
+                                },
+                                activeTrackColor: Colors.white54,
+                                activeColor: Colors.white70,
+                              ),]
                             ),
                           ),
                           SizedBox(
@@ -250,46 +326,45 @@ class _AddAlarmState extends State<AddAlarm> {
                               color: Colors.white30,
                             ),
                           ),
-                          const ListTile(
+                          ListTile(
                             leading: Icon(
-                              Icons.notifications_none,
+                              Icons.waves,
                               color: Colors.white,
+                              size: 40.0,
                             ),
-                            title: Text(
-                              'Alarm Notification',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2.0,
-                            child: Container(
-                              color: Colors.white30,
-                            ),
-                          ),
-                          const ListTile(
-                            leading: Icon(
-                              Icons.notifications_none,
-                              color: Colors.white,
-                            ),
-                            title: Text(
-                              'Alarm Notification',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2.0,
-                            child: Container(
-                              color: Colors.white30,
-                            ),
-                          ),
-                          const ListTile(
-                            leading: Icon(
-                              Icons.check_box,
-                              color: Colors.white,
-                            ),
-                            title: Text(
-                              'Vibrate',
-                              style: TextStyle(color: Colors.white),
+                            title: Row(
+                              children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Fade In',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        '(Gently increase alarm volumn)',
+                                        style: TextStyle(
+                                            color: Colors.grey[350],
+                                            fontSize: 12),
+                                      ),
+                                    ]),
+                                Switch(
+                                  value: _isSwitchedFade,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _isSwitchedFade = value;
+                                      print(_isSwitchedFade);
+                                    });
+                                  },
+                                  activeTrackColor: Colors.white54,
+                                  activeColor: Colors.white70,
+                                ),
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             ),
                           ),
                           SizedBox(
@@ -304,7 +379,7 @@ class _AddAlarmState extends State<AddAlarm> {
                             children: [
                               LightButton(
                                 text: 'CALCULATE',
-                                width: 170,
+                                width: 200,
                                 height: 50,
                                 onPressed: () {
                                   _calculateTimes();
@@ -312,8 +387,8 @@ class _AddAlarmState extends State<AddAlarm> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return Dialog(
-                                        backgroundColor:
-                                            const Color.fromARGB(150, 53, 70, 131),
+                                        backgroundColor: const Color.fromARGB(
+                                            150, 53, 70, 131),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -342,19 +417,24 @@ class _AddAlarmState extends State<AddAlarm> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               8),
-                                                      color: const Color.fromARGB(
-                                                          150, 53, 70, 131),
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              150, 53, 70, 131),
                                                     ),
-                                                    padding:
-                                                        const EdgeInsets.symmetric(
-                                                            horizontal: 8,
-                                                            vertical: 16),
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 16),
                                                     child: Row(
                                                       children: [
-                                                        const SizedBox(width: 16),
+                                                        const SizedBox(
+                                                            width: 16),
                                                         Text(
-                                                          (index + 1).toString().padLeft(2, '0'),
-                                                          style: const TextStyle(
+                                                          (index + 1)
+                                                              .toString()
+                                                              .padLeft(2, '0'),
+                                                          style:
+                                                              const TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w700,
                                                             fontSize: 20,
@@ -366,13 +446,15 @@ class _AddAlarmState extends State<AddAlarm> {
                                                                     132),
                                                           ),
                                                         ),
-                                                        const SizedBox(width: 16),
+                                                        const SizedBox(
+                                                            width: 16),
                                                         Expanded(
                                                           child: Text(
                                                             '${_getBedTime(index + 1)} for ${_getCycleCount(index + 1)} Cycles \n${_getSleepDuration(index + 1)} of Sleep.',
                                                             textAlign:
                                                                 TextAlign.left,
-                                                            style: const TextStyle(
+                                                            style:
+                                                                const TextStyle(
                                                               color:
                                                                   Colors.white,
                                                               fontWeight:
@@ -399,12 +481,12 @@ class _AddAlarmState extends State<AddAlarm> {
                               ),
                               const SizedBox(width: 8),
 
-                              DarkButton(
-                                text: 'SAVE',
-                                width: 170,
-                                height: 50,
-                                onPressed: () {},
-                              ),
+                              // DarkButton(
+                              //   text: 'SAVE',
+                              //   width: 170,
+                              //   height: 50,
+                              //   onPressed: () {},
+                              // ),
                               //
                             ],
                           ),
@@ -456,8 +538,8 @@ class _AddAlarmState extends State<AddAlarm> {
 
   void _calculateTimes() {
     int cycleLength = 90;
-    bedTime1 = wakeTime.minusMinute(cycleLength * 6);
-    // bedTime1 = wakeTime.replacing(minute: wakeTime.minute - 1);
+    // bedTime1 = wakeTime.minusMinute(cycleLength * 6);
+    bedTime1 = wakeTime.replacing(minute: wakeTime.minute - 1);
     bedTime2 = wakeTime.minusMinute(cycleLength * 5);
     bedTime3 = wakeTime.minusMinute(cycleLength * 4);
     bedTime4 = wakeTime.minusMinute(cycleLength * 3);
