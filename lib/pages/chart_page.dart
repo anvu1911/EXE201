@@ -33,16 +33,16 @@ class _ChartPageState extends State<ChartPage> {
     });
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
         break;
       case 1:
         // Navigate to the chart page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const ChartPage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
         break;
 
@@ -126,7 +126,7 @@ class _ChartPageState extends State<ChartPage> {
           ),
         ),
         bottomNavigationBar: MyBottomNavigationBar(
-          currentIndex: _selectedIndex,
+          currentIndex: 1,
           onTap: _onItemTapped,
         ),
       ),
