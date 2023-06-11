@@ -33,16 +33,16 @@ class _ChartPageState extends State<ChartPage> {
     });
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
         break;
       case 1:
         // Navigate to the chart page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const ChartPage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
         break;
 
@@ -91,7 +91,7 @@ class _ChartPageState extends State<ChartPage> {
                     padding: EdgeInsets.only(top: 90)),
                 SleepChart(
                   daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                  sleepHours: [7, 6, 8, 7, 5, 9, 6],
+                  sleepHours: [6, 5.25, 4, 6.75, 3.75, 3, 8.25],
                   padding: EdgeInsets.only(top: 10),
                 ),
                 ColoredRectangle(
@@ -103,8 +103,8 @@ class _ChartPageState extends State<ChartPage> {
                   padding: const EdgeInsets.only(top: 10.0),
                   child: PercentageRectangle(
                     bestPercentage: '80',
-                    worstPercentage: '80',
-                    averagePercentage: '80',
+                    worstPercentage: '40',
+                    averagePercentage: '70',
                   ),
                 ),
                 ColoredRectangle(
@@ -126,7 +126,7 @@ class _ChartPageState extends State<ChartPage> {
           ),
         ),
         bottomNavigationBar: MyBottomNavigationBar(
-          currentIndex: _selectedIndex,
+          currentIndex: 1,
           onTap: _onItemTapped,
         ),
       ),

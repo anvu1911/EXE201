@@ -63,14 +63,15 @@ class _HomePageState extends State<HomePage> {
     });
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
+
         break;
       case 1:
         // Navigate to the chart page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ChartPage()),
         );
@@ -157,7 +158,8 @@ class _HomePageState extends State<HomePage> {
                                 shape: BoxShape.circle,
                                 color: Color.fromRGBO(49, 27, 107, 1),
                                 image: DecorationImage(
-                                  image: AssetImage('assets/images/phone.png'),
+                                  image:
+                                      AssetImage('assets/images/bedtime.png'),
                                 ),
                               ),
                             ),
@@ -188,7 +190,8 @@ class _HomePageState extends State<HomePage> {
                                 shape: BoxShape.circle,
                                 color: Color.fromRGBO(49, 27, 107, 1),
                                 image: DecorationImage(
-                                  image: AssetImage('assets/images/phone.png'),
+                                  image:
+                                      AssetImage('assets/images/waketime.png'),
                                 ),
                               ),
                             ),
@@ -236,7 +239,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: MyBottomNavigationBar(
-        currentIndex: _selectedIndex,
+        currentIndex: 0,
         onTap: _onItemTapped,
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SleepChart extends StatelessWidget {
   final List<String> daysOfWeek;
-  final List<int> sleepHours;
+  final List<double> sleepHours;
   final EdgeInsets padding;
 
   SleepChart({

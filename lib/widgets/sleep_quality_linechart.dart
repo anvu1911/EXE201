@@ -65,7 +65,6 @@ class LineChartWidget extends StatelessWidget {
       color: Colors.white, // Set text color to white
     );
     Widget text;
-    debugPrint('$value');
     switch (value.toInt()) {
       case 0:
         text = const Text('0', style: style);
