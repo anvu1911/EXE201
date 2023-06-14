@@ -1,4 +1,6 @@
 import 'package:exe201/pages/home_page.dart';
+
+import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:exe201/widgets/chart.dart';
 import 'package:exe201/widgets/percentage_rectangle.dart';
 import 'package:exe201/widgets/show_box.dart';
@@ -17,7 +19,7 @@ class ChartPage extends StatefulWidget {
 }
 
 class _ChartPageState extends State<ChartPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   // bool _showButton = true;
 
@@ -33,25 +35,25 @@ class _ChartPageState extends State<ChartPage> {
     });
     switch (index) {
       case 0:
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
         break;
       case 1:
         // Navigate to the chart page
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const ChartPage()),
         );
         break;
 
       case 2:
         // Navigate to the notifications page
-        Navigator.pushReplacementNamed(context, '#');
-        break;
-      default:
-        // Do nothing
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const PremiumWeatherPage()),
+        );
         break;
     }
   }
@@ -126,7 +128,7 @@ class _ChartPageState extends State<ChartPage> {
           ),
         ),
         bottomNavigationBar: MyBottomNavigationBar(
-          currentIndex: 1,
+          currentIndex: _selectedIndex,
           onTap: _onItemTapped,
         ),
       ),
