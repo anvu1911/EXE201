@@ -1,4 +1,5 @@
 import 'package:exe201/pages/home_page.dart';
+import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:exe201/widgets/chart.dart';
 import 'package:exe201/widgets/percentage_rectangle.dart';
 import 'package:exe201/widgets/show_box.dart';
@@ -9,56 +10,48 @@ import '../widgets/light_button.dart';
 import '../widgets/top_bar.dart';
 import 'chart_page.dart';
 
-// class PremiumSoundsPage extends StatefulWidget {
-//   const PremiumSoundsPage({super.key});
-//
-//   @override
-//   _PremiumSoundsPage createState() {
-//     return _PremiumSoundsPage();
-//   }
-// }
+class PremiumSoundsPage extends StatefulWidget {
+  const PremiumSoundsPage({super.key});
 
-// class _PremiumSoundsPage extends State<PremiumSoundsPage> {
-//   int _selectedIndex = 2;
+  @override
+  _PremiumSoundsPage createState() {
+    return _PremiumSoundsPage();
+  }
+}
+
+class _PremiumSoundsPage extends State<PremiumSoundsPage> {
+  int _selectedIndex = 2;
 
 
 
-  // bool _showButton = true;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
+      case 1:
+      // Navigate to the chart page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ChartPage()),
+        );
+        break;
 
-  // void _toggleButton() {
-  //   setState(() {
-  //     _showButton = !_showButton;
-  //   });
-  // }
-
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  //   switch (index) {
-  //     case 0:
-  //       Navigator.pushReplacement(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => const HomePage()),
-  //       );
-  //       break;
-  //     case 1:
-  //     // Navigate to the chart page
-  //       Navigator.pushReplacement(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => const ChartPage()),
-  //       );
-  //       break;
-  //
-  //     case 2:
-  //     // Navigate to the notifications page
-  //       Navigator.pushReplacement(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => const PremiumSoundsPage()),
-  //       );
-  //       break;
-  //   }
-  // }
+      case 2:
+      // Navigate to the notifications page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const PremiumWeatherPage()),
+        );
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +60,9 @@ import 'chart_page.dart';
       debugShowCheckedModeBanner: false,
       title: 'Sleeping app',
       home: Scaffold(
+
         extendBodyBehindAppBar: true,
-        appBar: TopBar(
-          showArrow: true,
-          title: 'Premium Features',
-          onBackButtonPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+
         body: LayoutBuilder(
           builder: (context, constraints) => Container(
             width: constraints.maxWidth,
@@ -88,11 +76,18 @@ import 'chart_page.dart';
             ),
             child: Column(
               children: [
+                TopBar(
+                  showArrow: true,
+                  title: 'Premium Features',
+                  onBackButtonPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
                 Row(
                   children: [
                     Padding(
                       padding:
-                      const EdgeInsets.fromLTRB(3, 80, 0, 0),
+                      const EdgeInsets.fromLTRB(3, 0, 0, 0),
                       child: LightButton(
                           text: 'NEWS',
                           width: 80,
@@ -100,7 +95,7 @@ import 'chart_page.dart';
                     ),
                     Padding(
                       padding:
-                      const EdgeInsets.fromLTRB(4, 80, 0, 0),
+                      const EdgeInsets.fromLTRB(4, 0, 0, 0),
                       child: LightButton(
                         text: 'SOUNDS',
                         width: 100,
@@ -108,15 +103,20 @@ import 'chart_page.dart';
                     ),
                     Padding(
                       padding:
-                      const EdgeInsets.fromLTRB(4, 80, 0, 0),
+                      const EdgeInsets.fromLTRB(4, 0, 0, 0),
                       child: LightButton(
                         text: 'WEATHER',
                         width: 110,
-                        height: 35, onPressed: () {  },),
+                        height: 35, onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PremiumWeatherPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                        );
+                      },),
                     ),
                     Padding(
                       padding:
-                      const EdgeInsets.fromLTRB(4, 80, 0, 0),
+                      const EdgeInsets.fromLTRB(4, 0, 0, 0),
                       child: LightButton(
                         text: 'GAMES',
                         width: 85,
@@ -129,127 +129,231 @@ import 'chart_page.dart';
                     height: 40,
                     text: 'Collection',
                     padding: EdgeInsets.only(top: 20)),
-                Row(
-                  children: [
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(10, 30, 0, 0),
-                      child: Image.asset(
-                          'assets/images/piano.png',
-                          width: 90,
-                          height: 90),
-                    ),
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(10, 30, 0, 0),
-                    child:
-                    Column(
-                      children: [
-                        Text(
-                          "Julio Iglesias’s Collection",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.5,
-                              fontFamily:
-                              'Itim-Regular'),
+                SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Expanded(
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                            Color.fromRGBO(
+                                53, 70, 112, 1),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(
+                                    20.0))
+                          // minimumSize: Size(250, 40),
                         ),
-                        Text(
-                          "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.5,
-                              fontFamily:
-                              'Itim-Regular'),
-                        )
-                      ],
-                    )
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(10, 30, 0, 0),
-                      child: Image.asset(
-                          'assets/images/piano.png',
-                          width: 90,
-                          height: 90),
-                    ),
-                    Padding(
-                        padding:
-                        const EdgeInsets.fromLTRB(10, 30, 0, 0),
-                        child:
-                        Column(
+                        child:Row(
                           children: [
-                            Text(
-                              "Julio Iglesias’s Collection",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.5,
-                                  fontFamily:
-                                  'Itim-Regular'),
-                            ),
-                            Text(
-                              "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.5,
-                                  fontFamily:
-                                  'Itim-Regular'),
+                            Image.asset(
+                                'assets/images/piano.png',
+                                width: 90,
+                                height: 90),
+                            Column(
+                              children: [
+                                Text(
+                                  "Julio Iglesias’s Collection",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily:
+                                      'Itim-Regular'),
+                                ),
+                                Text(
+                                  "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontFamily:
+                                      'Itim-Regular'),
+                                )
+                              ],
                             )
                           ],
-                        )
+                        ),
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(10, 30, 0, 0),
-                      child: Image.asset(
-                          'assets/images/piano.png',
-                          width: 90,
-                          height: 90),
-                    ),
-                    Padding(
-
-                        padding:
-                        const EdgeInsets.fromLTRB(10, 30, 0, 0),
-                        child:
-                        Column(
+                SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Expanded(
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                            Color.fromRGBO(
+                                53, 70, 112, 1),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(
+                                    20.0))
+                          // minimumSize: Size(250, 40),
+                        ),
+                        child:Row(
                           children: [
-                            Text(
-                              "Julio Iglesias’s Collection",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.5,
-                                  fontFamily:
-                                  'Itim-Regular'),
-                            ),
-                            Text(
-                              "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.5,
-                                  fontFamily:
-                                  'Itim-Regular'),
+                            Image.asset(
+                                'assets/images/piano.png',
+                                width: 90,
+                                height: 90),
+                            Column(
+                              children: [
+                                Text(
+                                  "Julio Iglesias’s Collection",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily:
+                                      'Itim-Regular'),
+                                ),
+                                Text(
+                                  "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontFamily:
+                                      'Itim-Regular'),
+                                )
+                              ],
                             )
                           ],
-                        )
+                        ),
+                      ),
                     ),
-                  ],
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Expanded(
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                              Color.fromRGBO(
+                                  53, 70, 112, 1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(
+                                      20.0))
+                            // minimumSize: Size(250, 40),
+                          ),
+                          child:Row(
+                            children: [
+                              Image.asset(
+                                    'assets/images/piano.png',
+                                    width: 90,
+                                    height: 90),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "Julio Iglesias’s Collection",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontFamily:
+                                            'Itim-Regular'),
+                                      ),
+                                      Text(
+                                        "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontFamily:
+                                            'Itim-Regular'),
+                                      )
+                                    ],
+                                  )
+                            ],
+                          ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Expanded(
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                            Color.fromRGBO(
+                                53, 70, 112, 1),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(
+                                    20.0))
+                          // minimumSize: Size(250, 40),
+                        ),
+                        child:Row(
+                          children: [
+                            Image.asset(
+                                'assets/images/piano.png',
+                                width: 90,
+                                height: 90),
+                            Column(
+                              children: [
+                                Text(
+                                  "Julio Iglesias’s Collection",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily:
+                                      'Itim-Regular'),
+                                ),
+                                Text(
+                                  "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontFamily:
+                                      'Itim-Regular'),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
         ),
-        // bottomNavigationBar: MyBottomNavigationBar(
-        //   currentIndex: _selectedIndex,
-        //   onTap: _onItemTapped,
-        // ),
+        bottomNavigationBar: MyBottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
-// }
+}
