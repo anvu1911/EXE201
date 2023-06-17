@@ -1,9 +1,5 @@
 import 'package:exe201/pages/home_page.dart';
 import 'package:exe201/pages/premium_weather_page.dart';
-import 'package:exe201/widgets/chart.dart';
-import 'package:exe201/widgets/percentage_rectangle.dart';
-import 'package:exe201/widgets/show_box.dart';
-import 'package:exe201/widgets/sleep_quality_linechart.dart';
 import 'package:flutter/material.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/light_button.dart';
@@ -22,7 +18,7 @@ class PremiumSoundsPage extends StatefulWidget {
 class _PremiumSoundsPage extends State<PremiumSoundsPage> {
   int _selectedIndex = 2;
 
-
+  double progress = 0.5;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -55,14 +51,13 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
 
   @override
   Widget build(BuildContext context) {
+
     // final data = [10.0, 23.0, 43.0, 54.0, 34.0, 76.0, 97.0];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sleeping app',
       home: Scaffold(
-
         extendBodyBehindAppBar: true,
-
         body: LayoutBuilder(
           builder: (context, constraints) => Container(
             width: constraints.maxWidth,
@@ -96,10 +91,31 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                     Padding(
                       padding:
                       const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                      child: LightButton(
-                        text: 'SOUNDS',
-                        width: 100,
-                        height: 35, onPressed: () {  },),
+                      child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                              Color.fromRGBO(
+                                  53, 70, 112, 1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(
+                                      20.0))
+                            // minimumSize: Size(250, 40),
+                          ),
+                          child:
+
+                              Text(
+                                "SOUNDS",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.5,
+                                    fontFamily:
+                                    'Itim-Regular'),
+                              )
+
+
+                      ),
                     ),
                     Padding(
                       padding:
@@ -124,227 +140,275 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                     ),
                   ]
                 ),
-                ColoredRectangle(
-                    width: 360,
-                    height: 40,
-                    text: 'Collection',
-                    padding: EdgeInsets.only(top: 20)),
-                SizedBox(
-                  height: 5,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                  child: Container(
+                    alignment: Alignment.topLeft, // Căn trái
+                    child: Text(
+                      "Shleep's Collection",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontFamily: 'Itim-Regular',
+                      ),
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: 100,
-                  width: double.infinity,
-                  child: Expanded(
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                            Color.fromRGBO(
-                                53, 70, 112, 1),
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(
-                                    20.0))
-                          // minimumSize: Size(250, 40),
-                        ),
-                        child:Row(
+
+
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
                           children: [
-                            Image.asset(
-                                'assets/images/piano.png',
-                                width: 90,
-                                height: 90),
-                            Column(
-                              children: [
-                                Text(
-                                  "Julio Iglesias’s Collection",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontFamily:
-                                      'Itim-Regular'),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            SizedBox(
+                              height: 120,
+                              width: 370,
+                              child: Expanded(
+                                child: Container(
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        minimumSize: Size(0, 0),
+                                        backgroundColor:
+                                        Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                40.0))
+                                      // minimumSize: Size(250, 40),
+                                    ),
+                                    child:Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          height: 120,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
+                                            color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
+                                            child:Column(
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/piano.png',
+                                                  width: 120,
+                                                  height: 120,
+                                                ),
+                                              ],
+                                            )
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Julio Iglesias’s Collection",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                    fontFamily:
+                                                    'Itim-Regular'),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(
+                                                    0, 5, 0, 0),
+                                                child: Text(
+                                                  "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.5,
+                                                      fontFamily:
+                                                      'Itim-Regular'),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                Text(
-                                  "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontFamily:
-                                      'Itim-Regular'),
-                                )
-                              ],
-                            )
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            SizedBox(
+                              height: 120,
+                              width: 370,
+                              child: Expanded(
+                                child: Container(
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        minimumSize: Size(0, 0),
+                                        backgroundColor:
+                                        Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                40.0))
+                                      // minimumSize: Size(250, 40),
+                                    ),
+                                    child:Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          height: 120,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
+                                            color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
+                                            child: Image.asset(
+                                              'assets/images/bedti_melody.jfif',
+                                              width: 120,
+                                              height: 120,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Bedtime Melodies",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                    fontFamily:
+                                                    'Itim-Regular'),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(
+                                                    0, 5, 0, 0),
+                                                child: Text(
+                                                  "Soothing Bedtime Melody - Slient \n Stream The often monotonous \n repetition of melody can aid ...",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.5,
+                                                      fontFamily:
+                                                      'Itim-Regular'),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            SizedBox(
+                              height: 120,
+                              width: 370,
+                              child: Expanded(
+                                child: Container(
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        minimumSize: Size(0, 0),
+                                        backgroundColor:
+                                        Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                40.0))
+                                      // minimumSize: Size(250, 40),
+                                    ),
+                                    child:Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          height: 120,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
+                                            color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
+                                            child: Image.asset(
+                                              'assets/images/bloom.png',
+                                              width: 120,
+                                              height: 120,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Blooms Music",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                    fontFamily:
+                                                    'Itim-Regular'),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.fromLTRB(
+                                                    0, 5, 0, 0),
+                                                child: Text(
+                                                  "Music For Plants & Gardens Full \n Spectrum Frequencies",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15.5,
+                                                      fontFamily:
+                                                      'Itim-Regular'),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+
+
                           ],
                         ),
                       ),
                     ),
-                  ),
+
+
+                  ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                  height: 100,
-                  width: double.infinity,
-                  child: Expanded(
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                            Color.fromRGBO(
-                                53, 70, 112, 1),
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(
-                                    20.0))
-                          // minimumSize: Size(250, 40),
-                        ),
-                        child:Row(
-                          children: [
-                            Image.asset(
-                                'assets/images/piano.png',
-                                width: 90,
-                                height: 90),
-                            Column(
-                              children: [
-                                Text(
-                                  "Julio Iglesias’s Collection",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontFamily:
-                                      'Itim-Regular'),
-                                ),
-                                Text(
-                                  "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontFamily:
-                                      'Itim-Regular'),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                  height: 100,
-                  width: double.infinity,
-                  child: Expanded(
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                              Color.fromRGBO(
-                                  53, 70, 112, 1),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(
-                                      20.0))
-                            // minimumSize: Size(250, 40),
-                          ),
-                          child:Row(
-                            children: [
-                              Image.asset(
-                                    'assets/images/piano.png',
-                                    width: 90,
-                                    height: 90),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "Julio Iglesias’s Collection",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontFamily:
-                                            'Itim-Regular'),
-                                      ),
-                                      Text(
-                                        "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontFamily:
-                                            'Itim-Regular'),
-                                      )
-                                    ],
-                                  )
-                            ],
-                          ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                  height: 100,
-                  width: double.infinity,
-                  child: Expanded(
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                            Color.fromRGBO(
-                                53, 70, 112, 1),
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(
-                                    20.0))
-                          // minimumSize: Size(250, 40),
-                        ),
-                        child:Row(
-                          children: [
-                            Image.asset(
-                                'assets/images/piano.png',
-                                width: 90,
-                                height: 90),
-                            Column(
-                              children: [
-                                Text(
-                                  "Julio Iglesias’s Collection",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontFamily:
-                                      'Itim-Regular'),
-                                ),
-                                Text(
-                                  "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontFamily:
-                                      'Itim-Regular'),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+
+
               ],
             ),
           ),
@@ -357,3 +421,4 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
     );
   }
 }
+
