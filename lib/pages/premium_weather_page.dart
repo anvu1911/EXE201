@@ -144,49 +144,53 @@ class _PremiumWeatherPage extends State<PremiumWeatherPage> {
                       ]
                   ),
                 Expanded (
-                    child:  ListView.builder(
-                      itemCount: _data.length,
-                      itemBuilder: (context, index) {
-                        Item item = _data[index];
-                        return ExpansionPanelList(
-
-                          expansionCallback: (int panelIndex, bool isExpanded) {
-                            setState(() {
-                              _data.forEach((item) {
-                                item.isExpanded = false;
-                              });
-                              item.isExpanded = !isExpanded;
-                            });
-                          },
-                          children: [
-                            ExpansionPanel(
-                              headerBuilder: (BuildContext context, bool isExpanded) {
-                                return ListTile(
-                                  tileColor:const Color.fromARGB(
-                                      156, 30, 90, 137),
-                                  title: Container(
-                                    child: Text(
-                                      item.headerValue,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily:
-                                        'Itim-Regular',
-                                          fontSize: 28,
-                                          fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                );
+                    child:  Container(
+                      width: 370,
+                      child: ListView.builder(
+                        itemCount: _data.length,
+                        itemBuilder: (context, index) {
+                          Item item = _data[index];
+                          return ExpansionPanelList(
+                              expansionCallback: (int panelIndex, bool isExpanded) {
+                                setState(() {
+                                  _data.forEach((item) {
+                                    item.isExpanded = false;
+                                  });
+                                  item.isExpanded = !isExpanded;
+                                });
                               },
-                              body: Container(
-                                child: _buildContentForDay(item.headerValue), // Call a method to build content based on the day
-                              color: Colors.cyan,
-                              ),
-                              isExpanded: item.isExpanded,
-                            ),
-                          ],
-                        );
-                      },
+                              children: [
+                                ExpansionPanel(
+                                  headerBuilder: (BuildContext context, bool isExpanded) {
+                                    return Container(
+                                      //color: Colors.red,
+                                      child: ListTile(
+                                        tileColor:const Color.fromARGB(
+                                            156, 30, 90, 137),
+                                        title:Text(
+                                            item.headerValue,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily:
+                                              'Itim-Regular',
+                                                fontSize: 28,
+                                                fontWeight: FontWeight.bold,
+                                            ),
+
+                                          ),
+                                      ),
+                                    );
+                                  },
+                                  body: Container(
+                                    child: _buildContentForDay(item.headerValue), // Call a method to build content based on the day
+                                  color: Colors.cyan,
+                                  ),
+                                  isExpanded: item.isExpanded,
+                                ),
+                              ],
+                            );
+                        },
+                      ),
                     ),
                   ),
               ],
