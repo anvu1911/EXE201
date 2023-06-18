@@ -154,259 +154,250 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                     ),
                   ),
                 ),
-
-
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 15,
-                            ),
-                            SizedBox(
-                              height: 120,
-                              width: 370,
-                              child: Expanded(
-                                child: Container(
-                                  height: 50,
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        minimumSize: Size(0, 0),
-                                        backgroundColor:
-                                        Colors.transparent,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(
-                                                40.0))
-                                      // minimumSize: Size(250, 40),
-                                    ),
-                                    child:Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          height: 120,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
-                                            color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
-                                            child:Column(
-                                              children: [
-                                                Image.asset(
-                                                  'assets/images/piano.png',
-                                                  width: 120,
-                                                  height: 120,
-                                                ),
-                                              ],
-                                            )
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "Julio Iglesias’s Collection",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20,
-                                                    fontFamily:
-                                                    'Itim-Regular'),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.fromLTRB(
-                                                    0, 5, 0, 0),
-                                                child: Text(
-                                                  "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 15.5,
-                                                      fontFamily:
-                                                      'Itim-Regular'),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            SizedBox(
-                              height: 120,
-                              width: 370,
-                              child: Expanded(
-                                child: Container(
-                                  height: 50,
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        minimumSize: Size(0, 0),
-                                        backgroundColor:
-                                        Colors.transparent,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(
-                                                40.0))
-                                      // minimumSize: Size(250, 40),
-                                    ),
-                                    child:Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          height: 120,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
-                                            color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
-                                            child: Image.asset(
-                                              'assets/images/bedti_melody.jfif',
-                                              width: 120,
-                                              height: 120,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "Bedtime Melodies",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20,
-                                                    fontFamily:
-                                                    'Itim-Regular'),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.fromLTRB(
-                                                    0, 5, 0, 0),
-                                                child: Text(
-                                                  "Soothing Bedtime Melody - Slient \n Stream The often monotonous \n repetition of melody can aid ...",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 15.5,
-                                                      fontFamily:
-                                                      'Itim-Regular'),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            SizedBox(
-                              height: 120,
-                              width: 370,
-                              child: Expanded(
-                                child: Container(
-                                  height: 50,
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        minimumSize: Size(0, 0),
-                                        backgroundColor:
-                                        Colors.transparent,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(
-                                                40.0))
-                                      // minimumSize: Size(250, 40),
-                                    ),
-                                    child:Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          height: 120,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
-                                            color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
-                                            child: Image.asset(
-                                              'assets/images/bloom.png',
-                                              width: 120,
-                                              height: 120,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "Blooms Music",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20,
-                                                    fontFamily:
-                                                    'Itim-Regular'),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.fromLTRB(
-                                                    0, 5, 0, 0),
-                                                child: Text(
-                                                  "Music For Plants & Gardens Full \n Spectrum Frequencies",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 15.5,
-                                                      fontFamily:
-                                                      'Itim-Regular'),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-
-
-
-                          ],
-                        ),
-                      ),
-                    ),
-
-
-                  ],
+                Container(
+                  height: 550,
+                  width: 370,
+                  child: ListView(
+                           children: [
+                             SizedBox(
+                               height: 120,
+                               width: 370,
+                               child: Expanded(
+                                 child: Container(
+                                   height: 50,
+                                   child: ElevatedButton(
+                                     onPressed: () {},
+                                     style: ElevatedButton.styleFrom(
+                                         padding: EdgeInsets.zero,
+                                         minimumSize: Size(0, 0),
+                                         backgroundColor:
+                                         Colors.transparent,
+                                         shape: RoundedRectangleBorder(
+                                             borderRadius:
+                                             BorderRadius.circular(
+                                                 40.0))
+                                       // minimumSize: Size(250, 40),
+                                     ),
+                                     child:Row(
+                                       children: [
+                                         Container(
+                                           width: 120,
+                                           height: 120,
+                                           decoration: BoxDecoration(
+                                             borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
+                                             color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
+                                           ),
+                                           child: ClipRRect(
+                                               borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
+                                               child:Column(
+                                                 children: [
+                                                   Image.asset(
+                                                     'assets/images/piano.png',
+                                                     width: 120,
+                                                     height: 120,
+                                                   ),
+                                                 ],
+                                               )
+                                           ),
+                                         ),
+                                         SizedBox(
+                                           width: 5,
+                                         ),
+                                         Padding(
+                                           padding: const EdgeInsets.all(8.0),
+                                           child: Column(
+                                             children: [
+                                               Text(
+                                                 "Julio Iglesias’s Collection",
+                                                 style: TextStyle(
+                                                     color: Colors.white,
+                                                     fontSize: 20,
+                                                     fontFamily:
+                                                     'Itim-Regular'),
+                                               ),
+                                               Padding(
+                                                 padding: const EdgeInsets.fromLTRB(
+                                                     0, 5, 0, 0),
+                                                 child: Text(
+                                                   "The most popular Latin singer of\n the late 20th century and beyond,\n a smooth crooner with roma...",
+                                                   style: TextStyle(
+                                                       color: Colors.white,
+                                                       fontSize: 15.5,
+                                                       fontFamily:
+                                                       'Itim-Regular'),
+                                                 ),
+                                               )
+                                             ],
+                                           ),
+                                         )
+                                       ],
+                                     ),
+                                   ),
+                                 ),
+                               ),
+                             ),
+                             SizedBox(
+                               height: 15,
+                             ),
+                             SizedBox(
+                               height: 120,
+                               width: 370,
+                               child: Expanded(
+                                 child: Container(
+                                   height: 50,
+                                   child: ElevatedButton(
+                                     onPressed: () {},
+                                     style: ElevatedButton.styleFrom(
+                                         padding: EdgeInsets.zero,
+                                         minimumSize: Size(0, 0),
+                                         backgroundColor:
+                                         Colors.transparent,
+                                         shape: RoundedRectangleBorder(
+                                             borderRadius:
+                                             BorderRadius.circular(
+                                                 40.0))
+                                       // minimumSize: Size(250, 40),
+                                     ),
+                                     child:Row(
+                                       children: [
+                                         Container(
+                                           width: 120,
+                                           height: 120,
+                                           decoration: BoxDecoration(
+                                             borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
+                                             color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
+                                           ),
+                                           child: ClipRRect(
+                                             borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
+                                             child: Image.asset(
+                                               'assets/images/bedti_melody.jfif',
+                                               width: 120,
+                                               height: 120,
+                                             ),
+                                           ),
+                                         ),
+                                         SizedBox(
+                                           width: 5,
+                                         ),
+                                         Padding(
+                                           padding: const EdgeInsets.all(8.0),
+                                           child: Column(
+                                             children: [
+                                               Text(
+                                                 "Bedtime Melodies",
+                                                 style: TextStyle(
+                                                     color: Colors.white,
+                                                     fontSize: 20,
+                                                     fontFamily:
+                                                     'Itim-Regular'),
+                                               ),
+                                               Padding(
+                                                 padding: const EdgeInsets.fromLTRB(
+                                                     0, 5, 0, 0),
+                                                 child: Text(
+                                                   "Soothing Bedtime Melody - Slient \n Stream The often monotonous \n repetition of melody can aid ...",
+                                                   style: TextStyle(
+                                                       color: Colors.white,
+                                                       fontSize: 15.5,
+                                                       fontFamily:
+                                                       'Itim-Regular'),
+                                                 ),
+                                               )
+                                             ],
+                                           ),
+                                         )
+                                       ],
+                                     ),
+                                   ),
+                                 ),
+                               ),
+                             ),
+                             SizedBox(
+                               height: 15,
+                             ),
+                             SizedBox(
+                               height: 120,
+                               width: 370,
+                               child: Expanded(
+                                 child: Container(
+                                   height: 50,
+                                   child: ElevatedButton(
+                                     onPressed: () {},
+                                     style: ElevatedButton.styleFrom(
+                                         padding: EdgeInsets.zero,
+                                         minimumSize: Size(0, 0),
+                                         backgroundColor:
+                                         Colors.transparent,
+                                         shape: RoundedRectangleBorder(
+                                             borderRadius:
+                                             BorderRadius.circular(
+                                                 40.0))
+                                       // minimumSize: Size(250, 40),
+                                     ),
+                                     child:Row(
+                                       children: [
+                                         Container(
+                                           width: 120,
+                                           height: 120,
+                                           decoration: BoxDecoration(
+                                             borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho container
+                                             color: Colors.grey, // Đặt màu nền cho container (nếu muốn)
+                                           ),
+                                           child: ClipRRect(
+                                             borderRadius: BorderRadius.circular(40), // Đặt bán kính bo góc cho hình ảnh
+                                             child: Image.asset(
+                                               'assets/images/bloom.png',
+                                               width: 120,
+                                               height: 120,
+                                             ),
+                                           ),
+                                         ),
+                                         SizedBox(
+                                           width: 5,
+                                         ),
+                                         Padding(
+                                           padding: const EdgeInsets.all(8.0),
+                                           child: Column(
+                                             children: [
+                                               Text(
+                                                 "Blooms Music",
+                                                 style: TextStyle(
+                                                     color: Colors.white,
+                                                     fontSize: 20,
+                                                     fontFamily:
+                                                     'Itim-Regular'),
+                                               ),
+                                               Padding(
+                                                 padding: const EdgeInsets.fromLTRB(
+                                                     0, 5, 0, 0),
+                                                 child: Text(
+                                                   "Music For Plants & Gardens Full \n Spectrum Frequencies",
+                                                   style: TextStyle(
+                                                       color: Colors.white,
+                                                       fontSize: 15.5,
+                                                       fontFamily:
+                                                       'Itim-Regular'),
+                                                 ),
+                                               )
+                                             ],
+                                           ),
+                                         )
+                                       ],
+                                     ),
+                                   ),
+                                 ),
+                               ),
+                             ),
+                           ],
+                         ),
                 ),
+
+
+
+
+
+
+
 
 
               ],
