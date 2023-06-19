@@ -1,4 +1,5 @@
 import 'package:exe201/pages/home_page.dart';
+import 'package:exe201/pages/premium_news_page.dart';
 
 import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:exe201/widgets/chart.dart';
@@ -52,7 +53,7 @@ class _ChartPageState extends State<ChartPage> {
         // Navigate to the notifications page
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const PremiumWeatherPage()),
+          MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
         );
         break;
     }

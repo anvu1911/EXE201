@@ -1,4 +1,6 @@
 import 'package:exe201/pages/home_page.dart';
+import 'package:exe201/pages/premium_games_page/premium_games_day_page.dart';
+import 'package:exe201/pages/premium_news_page.dart';
 import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/bottom_navigation_bar.dart';
@@ -43,7 +45,7 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
       // Navigate to the notifications page
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const PremiumWeatherPage()),
+          MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
         );
         break;
     }
@@ -86,7 +88,10 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                       child: LightButton(
                           text: 'NEWS',
                           width: 80,
-                          height: 35, onPressed: () {  },),
+                          height: 35, onPressed: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PremiumNewsPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                      ); },),
                     ),
                     Padding(
                       padding:
@@ -105,14 +110,14 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                           ),
                           child:
 
-                              Text(
-                                "SOUNDS",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17.5,
-                                    fontFamily:
-                                    'Itim-Regular'),
-                              )
+                          Text(
+                            "SOUNDS",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17.5,
+                                fontFamily:
+                                'Itim-Regular'),
+                          )
 
 
                       ),
@@ -136,7 +141,10 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                       child: LightButton(
                         text: 'GAMES',
                         width: 85,
-                        height: 35, onPressed: () {  },),
+                        height: 35, onPressed: () { Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PremiumGamesDayPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                      );  },),
                     ),
                   ]
                 ),
