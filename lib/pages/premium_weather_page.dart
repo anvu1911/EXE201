@@ -17,6 +17,10 @@ class PremiumWeatherPage extends StatefulWidget {
 
 class _PremiumWeatherPage extends State<PremiumWeatherPage> {
   int _selectedIndex = 2;
+  List<String> daysOfWeek = [
+    'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+  ];
+  int expandedIndex = -1; // Chỉ một thẻ được mở cùng một lúc
 
 
   void _onItemTapped(int index) {
@@ -47,10 +51,9 @@ class _PremiumWeatherPage extends State<PremiumWeatherPage> {
         break;
     }
   }
-  List<Item> _data = generateItems();
+  //List<Item> _data = generateItems();
   @override
   Widget build(BuildContext context) {
-    // final data = [10.0, 23.0, 43.0, 54.0, 34.0, 76.0, 97.0];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sleeping app',
@@ -70,7 +73,6 @@ class _PremiumWeatherPage extends State<PremiumWeatherPage> {
 
             ),
             child: Column(
-
               children: [
                 TopBar(
                   showArrow: true,
@@ -80,119 +82,87 @@ class _PremiumWeatherPage extends State<PremiumWeatherPage> {
                   },
                 ),
                 Row(
-                      children: [
-                        Padding(
-                          padding:
-                          const EdgeInsets.fromLTRB(3, 0, 0, 0),
-                          child: LightButton(
-                            text: 'NEWS',
-                            width: 80,
-                            height: 35, onPressed: () {
+                    children: [
+                      Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                        child: LightButton(
+                          text: 'NEWS',
+                          width: 80,
+                          height: 35, onPressed: () {
 
-                          },),
-                        ),
-                        Padding(
-                          padding:
-                          const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                          child: LightButton(
-                            text: 'SOUNDS',
-                            width: 100,
-                            height: 35, onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => PremiumSoundsPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                            );
-                          },),
-                        ),
-                        Padding(
-                          padding:
-                          const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                          child: ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                  Color.fromRGBO(
-                                      53, 70, 112, 1),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(
-                                          20.0))
-                                // minimumSize: Size(250, 40),
-                              ),
-                              child:
-
-                              Text(
-                                "WEATHER",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17.5,
-                                    fontFamily:
-                                    'Itim-Regular'),
-                              )
-
-
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                          const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                          child: LightButton(
-                            text: 'GAMES',
-                            width: 85,
-                            height: 35, onPressed: () {  },),
-                        ),
-                      ]
-                  ),
-                Expanded (
-                    child:  Container(
-                      width: 370,
-                      child: ListView.builder(
-                        itemCount: _data.length,
-                        itemBuilder: (context, index) {
-                          Item item = _data[index];
-                          return ExpansionPanelList(
-                              expansionCallback: (int panelIndex, bool isExpanded) {
-                                setState(() {
-                                  _data.forEach((item) {
-                                    item.isExpanded = false;
-                                  });
-                                  item.isExpanded = !isExpanded;
-                                });
-                              },
-                              children: [
-                                ExpansionPanel(
-                                  headerBuilder: (BuildContext context, bool isExpanded) {
-                                    return Container(
-                                      //color: Colors.red,
-                                      child: ListTile(
-                                        tileColor:const Color.fromARGB(
-                                            156, 30, 90, 137),
-                                        title:Text(
-                                            item.headerValue,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily:
-                                              'Itim-Regular',
-                                                fontSize: 28,
-                                                fontWeight: FontWeight.bold,
-                                            ),
-
-                                          ),
-                                      ),
-                                    );
-                                  },
-                                  body: Container(
-                                    child: _buildContentForDay(item.headerValue), // Call a method to build content based on the day
-                                  color: Colors.cyan,
-                                  ),
-                                  isExpanded: item.isExpanded,
-                                ),
-                              ],
-                            );
-                        },
+                        },),
                       ),
-                    ),
-                  ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        child: LightButton(
+                          text: 'SOUNDS',
+                          width: 100,
+                          height: 35, onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PremiumSoundsPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                          );
+                        },),
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                Color.fromRGBO(
+                                    53, 70, 112, 1),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                        20.0))
+                              // minimumSize: Size(250, 40),
+                            ),
+                            child:
+
+                            Text(
+                              "WEATHER",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.5,
+                                  fontFamily:
+                                  'Itim-Regular'),
+                            )
+
+
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        child: LightButton(
+                          text: 'GAMES',
+                          width: 85,
+                          height: 35, onPressed: () {  },),
+                      ),
+                    ]
+                ),
+          Container(
+            height: 560,
+            width: 350,
+            child: ListView(
+            children: List.generate(daysOfWeek.length, (index) {
+
+              return Card(
+                color: Color.fromRGBO(30,90,137,1),
+                child: ExpansionTile(
+        title: _nameTab(index),
+        children: [
+          _buildContentForDay(index)
+        ],
+        ),
+              );
+        }),
+      ),
+          )
               ],
             ),
           ),
@@ -205,526 +175,287 @@ class _PremiumWeatherPage extends State<PremiumWeatherPage> {
     );
   }
 }
-class Item {
-  Item({
-    required this.headerValue,
-    this.isExpanded = false,
-  });
 
-  String headerValue;
-  bool isExpanded;
-}
-List<Item> generateItems() {
-  List<String> daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  return daysOfWeek.map((day) {
-    return Item(
-      headerValue: day,
-    );
-  }).toList();
-}
-Widget _buildContentForDay(String day) {
+Widget _nameTab(int day) {
   // Return different content based on the day
   switch (day) {
-    case 'Monday':
+    case 0:
       return Container(
-          color: Color.fromARGB(186, 20, 44, 121),
-          child: Row(
-            children: [
-              Column(
-                children: [
-                  Image.asset(
-                    'assets/images/nhieumay.png',
-                    width: 110,
-                    height: 110,
-                  ),
-                  Text("Cloudy",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'Itim-Regular',
-                    ),
-                  ),
-                ],
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Text(
+                "Monday",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: 'Itim-Regular',
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Ho Chi Minh city",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontFamily: 'Itim-Regular',
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    "34°C",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontFamily: 'Itim-Regular',
-                    ),
-                  ),
-                ],
+            ),
+SizedBox(width: 35,),
+            Text(
+              "19 JUN",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
               ),
-              SizedBox(
-                width: 15,
+            ),
+            Image.asset(
+              'assets/images/nhieumay.png',
+              width: 45,
+              height: 45,
+            ),
+            Text(
+              "23°",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
               ),
-              Column(
-                children: [
-                  Text(
-                    '19 Jun',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'Itim-Regular',
-                    ),
-                  ),
-                  SizedBox(height: 10),
-
-                  Text(
-                    '2023',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'Itim-Regular',
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        );
-    case 'Tuesday':
-      return Container(
-        color: Color.fromARGB(186, 20, 44, 121),
-        child: Row(
-          children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/muaset.png',
-                  width: 110,
-                  height: 110,
-                ),
-                Text("Rain with \n lightning",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
-
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Ho Chi Minh city",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "34°C",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            Column(
-              children: [
-                Text(
-                  '20 Jun',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 10),
-
-                Text(
-                  '2023',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                )
-              ],
-            )
           ],
         ),
       );
-    case 'Wednesday':
+    case 1:
       return Container(
-
-        color: Color.fromARGB(186, 20, 44, 121),
         child: Row(
           children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/nhieumay.png',
-                  width: 110,
-                  height: 110,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Text(
+                "Tuesday",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: 'Itim-Regular',
                 ),
-                Text("Cloudy",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Ho Chi Minh city",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "31°C",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+            SizedBox(width: 30,),
+            Text(
+              "20 JUN",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
             ),
-            SizedBox(
-              width: 15,
+            Image.asset(
+              'assets/images/nhieumay.png',
+              width: 45,
+              height: 45,
             ),
-            Column(
-              children: [
-                Text(
-                  '21 Jun',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 10),
-
-                Text(
-                  '2023',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                )
-              ],
-            )
+            Text(
+              "20°",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
+            ),
           ],
         ),
       );
-    case 'Thursday':
+    case 2:
       return Container(
-
-        color: Color.fromARGB(186, 20, 44, 121),
         child: Row(
           children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/mua.png',
-                  width: 110,
-                  height: 110,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Text(
+                "Wednesday",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: 'Itim-Regular',
                 ),
-                Text("Rainny",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Ho Chi Minh city",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "30°C",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            Column(
-              children: [
-                Text(
-                  '22 Jun',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 10),
 
-                Text(
-                  '2023',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                )
-              ],
-            )
+            Text(
+              "21 JUN",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
+            ),
+            Image.asset(
+              'assets/images/mua.png',
+              width: 45,
+              height: 45,
+            ),
+            Text(
+              "34°",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
+            ),
           ],
         ),
       );
-    case 'Friday':
+    case 3:
       return Container(
-
-        color: Color.fromARGB(186, 20, 44, 121),
         child: Row(
           children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/muaset.png',
-                  width: 110,
-                  height: 110,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Text(
+                "Thursday",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: 'Itim-Regular',
                 ),
-                Text("Rain with \n lightning",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Ho Chi Minh city",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "33°C",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+            SizedBox(width: 25,),
+            Text(
+              "22 JUN",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
             ),
-            SizedBox(
-              width: 15,
+            Image.asset(
+              'assets/images/mua.png',
+              width: 45,
+              height: 45,
             ),
-            Column(
-              children: [
-                Text(
-                  '23 Jun',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 10),
-
-                Text(
-                  '2023',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                )
-              ],
-            )
+            Text(
+              "15°",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
+            ),
           ],
         ),
       );
-    case 'Saturday':
+    case 4:
       return Container(
-
-        color: Color.fromARGB(186, 20, 44, 121),
         child: Row(
           children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/mua.png',
-                  width: 110,
-                  height: 110,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Text(
+                "Friday",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: 'Itim-Regular',
                 ),
-                Text("Rainny",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Ho Chi Minh city",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "29°C",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+            SizedBox(width: 58,),
+            Text(
+              "23 JUN",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
             ),
-            SizedBox(
-              width: 15,
+            Image.asset(
+              'assets/images/muaset.png',
+              width: 45,
+              height: 45,
             ),
-            Column(
-              children: [
-                Text(
-                  '24 Jun',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 10),
-
-                Text(
-                  '2023',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                )
-              ],
-            )
+            Text(
+              "14°",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
+            ),
           ],
         ),
       );
-    case 'Sunday':
+    case 5:
       return Container(
-
-        color: Color.fromARGB(186, 20, 44, 121),
         child: Row(
           children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/nhieumay.png',
-                  width: 110,
-                  height: 110,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Text(
+                "Saturday",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: 'Itim-Regular',
                 ),
-                Text("Cloudy",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Ho Chi Minh city",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "32°C",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                ),
-              ],
+            SizedBox(width: 28,),
+            Text(
+              "24 JUN",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
             ),
-            SizedBox(
-              width: 15,
+            Image.asset(
+              'assets/images/nhieumay.png',
+              width: 45,
+              height: 45,
             ),
-            Column(
-              children: [
-                Text(
-                  '25 Jun',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
+            Text(
+              "16°",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
+            ),
+          ],
+        ),
+      );
+    case 6:
+      return Container(
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+              child: Text(
+                "Sunday",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: 'Itim-Regular',
                 ),
-                SizedBox(height: 10),
-
-                Text(
-                  '2023',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Itim-Regular',
-                  ),
-                )
-              ],
-            )
+              ),
+            ),
+            SizedBox(width: 47,),
+            Text(
+              "25 JUN",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
+            ),
+            Image.asset(
+              'assets/images/nhieumay.png',
+              width: 45,
+              height: 45,
+            ),
+            Text(
+              "19°",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Itim-Regular',
+              ),
+            ),
           ],
         ),
       );
@@ -733,3 +464,463 @@ Widget _buildContentForDay(String day) {
       return Container();
   }
 }
+Widget _buildContentForDay(int day) {
+  // Return different content based on the day
+  switch (day) {
+    case 0:
+      return Container(
+        color: Color.fromRGBO(29,66,119,100),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Column(
+                children: [
+                  Text(
+                    'HoChiMinh city',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'Humidity 20%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'v23° ^27',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    "23°",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 75,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  'assets/images/nhieumay.png',
+                  width: 110,
+                  height: 110,
+                ),
+                Text("Cloudy",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                SizedBox(height: 10,)
+              ],
+            ),
+          ],
+        ),
+      );
+    case 1:
+      return Container(
+        color: Color.fromRGBO(29,66,119,100),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Column(
+                children: [
+                  Text(
+                    'HoChiMinh city',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'Humidity 27%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'v25° ^30',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    "20°",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 75,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  'assets/images/nhieumay.png',
+                  width: 110,
+                  height: 110,
+                ),
+                Text("Cloudy",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                SizedBox(height: 10,)
+              ],
+            ),
+          ],
+        ),
+      );
+    case 2:
+      return Container(
+        color: Color.fromRGBO(29,66,119,100),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Column(
+                children: [
+                  Text(
+                    'HoChiMinh city',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'Humidity 30%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'v20° ^35',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    "18°",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 75,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  'assets/images/mua.png',
+                  width: 110,
+                  height: 110,
+                ),
+                Text("Rainny",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                SizedBox(height: 10,)
+              ],
+            ),
+          ],
+        ),
+      );
+    case 3:
+      return Container(
+        color: Color.fromRGBO(29,66,119,100),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Column(
+                children: [
+                  Text(
+                    'HoChiMinh city',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'Humidity 33%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'v28° ^29',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    "15°",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 75,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  'assets/images/mua.png',
+                  width: 110,
+                  height: 110,
+                ),
+                Text("Rainny",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                SizedBox(height: 10,)
+              ],
+            ),
+          ],
+        ),
+      );
+    case 4:
+      return Container(
+        color: Color.fromRGBO(29,66,119,100),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Column(
+                children: [
+                  Text(
+                    'HoChiMinh city',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'Humidity 35%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'v30° ^35',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    "14°",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 75,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  'assets/images/muaset.png',
+                  width: 110,
+                  height: 110,
+                ),
+                Text("Rain with\nLightning",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                SizedBox(height: 10,)
+              ],
+            ),
+          ],
+        ),
+      );
+    case 5:
+      return Container(
+        color: Color.fromRGBO(29,66,119,100),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Column(
+                children: [
+                  Text(
+                    'HoChiMinh city',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'Humidity 21%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'v25° ^29',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    "16°",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 75,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  'assets/images/nhieumay.png',
+                  width: 110,
+                  height: 110,
+                ),
+                Text("Cloudy",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                SizedBox(height: 10,)
+              ],
+            ),
+          ],
+        ),
+      );
+    case 6:
+      return Container(
+        color: Color.fromRGBO(29,66,119,100),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Column(
+                children: [
+                  Text(
+                    'HoChiMinh city',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'Humidity 23%',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    'v29° ^25',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                  Text(
+                    "19°",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 75,
+                      fontFamily: 'Itim-Regular',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  'assets/images/nhieumay.png',
+                  width: 110,
+                  height: 110,
+                ),
+                Text("Cloudy",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Itim-Regular',
+                  ),
+                ),
+                SizedBox(height: 10,)
+              ],
+            ),
+          ],
+        ),
+      );
+  // Add cases for other days
+    default:
+      return Container();
+  }
+}
+
+
+
+
