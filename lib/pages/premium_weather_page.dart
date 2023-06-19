@@ -209,7 +209,7 @@ SizedBox(width: 35,),
               height: 45,
             ),
             Text(
-              "23°",
+              "32°",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -249,7 +249,7 @@ SizedBox(width: 35,),
               height: 45,
             ),
             Text(
-              "20°",
+              "28°",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -289,7 +289,7 @@ SizedBox(width: 35,),
               height: 45,
             ),
             Text(
-              "34°",
+              "28°",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -329,7 +329,7 @@ SizedBox(width: 35,),
               height: 45,
             ),
             Text(
-              "15°",
+              "31°",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -354,7 +354,7 @@ SizedBox(width: 35,),
                 ),
               ),
             ),
-            SizedBox(width: 58,),
+            SizedBox(width: 55,),
             Text(
               "23 JUN",
               style: TextStyle(
@@ -369,7 +369,7 @@ SizedBox(width: 35,),
               height: 45,
             ),
             Text(
-              "14°",
+              "30°",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -409,7 +409,7 @@ SizedBox(width: 35,),
               height: 45,
             ),
             Text(
-              "16°",
+              "31°",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -449,7 +449,7 @@ SizedBox(width: 35,),
               height: 45,
             ),
             Text(
-              "19°",
+              "29°",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -493,7 +493,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    'v23° ^27',
+                    'v29° ^32°',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -501,7 +501,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    "23°",
+                    "32°",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 75,
@@ -557,7 +557,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    'v25° ^30',
+                    'v28° ^32°',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -565,7 +565,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    "20°",
+                    "28°",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 75,
@@ -621,7 +621,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    'v20° ^35',
+                    'v28° ^33°',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -629,7 +629,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    "18°",
+                    "28°",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 75,
@@ -685,7 +685,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    'v28° ^29',
+                    'v30° ^32°',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -693,7 +693,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    "15°",
+                    "31°",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 75,
@@ -749,7 +749,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    'v30° ^35',
+                    'v29° ^32°',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -757,7 +757,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    "14°",
+                    "30°",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 75,
@@ -813,7 +813,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    'v25° ^29',
+                    'v29° ^31°',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -821,7 +821,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    "16°",
+                    "31°",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 75,
@@ -877,7 +877,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    'v29° ^25',
+                    'v28° ^32°',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
@@ -885,7 +885,7 @@ Widget _buildContentForDay(int day) {
                     ),
                   ),
                   Text(
-                    "19°",
+                    "29°",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 75,
