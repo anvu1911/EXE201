@@ -1,26 +1,23 @@
 import 'package:exe201/pages/home_page.dart';
-import 'package:exe201/pages/premium_games_page/premium_games_all_page.dart';
-import 'package:exe201/pages/premium_games_page/premium_games_day_page.dart';
-import 'package:exe201/pages/premium_games_page/premium_games_week_page.dart';
 import 'package:exe201/pages/premium_news_page.dart';
 import 'package:exe201/pages/premium_sounds_page.dart';
 import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/bottom_navigation_bar.dart';
-import '../../widgets/light_button.dart';
-import '../../widgets/top_bar.dart';
-import '../chart_page.dart';
+import '../widgets/bottom_navigation_bar.dart';
+import '../widgets/light_button.dart';
+import '../widgets/top_bar.dart';
+import 'chart_page.dart';
 
-class PremiumGamesMonthPage extends StatefulWidget {
-  const PremiumGamesMonthPage({super.key});
+class PremiumGamesPage extends StatefulWidget {
+  const PremiumGamesPage({super.key});
 
   @override
-  _PremiumGamesMonthPage createState() {
-    return _PremiumGamesMonthPage();
+  _PremiumGamesPage createState() {
+    return _PremiumGamesPage();
   }
 }
 
-class _PremiumGamesMonthPage extends State<PremiumGamesMonthPage> {
+class _PremiumGamesPage extends State<PremiumGamesPage> {
   int _selectedIndex = 2;
   double progress = 0.5;
 
@@ -151,104 +148,6 @@ class _PremiumGamesMonthPage extends State<PremiumGamesMonthPage> {
                       ),
                     ]
                 ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PremiumGamesDayPage(),
-                            ),
-                          );
-                        },
-
-                        child: Text(
-                          'Day',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontFamily:
-                              'Itim-Regular'
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PremiumGamesWeekPage(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Week',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontFamily:
-                              'Itim-Regular'
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                      child: InkWell(
-                        // onTap: () {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => PremiumNewsPage(),
-                        //     ),
-                        //   );
-                        // },
-                        child: Text(
-                          'Month',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Color.fromRGBO(
-                                  129,136,177, 1),
-                              fontSize: 30,
-                              fontFamily:
-                              'Itim-Regular'
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PremiumGamesAllPage(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'All',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontFamily:
-                              'Itim-Regular'
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   child: Row(
@@ -257,13 +156,13 @@ class _PremiumGamesMonthPage extends State<PremiumGamesMonthPage> {
                         padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
                         child:
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(20), // Đặt bán kính bo góc cho hình ảnh
-                          child: Image.asset(
-                            'assets/images/meo_cam_trai.png',
-                            width: 90,
-                            height: 90,
-                          ),
-                        ),
+                    borderRadius: BorderRadius.circular(20), // Đặt bán kính bo góc cho hình ảnh
+            child: Image.asset(
+              'assets/images/meo_cam_trai.png',
+              width: 90,
+              height: 90,
+            ),
+          ),
 
                       ),
                       Padding(

@@ -1,5 +1,5 @@
 import 'package:exe201/pages/home_page.dart';
-import 'package:exe201/pages/premium_games_page/premium_games_day_page.dart';
+import 'package:exe201/pages/premium_games_page.dart';
 import 'package:exe201/pages/premium_news_page.dart';
 import 'package:exe201/pages/premium_sounds_page.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +147,7 @@ class _PremiumWeatherPage extends State<PremiumWeatherPage> {
                           width: 85,
                           height: 35, onPressed: () { Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PremiumGamesDayPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                          MaterialPageRoute(builder: (context) => PremiumGamesPage()), // NewPage là một trang mới bạn muốn chuyển đến
                         );  },),
                       ),
                     ]
