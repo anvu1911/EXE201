@@ -1,3 +1,6 @@
+
+import 'package:exe201/pages/premium_news_page.dart';
+import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/light_button.dart';
@@ -79,10 +82,10 @@ class _HomePageState extends State<HomePage> {
 
       case 2:
         // Navigate to the notifications page
-        Navigator.pushReplacementNamed(context, '#');
-        break;
-      default:
-        // Do nothing
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
+        );
         break;
     }
   }
