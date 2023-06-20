@@ -167,7 +167,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                   ),
                 ),
                 Container(
-                  height: 550,
+                  height: 540,
                   width: 370,
                   child: ListView(
                     children: [
@@ -479,15 +479,6 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                     ],
                   ),
                 ),
-
-
-
-
-
-
-
-
-
               ],
             ),
           ),

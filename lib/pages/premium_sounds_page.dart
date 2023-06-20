@@ -163,7 +163,7 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                   ),
                 ),
                 Container(
-                  height: 550,
+                  height: 540,
                   width: 370,
                   child: ListView(
                            children: [
@@ -399,15 +399,6 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                            ],
                          ),
                 ),
-
-
-
-
-
-
-
-
-
               ],
             ),
           ),
