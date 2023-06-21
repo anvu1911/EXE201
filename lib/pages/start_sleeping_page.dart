@@ -5,7 +5,6 @@ import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/top_bar.dart';
 import '../widgets/swipe_up_button.dart';
 import '../widgets/current_datetime_v2.dart';
-import 'package:swipeable_button_view/swipeable_button_view.dart';
 
 class StartSleepingPage extends StatefulWidget {
   const StartSleepingPage({super.key});
@@ -75,8 +74,8 @@ class _StartSleepingPageState extends State<StartSleepingPage> {
             ),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 111.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 111.0),
                   child: Text(
                     'Good Night',
                     style: TextStyle(
@@ -117,8 +116,8 @@ class _StartSleepingPageState extends State<StartSleepingPage> {
                     : _buildSecondComponent(context),
                 _showButton
                     ? Container(height: 0)
-                    : Padding(
-                        padding: const EdgeInsets.only(top: 21.0),
+                    : const Padding(
+                        padding: EdgeInsets.only(top: 21.0),
                         child: Text(
                           'Swipe up to awake',
                           style: TextStyle(
@@ -159,14 +158,14 @@ Widget _buildSecondComponent(BuildContext context) {
         if (details.primaryVelocity! < 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => WakeUpPage()),
+            MaterialPageRoute(builder: (context) => const WakeUpPage()),
           );
         }
       },
       child: SwipeUpButton(
         onFinish: () {},
         onWaitingProcess: () {},
-        activeColor: Color.fromARGB(255, 172, 165, 223),
+        activeColor: const Color.fromARGB(255, 172, 165, 223),
         iconColor: Colors.white,
       ),
     ),

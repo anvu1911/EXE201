@@ -268,7 +268,8 @@ class _LoginPageState extends State<LoginPage> {
                                                             'Itim-Regular'),
                                                   )
                                                 ],
-                                              )),
+                                              )
+                                          ),
                                         ),
                                       ],
                                     ),

@@ -1,18 +1,18 @@
+
+import 'package:exe201/pages/premium_news_page.dart';
+import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/light_button.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/top_bar.dart';
 import '../widgets/dark_button.dart';
-import 'package:intl/intl.dart';
 import '../widgets/clock_view.dart';
-import '../widgets/swipte_button.dart';
 import '../widgets/current_datetime.dart';
 import 'start_sleeping_page.dart';
-import 'set_alarm_page.dart';
-import './auth/login_page.dart';
-import './auth/registry_page.dart';
+import 'add_alarm_page.dart';
 import 'dart:developer';
+import 'chart_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,8 +26,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  TimeOfDay? bedTime = TimeOfDay(hour: 10, minute: 0);
-  TimeOfDay? wakeTime = TimeOfDay(hour: 5, minute: 30);
+  TimeOfDay? bedTime = const TimeOfDay(hour: 10, minute: 0);
+  TimeOfDay? wakeTime = const TimeOfDay(hour: 5, minute: 30);
 
   Future<void> getTimesSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
@@ -66,17 +66,26 @@ class _HomePageState extends State<HomePage> {
     });
     switch (index) {
       case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+
         break;
       case 1:
-        // Navigate to the settings page
-        Navigator.pushReplacementNamed(context, 'login');
+        // Navigate to the chart page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ChartPage()),
+        );
         break;
+
       case 2:
         // Navigate to the notifications page
-        Navigator.pushReplacementNamed(context, '#');
-        break;
-      default:
-        // Do nothing
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
+        );
         break;
     }
   }
@@ -152,7 +161,8 @@ class _HomePageState extends State<HomePage> {
                                 shape: BoxShape.circle,
                                 color: Color.fromRGBO(49, 27, 107, 1),
                                 image: DecorationImage(
-                                  image: AssetImage('assets/images/phone.png'),
+                                  image:
+                                      AssetImage('assets/images/bedtime.png'),
                                 ),
                               ),
                             ),
@@ -183,7 +193,8 @@ class _HomePageState extends State<HomePage> {
                                 shape: BoxShape.circle,
                                 color: Color.fromRGBO(49, 27, 107, 1),
                                 image: DecorationImage(
-                                  image: AssetImage('assets/images/phone.png'),
+                                  image:
+                                      AssetImage('assets/images/waketime.png'),
                                 ),
                               ),
                             ),
@@ -231,7 +242,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: MyBottomNavigationBar(
-        currentIndex: _selectedIndex,
+        currentIndex: 0,
         onTap: _onItemTapped,
       ),
     );
