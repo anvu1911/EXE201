@@ -265,7 +265,10 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                           child: Container(
                             height: 50,
                             child: ElevatedButton(
-                              onPressed: () {}, // add link here
+                              onPressed: () {
+                                _launchURL(
+                                    "www.facebook.com/permalink.php?story_fbid=pfbid0FoEfAQyDv3DQjs5Kukrny7N7pRKdQAQQSKkBu6SRmqcNkMjkssBpdgGV8gwrC3Gsl&id=100092655316466");
+                              }, // add link here
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.zero,
                                   minimumSize: Size(0, 0),
@@ -339,7 +342,10 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                           child: Container(
                             height: 50,
                             child: ElevatedButton(
-                              onPressed: () {}, // add link here
+                              onPressed: () {
+                                _launchURL(
+                                    "www.facebook.com/permalink.php?story_fbid=pfbid0wk27R3ZGBkAvuTzw1DfJoySvXtF9KdEs5gfnbWDV9NSeyz7MpioF2F7nnXZdTLhvl&id=100092655316466");
+                              }, // add link here
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.zero,
                                   minimumSize: Size(0, 0),
@@ -413,7 +419,10 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                           child: Container(
                             height: 50,
                             child: ElevatedButton(
-                              onPressed: () {}, // add link here
+                              onPressed: () {
+                                _launchURL(
+                                    "www.facebook.com/permalink.php?story_fbid=pfbid08yTZswoyWBzzUMTUmGRiCdJCUiJSqQqcVwoWWEpSdDy2Qykog4RveQfAHitQis7Ql&id=100092655316466");
+                              }, // add link here
                               style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.zero,
                                   minimumSize: Size(0, 0),
