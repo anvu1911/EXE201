@@ -1,6 +1,5 @@
 import 'package:exe201/pages/advertisement_page.dart';
 import 'package:exe201/pages/premium_news_page.dart';
-import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/light_button.dart';
