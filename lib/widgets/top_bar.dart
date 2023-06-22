@@ -1,11 +1,16 @@
+import 'package:exe201/pages/auth/login_page.dart';
+import 'package:exe201/pages/started_page.dart';
 import 'package:flutter/material.dart';
 
+import '../service/auth_service.dart';
+
 class TopBar extends StatelessWidget implements PreferredSizeWidget {
+  final AuthService authService = AuthService();
   final String title;
   final bool showArrow;
   final Function() onBackButtonPressed;
 
-  const TopBar({
+  TopBar({
     super.key,
     required this.showArrow,
     required this.title,
@@ -209,74 +214,122 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
                               ),
                             ),
                           ),
-
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Color.fromARGB(169, 117, 166, 193),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 16),
-                            child: Row(
-                              children: [
-                                ImageIcon(
-                                  AssetImage('assets/images/vibrate.png'),
-                                  size: 36,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(width: 8),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Vibrate',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                          InkWell(
+                            onTap: () {},
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Color.fromARGB(169, 117, 166, 193),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 16),
+                              child: Row(
+                                children: [
+                                  ImageIcon(
+                                    AssetImage('assets/images/vibrate.png'),
+                                    size: 36,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Vibrate',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-
-                          //here
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Color.fromARGB(169, 117, 166, 193),
+                          InkWell(
+                            onTap: () {},
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Color.fromARGB(169, 117, 166, 193),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 16),
+                              child: Row(
+                                children: [
+                                  ImageIcon(
+                                    AssetImage('assets/images/fade-in.png'),
+                                    size: 36,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Fade in',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16),
+                                      ),
+                                      Text(
+                                        '(Gently increase alarm volumn)',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 10),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 16),
-                            child: Row(
-                              children: [
-                                ImageIcon(
-                                  AssetImage('assets/images/fade-in.png'),
-                                  size: 36,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(width: 8),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Fade in',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              authService.signOut();
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  new MaterialPageRoute(
+                                      builder: (context) => new StartedPage()),
+                                  (route) => false);
+                            },
+                            child: Ink(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Color.fromARGB(169, 117, 166, 193),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 16),
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.logout,
+                                      size: 36,
+                                      color: Colors.white,
                                     ),
-                                    Text(
-                                      '(Gently increase alarm volumn)',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 10),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    onPressed: () {},
+                                  ),
+                                  SizedBox(width: 8),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

@@ -2,6 +2,7 @@ import 'package:exe201/pages/advertisement_page.dart';
 import 'package:exe201/pages/premium_news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../helper/helper_function.dart';
 import '../widgets/light_button.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/top_bar.dart';
@@ -25,6 +26,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  bool _isSignedIn = false;
   TimeOfDay? bedTime = const TimeOfDay(hour: 10, minute: 0);
   TimeOfDay? wakeTime = const TimeOfDay(hour: 5, minute: 30);
 
@@ -56,7 +58,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _getUserLoggedInStatus();
     getTimesSharedPreferences();
+  }
+
+  void _getUserLoggedInStatus() async {
+    await HelperFunctions.getUserLoggedInStatus().then((value) {
+      if (value != null) {
+        _isSignedIn = value;
+      }
+    });
+    setState(() {});
   }
 
   void _onItemTapped(int index) {
@@ -81,9 +93,12 @@ class _HomePageState extends State<HomePage> {
 
       case 2:
         // Navigate to the notifications page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
+          MaterialPageRoute(
+              builder: (context) => _isSignedIn
+                  ? const PremiumNewsPage()
+                  : const AdvertisementPage()),
         );
         break;
       case 3:

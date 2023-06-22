@@ -1,3 +1,5 @@
+import 'package:exe201/helper/helper_function.dart';
+import 'package:exe201/pages/advertisement_page.dart';
 import 'package:exe201/pages/home_page.dart';
 import 'package:exe201/pages/premium_news_page.dart';
 import 'package:exe201/widgets/chart.dart';
@@ -19,14 +21,22 @@ class ChartPage extends StatefulWidget {
 
 class _ChartPageState extends State<ChartPage> {
   int _selectedIndex = 1;
+  bool _isSignedIn = false;
 
-  // bool _showButton = true;
+  @override
+  void initState() {
+    super.initState();
+    _getUserLoggedInStatus();
+  }
 
-  // void _toggleButton() {
-  //   setState(() {
-  //     _showButton = !_showButton;
-  //   });
-  // }
+  void _getUserLoggedInStatus() async {
+    await HelperFunctions.getUserLoggedInStatus().then((value) {
+      if (value != null) {
+        _isSignedIn = value;
+      }
+    });
+    setState(() {});
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -51,7 +61,10 @@ class _ChartPageState extends State<ChartPage> {
         // Navigate to the notifications page
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
+          MaterialPageRoute(
+              builder: (context) => _isSignedIn
+                  ? const PremiumNewsPage()
+                  : const AdvertisementPage()),
         );
         break;
     }
