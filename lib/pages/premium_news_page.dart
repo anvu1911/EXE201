@@ -21,8 +21,6 @@ class PremiumNewsPage extends StatefulWidget {
 class _PremiumNewsPage extends State<PremiumNewsPage> {
   int _selectedIndex = 2;
 
-  double progress = 0.5;
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -35,16 +33,16 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
         );
         break;
       case 1:
-        // Navigate to the chart page
-        Navigator.pushReplacement(
+      // Navigate to the chart page
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ChartPage()),
         );
         break;
 
       case 2:
-        // Navigate to the notifications page
-        Navigator.pushReplacement(
+      // Navigate to the notifications page
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
         );
@@ -64,12 +62,20 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
 
   @override
   Widget build(BuildContext context) {
+
     // final data = [10.0, 23.0, 43.0, 54.0, 34.0, 76.0, 97.0];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sleeping app',
       home: Scaffold(
         extendBodyBehindAppBar: true,
+        appBar: TopBar(
+          showArrow: true,
+          title: 'Premium Features',
+          onBackButtonPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         body: LayoutBuilder(
           builder: (context, constraints) => Container(
             width: constraints.maxWidth,
@@ -83,81 +89,81 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
             ),
             child: Column(
               children: [
-                TopBar(
-                  showArrow: true,
-                  title: 'Premium Features',
-                  onBackButtonPressed: () {
-                    Navigator.pop(context);
-                  },
+                Padding(
+                  padding: const EdgeInsets.only(top: 90),
+                  child: Row(
+                      children: [
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                          child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                  Color.fromRGBO(
+                                      53, 70, 112, 1),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          20.0))
+                                // minimumSize: Size(250, 40),
+                              ),
+                              child:
+
+                              Text(
+                                "NEWS",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.5,
+                                    fontFamily:
+                                    'Itim-Regular'),
+                              )
+
+
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: LightButton(
+                            text: 'SOUNDS',
+                            width: 100,
+                            height: 35, onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PremiumSoundsPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                            );
+                          },),
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: LightButton(
+                            text: 'WEATHER',
+                            width: 110,
+                            height: 35, onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PremiumWeatherPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                            );
+                          },),
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: LightButton(
+                            text: 'GAMES',
+                            width: 85,
+                            height: 35, onPressed: () {
+                              Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PremiumGamesPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                          );
+                              },),
+                        ),
+                      ]
+                  ),
                 ),
-                Row(children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(3, 0, 0, 0),
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(53, 70, 112, 1),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0))
-                            // minimumSize: Size(250, 40),
-                            ),
-                        child: Text(
-                          "NEWS",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.5,
-                              fontFamily: 'Itim-Regular'),
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                    child: LightButton(
-                      text: 'SOUNDS',
-                      width: 100,
-                      height: 35,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  PremiumSoundsPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                    child: LightButton(
-                      text: 'WEATHER',
-                      width: 110,
-                      height: 35,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  PremiumWeatherPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                    child: LightButton(
-                      text: 'GAMES',
-                      width: 85,
-                      height: 35,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  PremiumGamesPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                        );
-                      },
-                    ),
-                  ),
-                ]),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                   child: Container(
@@ -176,6 +182,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                   height: 540,
                   width: 370,
                   child: ListView(
+                    padding: EdgeInsets.only(top: 0),
                     children: [
                       SizedBox(
                         height: 120,
@@ -214,7 +221,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                         child: Column(
                                           children: [
                                             Image.asset(
-                                              'assets/images/goi.jpg',
+                                              'assets/images/shleep_ngu_ngon.jpg',
                                               width: 120,
                                               height: 120,
                                             ),
@@ -229,7 +236,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          "THE NEW SCIENCE OF...",
+                                          "Shleep 🐑🐑🐑",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20,
@@ -239,7 +246,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 5, 0, 0),
                                           child: Text(
-                                            "As modern schedules, stress, and \ntechnology tax our ability to get a \ngood night's rest, researchers...",
+                                            "Shleep chúc các bạn một buổi tối\ncuối tuần thật ấm êm\nvà ngủ ngon nhé :3",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 15.5,
@@ -292,7 +299,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                       borderRadius: BorderRadius.circular(
                                           40), // Đặt bán kính bo góc cho hình ảnh
                                       child: Image.asset(
-                                        'assets/images/den_ngu.jpg',
+                                        'assets/images/sleep_2.jpg',
                                         width: 120,
                                         height: 120,
                                       ),
@@ -306,7 +313,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          "GOOD SLEEP FOR GOO...",
+                                          "Shleep 🐑🐑🐑",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20,
@@ -316,7 +323,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 5, 0, 0),
                                           child: Text(
-                                            "Sometimes, the pace of modern \nlife barely gives you time to stop \nand rest. It can make getting...",
+                                            "Giấc ngủlà thứ vô cùng\nquan trọng và không thể\nthiếu với tất cả mọi người.",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 15.5,
@@ -369,7 +376,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                       borderRadius: BorderRadius.circular(
                                           40), // Đặt bán kính bo góc cho hình ảnh
                                       child: Image.asset(
-                                        'assets/images/thaothuc.jpg',
+                                        'assets/images/sleep_3.jpg',
                                         width: 120,
                                         height: 120,
                                       ),
@@ -383,7 +390,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          "THE PANDEMIC MESS...",
+                                          "Shleep 🐑🐑🐑",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20,
@@ -393,7 +400,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 5, 0, 0),
                                           child: Text(
-                                            "Is your sleep not what it used to \nbe? Does your mind race when \nyour head hits the pillow?...",
+                                            "Những mẹo cực giản đơn\nđể đưa bạnvào giấc ngủ\ncùng Shleep :3",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 15.5,
@@ -446,7 +453,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                       borderRadius: BorderRadius.circular(
                                           40), // Đặt bán kính bo góc cho hình ảnh
                                       child: Image.asset(
-                                        'assets/images/giandoan.png',
+                                        'assets/images/sleep_4.jpg',
                                         width: 120,
                                         height: 120,
                                       ),
@@ -460,7 +467,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          "GROWING CONCERN ...",
+                                          "Shleep 🐑🐑🐑",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 20,
@@ -470,7 +477,7 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 5, 0, 0),
                                           child: Text(
-                                            "Disrupted sleep has been a \nhallmark of the COVID-19 \npandemic. Psychologists expl...",
+                                            "Những mẹo cực giản đơn\nđể đưa bạnvào giấc ngủ\ncùng Shleep :3 (p2)",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 15.5,
@@ -501,3 +508,4 @@ class _PremiumNewsPage extends State<PremiumNewsPage> {
     );
   }
 }
+

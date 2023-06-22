@@ -1,7 +1,5 @@
 import 'package:exe201/pages/home_page.dart';
 import 'package:exe201/pages/premium_news_page.dart';
-
-import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:exe201/widgets/chart.dart';
 import 'package:exe201/widgets/percentage_rectangle.dart';
 import 'package:exe201/widgets/show_box.dart';
@@ -36,14 +34,14 @@ class _ChartPageState extends State<ChartPage> {
     });
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
         break;
       case 1:
         // Navigate to the chart page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ChartPage()),
         );
@@ -51,7 +49,7 @@ class _ChartPageState extends State<ChartPage> {
 
       case 2:
         // Navigate to the notifications page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
         );
