@@ -1,4 +1,4 @@
-
+import 'package:exe201/pages/advertisement_page.dart';
 import 'package:exe201/pages/premium_news_page.dart';
 import 'package:exe201/pages/premium_weather_page.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +85,13 @@ class _HomePageState extends State<HomePage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
+        );
+        break;
+      case 3:
+        // Navigate to the setting page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const AdvertisementPage()),
         );
         break;
     }

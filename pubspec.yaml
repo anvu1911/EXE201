@@ -55,6 +55,8 @@ dependencies:
   android_alarm_manager_plus: ^3.0.1
   audioplayers: ^4.1.0
   flutter_ringtone_player: ^3.2.0
+  url_launcher: ^6.1.11
+  
 
 dev_dependencies:
   flutter_test:
