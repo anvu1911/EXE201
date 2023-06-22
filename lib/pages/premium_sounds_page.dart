@@ -20,22 +20,20 @@ class PremiumSoundsPage extends StatefulWidget {
 class _PremiumSoundsPage extends State<PremiumSoundsPage> {
   int _selectedIndex = 2;
 
-  double progress = 0.5;
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
         break;
       case 1:
       // Navigate to the chart page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ChartPage()),
         );
@@ -43,7 +41,7 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
 
       case 2:
       // Navigate to the notifications page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
         );
@@ -53,13 +51,19 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
 
   @override
   Widget build(BuildContext context) {
-
     // final data = [10.0, 23.0, 43.0, 54.0, 34.0, 76.0, 97.0];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sleeping app',
       home: Scaffold(
         extendBodyBehindAppBar: true,
+        appBar: TopBar(
+          showArrow: true,
+          title: 'Premium Features',
+          onBackButtonPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         body: LayoutBuilder(
           builder: (context, constraints) => Container(
             width: constraints.maxWidth,
@@ -73,80 +77,76 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
             ),
             child: Column(
               children: [
-                TopBar(
-                  showArrow: true,
-                  title: 'Premium Features',
-                  onBackButtonPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(3, 0, 0, 0),
-                      child: LightButton(
-                          text: 'NEWS',
-                          width: 80,
-                          height: 35, onPressed: () { Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => PremiumNewsPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                      ); },),
-                    ),
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                      child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                              Color.fromRGBO(
-                                  53, 70, 112, 1),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(
-                                      20.0))
-                            // minimumSize: Size(250, 40),
-                          ),
-                          child:
-
-                          Text(
-                            "SOUNDS",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17.5,
-                                fontFamily:
-                                'Itim-Regular'),
-                          )
-
-
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                      child: LightButton(
-                        text: 'WEATHER',
-                        width: 110,
-                        height: 35, onPressed: () {
-                        Navigator.push(
+                Padding(
+                  padding: const EdgeInsets.only(top: 90),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                        child: LightButton(
+                            text: 'NEWS',
+                            width: 80,
+                            height: 35, onPressed: () { Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PremiumWeatherPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                        );
-                      },),
-                    ),
-                    Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                      child: LightButton(
-                        text: 'GAMES',
-                        width: 85,
-                        height: 35, onPressed: () { Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => PremiumGamesPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                      );  },),
-                    ),
-                  ]
+                          MaterialPageRoute(builder: (context) => PremiumNewsPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                        ); },),
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                Color.fromRGBO(
+                                    53, 70, 112, 1),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                        20.0))
+                              // minimumSize: Size(250, 40),
+                            ),
+                            child:
+
+                            Text(
+                              "SOUNDS",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.5,
+                                  fontFamily:
+                                  'Itim-Regular'),
+                            )
+
+
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        child: LightButton(
+                          text: 'WEATHER',
+                          width: 110,
+                          height: 35, onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PremiumWeatherPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                          );
+                        },),
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        child: LightButton(
+                          text: 'GAMES',
+                          width: 85,
+                          height: 35, onPressed: () { Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PremiumGamesPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                        );  },),
+                      ),
+                    ]
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
@@ -162,10 +162,11 @@ class _PremiumSoundsPage extends State<PremiumSoundsPage> {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 540,
                   width: 370,
                   child: ListView(
+                    padding: EdgeInsets.only(top: 0),
                            children: [
                              SizedBox(
                                height: 120,

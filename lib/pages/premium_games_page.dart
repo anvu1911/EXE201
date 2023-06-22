@@ -2,6 +2,7 @@ import 'package:exe201/pages/home_page.dart';
 import 'package:exe201/pages/premium_news_page.dart';
 import 'package:exe201/pages/premium_sounds_page.dart';
 import 'package:exe201/pages/premium_weather_page.dart';
+import 'package:exe201/pages/snakegame.dart';
 import 'package:flutter/material.dart';
 import '../widgets/bottom_navigation_bar.dart';
 import '../widgets/light_button.dart';
@@ -34,7 +35,7 @@ class _PremiumGamesPage extends State<PremiumGamesPage> {
         break;
       case 1:
       // Navigate to the chart page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ChartPage()),
         );
@@ -42,7 +43,7 @@ class _PremiumGamesPage extends State<PremiumGamesPage> {
 
       case 2:
       // Navigate to the notifications page
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const PremiumNewsPage()),
         );
@@ -59,6 +60,13 @@ class _PremiumGamesPage extends State<PremiumGamesPage> {
       title: 'Sleeping app',
       home: Scaffold(
         extendBodyBehindAppBar: true,
+        appBar: TopBar(
+          showArrow: true,
+          title: 'Statistics',
+          onBackButtonPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         body: LayoutBuilder(
           builder: (context, constraints) => Container(
             width: constraints.maxWidth,
@@ -72,81 +80,77 @@ class _PremiumGamesPage extends State<PremiumGamesPage> {
             ),
             child: Column(
               children: [
-                TopBar(
-                  showArrow: true,
-                  title: 'Premium Features',
-                  onBackButtonPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Row(
-                    children: [
-                      Padding(
-                        padding:
-                        const EdgeInsets.fromLTRB(3, 0, 0, 0),
-                        child: LightButton(
-                          text: 'NEWS',
-                          width: 80,
-                          height: 35, onPressed: () { Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PremiumNewsPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                        ); },),
-                      ),
-                      Padding(
-                        padding:
-                        const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                        child: LightButton(
-                          text: 'SOUNDS',
-                          width: 100,
-                          height: 35, onPressed: () {
-                          Navigator.push(
+                Padding(
+                  padding: const EdgeInsets.only(top: 90),
+                  child: Row(
+                      children: [
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                          child: LightButton(
+                            text: 'NEWS',
+                            width: 80,
+                            height: 35, onPressed: () { Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => PremiumSoundsPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                          );
-                        },),
-                      ),
-                      Padding(
-                        padding:
-                        const EdgeInsets.fromLTRB(3, 0, 0, 0),
-                        child: LightButton(
-                          text: 'WEATHER',
-                          width: 110,
-                          height: 35, onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => PremiumWeatherPage()), // NewPage là một trang mới bạn muốn chuyển đến
-                          );
-                        },),
-                      ),
-                      Padding(
-                        padding:
-                        const EdgeInsets.fromLTRB(3, 0, 0, 0),
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                Color.fromRGBO(
-                                    53, 70, 112, 1),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        20.0))
-                              // minimumSize: Size(250, 40),
-                            ),
-                            child:
-                            Text(
-                              "GAMES",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17.5,
-                                  fontFamily:
-                                  'Itim-Regular'),
-                            )
-
-
+                            MaterialPageRoute(builder: (context) => PremiumNewsPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                          ); },),
                         ),
-                      ),
-                    ]
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: LightButton(
+                            text: 'SOUNDS',
+                            width: 100,
+                            height: 35, onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PremiumSoundsPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                            );
+                          },),
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                          child: LightButton(
+                            text: 'WEATHER',
+                            width: 110,
+                            height: 35, onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PremiumWeatherPage()), // NewPage là một trang mới bạn muốn chuyển đến
+                            );
+                          },),
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                          child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                  Color.fromRGBO(
+                                      53, 70, 112, 1),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          20.0))
+                                // minimumSize: Size(250, 40),
+                              ),
+                              child:
+                              Text(
+                                "GAMES",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.5,
+                                    fontFamily:
+                                    'Itim-Regular'),
+                              )
+
+
+                          ),
+                        ),
+                      ]
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -154,35 +158,58 @@ class _PremiumGamesPage extends State<PremiumGamesPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        child:
-                        ClipRRect(
-                    borderRadius: BorderRadius.circular(20), // Đặt bán kính bo góc cho hình ảnh
-            child: Image.asset(
-              'assets/images/meo_cam_trai.png',
-              width: 90,
-              height: 90,
-            ),
-          ),
-
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/images/cat_hero.png',
-                            width: 90,
-                            height: 90,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SnakeGame()));
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              'assets/images/meo_cam_trai.png',
+                              width: 90,
+                              height: 90,
+                            ),
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        child: ClipRRect( borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/images/cat_war.png',
-                            width: 90,
-                            height: 90,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SnakeGame()));
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              'assets/images/cat_hero.png',
+                              width: 90,
+                              height: 90,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SnakeGame()));
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              'assets/images/cat_war.png',
+                              width: 90,
+                              height: 90,
+                            ),
                           ),
                         ),
                       ),
