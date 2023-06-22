@@ -158,7 +158,7 @@ class _PremiumGamesPage extends State<PremiumGamesPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SnakeGame()));
+                                    builder: (context) => const SnakeGame()));
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
@@ -173,7 +173,12 @@ class _PremiumGamesPage extends State<PremiumGamesPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SnakeGame()));
+                          },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
@@ -188,8 +193,10 @@ class _PremiumGamesPage extends State<PremiumGamesPage> {
                         padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
                         child: GestureDetector(
                           onTap: () {
-                            // Handle image 3 click event
-                            // Add your logic here
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SnakeGame()));
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
