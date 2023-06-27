@@ -100,9 +100,7 @@ class _MyAppState extends State<MyApp> {
         _isSignedIn = value;
       }
     });
-    setState(() {
-
-    });
+    setState(() {});
   }
 }
 

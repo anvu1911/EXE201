@@ -1,4 +1,7 @@
+import 'package:exe201/helper/helper_function.dart';
+import 'package:exe201/pages/advertisement_page.dart';
 import 'package:exe201/pages/home_page.dart';
+import 'package:exe201/pages/premium_news_page.dart';
 import 'package:exe201/widgets/chart.dart';
 import 'package:exe201/widgets/percentage_rectangle.dart';
 import 'package:exe201/widgets/show_box.dart';
@@ -17,15 +20,23 @@ class ChartPage extends StatefulWidget {
 }
 
 class _ChartPageState extends State<ChartPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
+  bool _isSignedIn = false;
 
-  // bool _showButton = true;
+  @override
+  void initState() {
+    super.initState();
+    _getUserLoggedInStatus();
+  }
 
-  // void _toggleButton() {
-  //   setState(() {
-  //     _showButton = !_showButton;
-  //   });
-  // }
+  void _getUserLoggedInStatus() async {
+    await HelperFunctions.getUserLoggedInStatus().then((value) {
+      if (value != null) {
+        _isSignedIn = value;
+      }
+    });
+    setState(() {});
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -42,16 +53,19 @@ class _ChartPageState extends State<ChartPage> {
         // Navigate to the chart page
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const ChartPage()),
         );
         break;
 
       case 2:
         // Navigate to the notifications page
-        Navigator.pushReplacementNamed(context, '#');
-        break;
-      default:
-        // Do nothing
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => _isSignedIn
+                  ? const PremiumNewsPage()
+                  : const AdvertisementPage()),
+        );
         break;
     }
   }
@@ -126,7 +140,7 @@ class _ChartPageState extends State<ChartPage> {
           ),
         ),
         bottomNavigationBar: MyBottomNavigationBar(
-          currentIndex: 1,
+          currentIndex: _selectedIndex,
           onTap: _onItemTapped,
         ),
       ),
